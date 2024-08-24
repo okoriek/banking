@@ -82,24 +82,24 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-#DATABASES = {
-#    'default': dj_database_url.parse(os.getenv('Echelong'))
-#}
-
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # or another database backend like 'django.db.backends.postgresql'
-        'NAME': BASE_DIR / "db.sqlite3",  # for SQLite
-        # or for PostgreSQL
-        # 'NAME': 'your_database_name',
-        # 'USER': 'your_database_user',
-        # 'PASSWORD': 'your_database_password',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
-    }
+    'default': dj_database_url.parse(os.getenv('banking'))
 }
+
+
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',  # or another database backend like 'django.db.backends.postgresql'
+#        'NAME': BASE_DIR / "db.sqlite3",  # for SQLite
+#        # or for PostgreSQL
+#        # 'NAME': 'your_database_name',
+#        # 'USER': 'your_database_user',
+#        # 'PASSWORD': 'your_database_password',
+#        # 'HOST': 'localhost',
+#        # 'PORT': '5432',
+#    }
+#}
 
 
 # Password validation
@@ -148,12 +148,12 @@ STATIC_FILES = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-#AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
-#AWS_STORAGE_BUCKET_NAME = 'echelonglobeinflux'
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-#
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'kwexbanking'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 #EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 #EMAIL_HOST='smtppro.zoho.com'
 #EMAIL_PORT =465
