@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Echelonglobe - Investment Plan{% endblock %}
+{% block body %}
+
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="offer pt-5">Investment Packages</p>
+            <div class="divider"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="invest">
+                <h4>Standard Plan</h4>
+                <h1>5%</h1>
+                <p>Duration 3days</p>
+                <ul>
+                    <li>Minimum $200</li>
+                    <li>Maximum $999</li>
+                    <li>Referal 1%</li>
+                </ul>
+                <p>24/7 withdrawal</p>
+                {% if not request.user.is_authenticated %}
+                <a href=""><button class="btn btn-primary w-100">invest</button></a>
+                {% endif %}
+            </div>    
+        </div>
+        <div class="col-lg-4">
+            <div class="invest">
+                <h4>Premium Plan</h4>
+                <h1>6.5%</h1>
+                <p>Duration 5days</p>
+                <ul>
+                    <li>Minimum $1000</li>
+                    <li>Maximum $5999</li>
+                    <li>Referal 2%</li>
+                </ul>
+                <p>24/7 withdrawal</p>
+                {% if not request.user.is_authenticated %}
+                <a href=""><button class="btn btn-primary w-100">invest</button></a>
+                {% endif %}
+            </div>    
+        </div>
+        <div class="col-lg-4">
+            <div class="invest ">
+                <h4>Ultimate Plan</h4>
+                <h1>12%</h1>
+                <p>Duration 10days</p>
+                <ul>
+                    <li>Minimum $6000</li>
+                    <li>Maximum $30,999</li>
+                    <li>Referal 4%</li>
+                </ul>
+                <p>24/7 withdrawal</p>
+                {% if not request.user.is_authenticated %}
+                <a href=""><button class="btn btn-primary w-100">invest</button></a>
+                {% endif %}
+            </div>    
+        </div>
+        <div class="col-lg-4">
+            <div class="invest ">
+                <h4>Shareholders Plan</h4>
+                <h1>20%</h1>
+                <p>Duration 15days</p>
+                <ul>
+                    <li>Minimum $40,000</li>
+                    <li>Maximum Unlimited</li>
+                    <li>Referal 5%</li>
+                </ul>
+                <p>24/7 withdrawal</p>
+                {% if not request.user.is_authenticated %}
+                <a href=""><button class="btn btn-primary w-100">invest</button></a>
+                {% endif %}
+            </div>    
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

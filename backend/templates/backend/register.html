@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Echelonglobe - Sign up{% endblock %}
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    <div class="form-bg">
+        <div class="form px-4">
+            <p class="form-text">SIGN UP</p>
+
+            {% if form.errors %}
+            <div class="errors" style="color: yellow; background-color: black; padding: 10px;">
+                {{form.errors}}
+            </div>
+            {% endif %}
+            {% for message in messages %}
+            <center><span style="color: yellow; background-color: black; border: none; padding: 10px;">{{message}}</span></center>
+            {% endfor %}
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.email.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.email}}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.first_name.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.first_name}}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.last_name.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.last_name}}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.country.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.country}}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.mobile_number.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.mobile_number}}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.password1.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.password1}}<i id="eyes1"  class="fas fa-eye"></i>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.password2.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.password2}}<i id="eyes2" class="fas fa-eye"></i>
+                </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="accept">
+                <label class="form-check-label" for="accept">
+                  i agree with terms & conditions
+                </label>
+              </div>
+
+            <button type="submit" id="reg_submit" class="btn btn-primary w-100 mt-3" disabled>Sign up</button>
+
+            <p class="mt-3 text">Have an account already? <a href="{% url 'login' %}">Sign in</a></p>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    const hidebtn = document.getElementById('eyes1');
+    const hidebtn2 = document.getElementById('eyes2');
+    const password1 =  document.getElementById('id_password1');
+    const password2  = document.getElementById('id_password2');
+    const details = document.querySelector('.details');
+    const checkbox = document.getElementById('accept');
+    const btn = document.getElementById('reg_submit');
+  
+    var clicked1 = false
+    var clicked2 = false
+
+    
+
+    
+    checkbox.addEventListener('click',()=>{
+        if(checkbox.checked == true){
+            btn.disabled = false
+        }
+        else{
+            btn.disabled = true
+        }
+
+    })
+    
+  
+    hidebtn.addEventListener('click', ()=>{
+      if (clicked1 == false){
+        password1.type='text'
+        hidebtn.classList.remove('fa-eye')
+        hidebtn.classList.add('fa-eye-slash')
+        clicked1 = true
+      }
+      else{
+        password1.type='password'
+        hidebtn.classList.remove('fa-eye-slash')
+        hidebtn.classList.add('fa-eye')
+        clicked1 = false
+      }  
+    })
+  
+  
+    hidebtn2.addEventListener('click', ()=>{
+      if (clicked2 == false){
+        password2.type='text'
+        hidebtn2.classList.remove('fa-eye')
+        hidebtn2.classList.add('fa-eye-slash')
+        clicked2 = true
+      }
+      else{
+        password2.type='password'
+        hidebtn2.classList.remove('fa-eye-slash')
+        hidebtn2.classList.add('fa-eye')
+        clicked2 = false
+      }
+    })
+  </script>
+
+
+
+
+
+
+{% endblock %}

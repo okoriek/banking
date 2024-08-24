@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Echelonglobe - Contact Us{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+<div class="container pt-5">
+    
+    <div class="mx-3 pt-5">
+        <div>
+            <span><strong>Email:</strong></span><span class="px-3">support@echelonglobe.com</span>
+        </div>
+
+        <div>
+            <span><strong>Tel Phone:</strong></span><span class="px-3">01-555 776 43</span>
+        </div>   
+    </div>
+
+    <center><p class="offer">OR</p></center>
+
+    <form action="" method="post">
+        <div class="form-bg">
+            <div class="form px-4 mt-3">
+                <p class="form-text mb-2">Message Us</p>
+                <div class="divider mb-4"></div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name: </label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address: </label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="mb-3 ">
+                    <label for="message" class="form-label">Message: </label>
+                    <br>
+                    <textarea class="form-control" style="width: 100%;" rows="5" id="message" name="message"></textarea>
+                </div>
+                <button id="reg_submit" class="btn btn-primary w-100">Send us a message</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    const btn =  document.getElementById('reg_submit');
+    var token =  '{{csrf_token}}'
+    btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        btn.innerText = 'Sending Please Wait...'
+        btn.disabled = true
+        $.ajax({
+            url:'/complain/',
+            type:'post',
+            headers: { "X-CSRFToken": token },
+            data:{
+                name:$('#name').val(),
+                email:$('#email').val(),
+                message:$('#message').val(),
+            },
+            success:function(response){
+                $('#name').val('')
+                $('#email').val('')
+                $('#message').val('')
+
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Message Delivered',
+                })
+
+                btn.innerText = 'Send us a message'
+                btn.disabled = false
+            },
+            error:function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+                btn.innerText = 'Send us a message'
+                btn.disabled = false
+            }
+        })
+    })
+</script>
+
+{% endblock %}

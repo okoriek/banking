@@ -1,0 +1,36 @@
+{% extends 'base2.html' %}
+{% block body %}
+<div class="container pt-5 mx-4">
+    <h2 class="d-flex justify-content-center py-3 pt-5">Personal Details</h2>
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder;">First Name: </span>
+            <span class="px-4">{{request.user.first_name}}</span> 
+        </div>
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder;">Last Name: </span>
+            <span class="px-4">{{request.user.last_name}}</span> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; ">Email: </span>
+            <span class="px-4">{{request.user.email}}</span> 
+        </div>
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; ">Mobile Number: </span>
+            <span class="px-4">{{request.user.mobile_number}}</span> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; ">Country: </span>
+            <span class="px-4">{{request.user.country.name}}</span> 
+        </div>
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; ">Referee: </span>
+            <span class="px-4">{{request.user.refered_by}}</span> 
+        </div>
+    </div>
+</div>
+{% endblock %}
