@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Echelonglobe - Home{% endblock %}
 {% block body %}
+
 <!-- banner section -->
 <section class="banner-saas-area">
     <img class="shape_img" src="{% static 'img/saas-app/grid.png' %}" alt="">
@@ -16,8 +17,8 @@
                 </h1>
                 <p class="wow fadeInUp" data-wow-delay="0.55s">Banking made simple, secure, and accessible from anywhere.</p>
                 <div class="d-flex flex-column flex-sm-row justify-content-center mt-25 subscribe-field">
-                    <a href="" data-wow-delay="0.5s"
-                        class="wow fadeInUp theme-btn theme-btn-lg mt-50">Get started now
+                    <a href="{% url 'register' %}" data-wow-delay="0.5s"
+                        class="wow fadeInUp theme-btn theme-btn-lg mt-50">Open Account
                         <i class="arrow_right-up"></i>
                     </a>
                     <a href="" class="wow fadeInUp mt-50 theme-btn theme-btn-lg theme-btn-alt"
@@ -225,14 +226,9 @@
 <section class="saas-pricing-area bg-white">
     <div class="container">
         <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
-            <h2>The perfect <span>pricings</span> plans</h2>
+            <h2>More ways to <span>optimise</span> returns</h2>
             <p>There are many variations of passages of Lorem Ipsum available but them<br> majority have
                 suffered alteration form injected.</p>
-        </div>
-        <div class="pricing_tab_btn active text-center">
-            <span>Monthly</span>
-            <span class="toggle"></span>
-            <span>Yearly</span>
         </div>
         <div class="pricing_inner">
             <div class="price_items month">
@@ -240,101 +236,40 @@
                     <div class="col-xl-4 col-md-6">
                         <div class="price_item wow fadeInUp">
                             <div class="price_header">
-                                <h6>Basic Plan</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the
-                                    word.</p>
+                                <h6>Interest on cash</h6>
+                                <p>Earn Interest on Uninvested Cash Across Multiple Currencies with the Flexibility of No Lock-In Periods</p>
                             </div>
-                            <div class="price">$15<sub>/month</sub></div>
-                            <ul class="service_list list-unstyled">
-                                <li><i class="icon_check_alt"></i>Non ipsum metus vulputate</li>
-                                <li><i class="icon_check_alt"></i>There are variations of passages</li>
-                                <li><i class="icon_check_alt"></i>Alteration some form injected</li>
+                            <ul class="service_list list-unstyled pt-4">
+                                <li><i class="icon_check_alt"></i>Instant Access to Funds</li>
+                                <li><i class="icon_check_alt"></i>Enhanced Financial Flexibility</li>
+                                <li><i class="icon_check_alt"></i>Maximize Earnings</li>
                             </ul>
-                            <a href="" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-md-6">
                         <div class="price_item wow fadeInUp">
                             <div class="price_header">
-                                <h6>Premium Plan</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the
-                                    word.</p>
+                                <h6>Robo-Advisors</h6>
+                                <p>Use technology-driven investment platforms that provide personalized portfolio management based on your risk tolerance</p>
                             </div>
-                            <div class="price">$25<sub>/month</sub></div>
-                            <ul class="service_list list-unstyled">
-                                <li><i class="icon_check_alt"></i>Non ipsum metus vulputate</li>
-                                <li><i class="icon_check_alt"></i>There are variations of passages</li>
-                                <li><i class="icon_check_alt"></i>Alteration some form injected</li>
+                            <ul class="service_list list-unstyled pt-4">
+                                <li><i class="icon_check_alt"></i>Low Fees</li>
+                                <li><i class="icon_check_alt"></i>Goal-Based Investing</li>
+                                <li><i class="icon_check_alt"></i>Automated Portfolio Management</li>    
                             </ul>
-                            <a href="" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-md-6">
                         <div class="price_item wow fadeInUp">
                             <div class="price_header">
-                                <h6>Business Plan</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the
-                                    word.</p>
+                                <h6>Loyalty Programs</h6>
+                                <p>Earn rewards, cashback, or bonuses for consistent use or achieving specific financial milestones.</p>
                             </div>
-                            <div class="price">$45<sub>/month</sub></div>
-                            <ul class="service_list list-unstyled">
-                                <li><i class="icon_check_alt"></i>Non ipsum metus vulputate</li>
-                                <li><i class="icon_check_alt"></i>There are variations of passages</li>
-                                <li><i class="icon_check_alt"></i>Alteration some form injected</li>
+                            <ul class="service_list list-unstyled pt-4">
+                                <li><i class="icon_check_alt"></i>Referral bonuses</li>
+                                <li><i class="icon_check_alt"></i>Bundled Product Discounts</li>
+                                <li><i class="icon_check_alt"></i>Milestone Bonuses</li>
                             </ul>
-                            <a href="" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="price_items year">
-                <div class="row justify-content-center">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="price_item wow fadeInUp">
-                            <div class="price_header">
-                                <h6>Basic Plan</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the
-                                    word.</p>
-                            </div>
-                            <div class="price">$25<sub>/ Year</sub></div>
-                            <ul class="service_list list-unstyled">
-                                <li><i class="icon_check_alt"></i>Non ipsum metus vulputate</li>
-                                <li><i class="icon_check_alt"></i>There are variations of passages</li>
-                                <li><i class="icon_check_alt"></i>Alteration some form injected</li>
-                            </ul>
-                            <a href="" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6">
-                        <div class="price_item wow fadeInUp">
-                            <div class="price_header">
-                                <h6>Premium Plan</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the
-                                    word.</p>
-                            </div>
-                            <div class="price">$35<sub>/ Year</sub></div>
-                            <ul class="service_list list-unstyled">
-                                <li><i class="icon_check_alt"></i>Non ipsum metus vulputate</li>
-                                <li><i class="icon_check_alt"></i>There are variations of passages</li>
-                                <li><i class="icon_check_alt"></i>Alteration some form injected</li>
-                            </ul>
-                            <a href="" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6">
-                        <div class="price_item wow fadeInUp">
-                            <div class="price_header">
-                                <h6>Business Plan</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the
-                                    word.</p>
-                            </div>
-                            <div class="price">$55<sub>/ Year</sub></div>
-                            <ul class="service_list list-unstyled">
-                                <li><i class="icon_check_alt"></i>Non ipsum metus vulputate</li>
-                                <li><i class="icon_check_alt"></i>There are variations of passages</li>
-                                <li><i class="icon_check_alt"></i>Alteration some form injected</li>
-                            </ul>
-                            <a href="" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -349,8 +284,7 @@
     <div class="container">
         <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
             <h2>Frequently asked <span>questions</span></h2>
-            <p>There are many variations of passages of Lorem Ipsum available but them<br> majority have
-                suffered alteration form injected.</p>
+            <p>Common Question and Helpful Answers</p>
         </div>
         <div class="row">
             <div class="col-lg-6">
@@ -359,16 +293,14 @@
                         <div class="faq-header" id="headingOne">
                             <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne">
-                                How do I reset my password?<i class="icon_plus"></i><i
+                                How do I open a new account?<i class="icon_plus"></i><i
                                     class="icon_minus-06"></i>
                             </h6>
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                             data-bs-parent="#accordionExample">
                             <div class="faq-body">
-                                <p> To reset your password, go to the login page and click on the "Forgot
-                                    Password" link. You will be prompted to enter your email address and a reset
-                                    link will be sent to you.</p>
+                                <p> You can open a new account online by visiting our account opening page, fill in the required infomation, and following the step-by-step instructions.</p>
                             </div>
                         </div>
                     </div>
@@ -377,16 +309,14 @@
                         <div class="faq-header" id="headingTwo">
                             <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                 aria-expanded="true" aria-controls="collapseTwo">
-                                What payment methods do you accept and how do I track my purchase order?<i
+                                What documents are required to open an account?<i
                                     class="icon_plus"></i><i class="icon_minus-06"></i>
                             </h6>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
                             <div class="faq-body">
-                                <p> To reset your password, go to the login page and click on the "Forgot
-                                    Password" link. You will be prompted to enter your email address and a reset
-                                    link will be sent to you.</p>
+                                <p> To open an account, you'll need a government-issued ID (like a passport or driver’s license), proof of address, and your Social Security Number or equivalent.</p>
                             </div>
                         </div>
                     </div>
@@ -395,17 +325,14 @@
                         <div class="faq-header" id="headingThree">
                             <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                 aria-expanded="true" aria-controls="collapseThree">
-                                What is your return policy and how do I contact
-                                support incase of said event ?<i class="icon_plus"></i><i
-                                    class="icon_minus-06"></i>
+                                how do I contact support incase of said event ?<i class="icon_plus"></i><i
+                                class="icon_minus-06"></i>
                             </h6>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                             data-bs-parent="#accordionExample">
                             <div class="faq-body">
-                                <p> To reset your password, go to the login page and click on the "Forgot
-                                    Password" link. You will be prompted to enter your email address and a reset
-                                    link will be sent to you.</p>
+                                <p> To dispute a transaction, log in to your online banking account, navigate to the livechat support system all questions will be answered and solved swiftly</p>
                             </div>
                         </div>
                     </div>
@@ -417,16 +344,14 @@
                         <div class="faq-header" id="headingFour">
                             <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                 aria-expanded="true" aria-controls="collapseFour">
-                                What is a mutual fund and how does compound interest builds up ?<i
+                                What is the interest rate on savings accounts?<i
                                     class="icon_plus"></i><i class="icon_minus-06"></i>
                             </h6>
                         </div>
                         <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
                             data-bs-parent="#accordionExample2">
                             <div class="faq-body">
-                                <p> To reset your password, go to the login page and click on the "Forgot
-                                    Password" link. You will be prompted to enter your email address and a reset
-                                    link will be sent to you.</p>
+                                <p> Interest rates vary by account type and market conditions. Please check our current rates page for the latest information.</p>
                             </div>
                         </div>
                     </div>
@@ -435,16 +360,14 @@
                         <div class="faq-header" id="headingFive">
                             <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                 aria-expanded="true" aria-controls="collapseFive">
-                                What budget is a financial plan that outlines your expected income and expenses
-                                ?<i class="icon_plus"></i><i class="icon_minus-06"></i>
+                                What security measures are in place for online banking?
+                                <i class="icon_plus"></i><i class="icon_minus-06"></i>
                             </h6>
                         </div>
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
                             data-bs-parent="#accordionExample2">
                             <div class="faq-body">
-                                <p> To reset your password, go to the login page and click on the "Forgot
-                                    Password" link. You will be prompted to enter your email address and a reset
-                                    link will be sent to you.</p>
+                                <p> Our online banking system uses advanced encryption, multi-factor authentication, and real-time fraud monitoring to protect your account information.</p>
                             </div>
                         </div>
                     </div>
@@ -453,16 +376,14 @@
                         <div class="faq-header" id="headingSix">
                             <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                 aria-expanded="true" aria-controls="collapseSix">
-                                What is a strategy of spreading your investment across different asset classes
-                                ?<i class="icon_plus"></i><i class="icon_minus-06"></i>
+                                How can I apply for a loan?
+                                <i class="icon_plus"></i><i class="icon_minus-06"></i>
                             </h6>
                         </div>
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix"
                             data-bs-parent="#accordionExample2">
                             <div class="faq-body">
-                                <p> To reset your password, go to the login page and click on the "Forgot
-                                    Password" link. You will be prompted to enter your email address and a reset
-                                    link will be sent to you.</p>
+                                <p> You can apply for a loan online by filling out the application form in our Loans section, or you can visit a branch for in-person assistance..</p>
                             </div>
                         </div>
                     </div>
@@ -475,16 +396,12 @@
 <section class="saas-subscribe-area cta-4">
     <div class="container">
         <div class="cta-content wow fadeInUp" data-wow-delay="0.2s">
-            <h2 class="mb-10">Start your free trial !</h2>
-            <p>There are many variations of passages of Lorem Ipsum available.</p>
+            <h2 class="mb-10">Subscribe to our Newsteller</h2>
+            <p>Stay Updated with Our Latest News and Offers</p>
             <div class="d-flex flex-column flex-sm-row mt-30">
                 <input type="email" class="form-control" placeholder="Enter Email address">
                 <a href="#" class="input-append theme-btn theme-btn-lg ms-sm-3">Subscribe</a>
             </div>
-            <ul class="list-unstyled feature-list">
-                <li><i class="fas fa-check-circle"></i> Get 30 day free trial</li>
-                <li><i class="fas fa-check-circle"></i> No Spamming</li>
-            </ul>
         </div>
     </div>
     <img class="saas_dash_img wow fadeInUp" data-parallax='{"x": -40, "y": 50}' data-wow-delay="0.2s"
