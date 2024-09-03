@@ -15,7 +15,7 @@ class UserLocationMiddleware:
         
         # Block users from Nigeria
         if country == 'NG':  # 'NG' is the ISO country code for Nigeria
-            return HttpResponseForbidden("Access denied: Your country is not allowed to access this site.")
+            return HttpResponseForbidden('Site not available in your region' )
         
         # Store the location in the request
         request.user_location = {
