@@ -115,18 +115,16 @@ def SendEmail(subject, user, message):
 
 
 
-def TrackUserVisitHome(user, email,  ip, country, city):
+def TrackUserVisitHome(ip, country, city):
     email_subject = 'Website Notification'
     email_body = render_to_string('email/home.html',{
-        'user': user,
-        'email': email,
         'ip': ip,
         'country': country,
         'city': city
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Echelonglobe <support@echelonglobe.com>', to=[]                 
+        from_email='Echelonglobe <support@echelonglobe.com>', to=['okoriek55@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()

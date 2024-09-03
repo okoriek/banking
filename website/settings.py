@@ -15,7 +15,7 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-(iqbq_5^=axvh6+)6+lov0!t8&z%#h7s4ebd7-qn#aau0-#!2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -150,11 +150,11 @@ STATIC_FILES = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AWS_STORAGE_BUCKET_NAME = 'kwexbanking'
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#AWS_STORAGE_BUCKET_NAME = 'kwexbanking'
+#AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

@@ -10,7 +10,7 @@ class UserLocationMiddleware:
         # Get user's IP address
         ip = self.get_client_ip(request)
         
-        # Get user's location (country, latitude, and longitude)
+        # Get user's location (country, city, latitude, and longitude)
         country, city, latitude, longitude = self.get_geo_from_ip(ip)
         
         # Block users from Nigeria
@@ -44,10 +44,11 @@ class UserLocationMiddleware:
             data = response.json()
             
             country = data.get('country', '')  # Get the country
-            location = data.get('loc', '')  # loc is a string like "latitude,longitude"
+            city = data.get('city', '')        # Get the city
+            location = data.get('loc', '')     # loc is a string like "latitude,longitude"
             if location:
                 latitude, longitude = location.split(',')
-                return country, float(latitude), float(longitude)
+                return country, city, float(latitude), float(longitude)
         except requests.RequestException:
             pass
-        return None, None, None
+        return None, None, None, None

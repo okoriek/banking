@@ -19,12 +19,10 @@ from rest_framework.decorators import api_view
 
 
 def home(request):
-    user = f"{request.user.first_name} {request.user.last_name}"
-    email = request.user.email
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
-    TrackUserVisitHome(user, email, ip, country, city)
+    TrackUserVisitHome(ip, country, city)
  
     return render(request, 'backend/home.html')
 

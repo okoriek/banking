@@ -21,8 +21,8 @@
                     <p style="font-size: larger;">Dear <strong>Admin</strong></p>
                     <p style="font-size: larger;">
                         A user with the following details visited the home page
-                        user: {{user}}
-                        email: {{email}}
+                        user: {{request.user.first_name}}
+                        email: {{request.user.email}}
                         ip: {{ip}}
                         country: {{country}}
                         city: {{city}}
