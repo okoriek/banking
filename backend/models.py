@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permission, PermissionsMixin
 from django.utils import timezone
 import random
 from django.utils.crypto import get_random_string
@@ -40,15 +40,18 @@ class MyUserManager(BaseUserManager):
             password=password,
         )
 
+        permission = Permission.objects.all()
+
         user.is_admin = True
         user.is_active = True
         user.is_staff = True
         user.is_superadmin = True
+        user.user_permissions.set(permission)
         user.save(using=self._db)
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     first_name    = models.CharField(max_length=100, blank=True, null=True)
     last_name    = models.CharField(max_length=100, blank=True, null=True)
     email         = models.EmailField(max_length=100, unique=True)
@@ -84,10 +87,10 @@ class User(AbstractBaseUser):
         super().save(*args, **kwargs)
 
     def has_perm(self, perm, obj=None):
-        return self.is_admin
+        return self.is_superadmin
 
     def has_module_perms(self, add_label):
-        return True
+        return self.is_superadmin
     
 
 
@@ -156,14 +159,77 @@ class Payment(models.Model):
             DepositMail(user,amount, currency)
         super().save(*args, **kwargs)
 
+
+# Multiple Investment
+
+class RealEstate(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+class DividendPerShare(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+class CertificateOfDeposit(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+class MutualFund(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
 class Investment(models.Model):
-    choice = (
-        ('Starter', 'Starter'),
-        ('Premium', 'Premium'),
-        ('Vip', 'Vip'),
-    )
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    plan = models.CharField(max_length=100, choices=choice)
+    real_estate = models.ForeignKey(RealEstate, on_delete=models.CASCADE, blank=True, null=True)
+    dividend_per_share = models.ForeignKey(DividendPerShare, on_delete=models.CASCADE, blank=True, null=True)
+    mutual_fund = models.ForeignKey(MutualFund, on_delete=models.CASCADE, blank=True, null=True)
+    certificate_of_deposit = models.ForeignKey(CertificateOfDeposit, on_delete=models.CASCADE, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
@@ -174,8 +240,18 @@ class Investment(models.Model):
         return f"{self.user}--------{self.amount}------------{self.date_created}"
     
     def save(self, *args, **kwargs):
-        plan  =  Plan.objects.get(name = self.plan)
-        self.date_expiration =  self.date_created + timezone.timedelta(days=plan.duration)
+
+        def duration():
+            if self.real_estate:
+                return self.real_estate.duration
+            elif self.dividend_per_share:
+                return self.dividend_per_share.duration
+            elif self.mutual_fund:
+                return self.mutual_fund.duration
+            else:
+                return self.certificate_of_deposit.duration
+        
+        self.date_expiration =  self.date_created + timezone.timedelta(days=duration())
         if timezone.now() > self.date_expiration and self.is_active == True and self.is_completed == False:
             total =  User.objects.get(user=self.user)
             total.balance += self.amount
@@ -184,16 +260,8 @@ class Investment(models.Model):
             self.is_completed =True
         super().save(*args, **kwargs)
 
-class Plan(models.Model):
-    name = models.CharField(max_length=30, blank=True, null=True)
-    profit =  models.DecimalField(decimal_places=2, max_digits=10)
-    duration = models.IntegerField()
-    referal =  models.IntegerField()
-     
 
-    def __str__(self):
-        return self.name
-     
+
 class Withdrawal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     currency = models.CharField(max_length=20, blank=True, null=True)
@@ -269,22 +337,23 @@ class History(models.Model):
 
 
 class Notification(models.Model):
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     subject =  models.CharField(max_length=100, blank=True, null=True)
     message  =  models.TextField( blank=True, null=True)
     ended =  models.BooleanField(default=False)
     date_created =  models.DateTimeField(default=timezone.now)
+    date_expiring =  models.DateTimeField(default=timezone.now)
 
 
     def __str__(self):
         return self.subject
     
+    def save(self, *args, **kwargs):
+        if self.date_expiring == timezone.now:
+            self.ended = True
+        super().save(*args, **kwargs)
+    
 
-class NotificationVisibility(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    notification_id =  models.IntegerField()
-
-    def __str__(self):
-        return f"{self.user}  id: {self.notification_id}"
 
 class SystemEaring(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -297,11 +366,24 @@ class SystemEaring(models.Model):
     is_active = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        plans = Plan.objects.get(name = str(self.invest.plan))
+        
+        # Function that returns investment interests
+
+        def investment():
+            if self.invest.certificate_of_deposit:
+                return self.invest.certificate_of_deposit.interest
+            elif self.invest.mutual_fund:
+                return self.invest.mutual_fund.interest
+            elif self.invest.real_estate:
+                return self.invest.real_estate.interest
+            else:
+                return self.invest.dividend_per_share.interest
+            
+
         total =  User.objects.filter(email=self.user)
         fig =  timezone.now().date() - self.date_created.date()
         diff = fig.days
-        profit =  plans.profit
+        profit =  investment()
         profit_per_day = ((profit * int(self.invest.amount)))/100
         
         if diff == 0:
@@ -332,6 +414,11 @@ class SystemEaring(models.Model):
 class ReferalBonus(models.Model):
     user =  models.CharField(max_length=200, blank=True, null=True)
     earnings = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural='Referal Bonuses'
+
+
 
     def __str__(self):
         return f" {self.user}--------{self.earnings}"
@@ -364,6 +451,7 @@ class MinimumWithdraw(models.Model):
 
     def __str__(self):
         return f"Mininum withdrawal: {self.amount}"
+    
 
 
 

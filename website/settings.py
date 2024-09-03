@@ -23,6 +23,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'backend.User'
 
 MIDDLEWARE = [
+    'backend.middleware.UserLocationMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -148,19 +150,20 @@ STATIC_FILES = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'kwexbanking'
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-#EMAIL_HOST='smtppro.zoho.com'
-#EMAIL_PORT =465
-#EMAIL_HOST_USER='support@zenithport.com'
-#EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
-#EMAIL_USE_SSL =True
-#DEFAULT_FROM_EMAIL ='support@zenithport.com'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST='mail.finovaedge.com'
+EMAIL_PORT =587
+EMAIL_HOST_USER='support@finovaedge.com'
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS =True
+DEFAULT_FROM_EMAIL ='support@finovaedge.com'
 
 LOGIN_REDIRECT_URL = ('/Profile-dashboard')
 LOGOUT_REDIRECT_URL = ('/')

@@ -23,8 +23,23 @@ urlpatterns = [
   path('withdrawal/', views.RenderWithdrawal, name='withdrawal'),
   path('make_withdrawal/', views.MakeWithdrawal, name='makewithdrawal'),
   path('make_payment/', views.ConfirmPayment, name='payment'),
-  path('make_investment/', views.ActiveInvestment, name='active'),
-  path('investment_processing/', views.SubmitInvestment, name='submitinvestment'),
+
+  # investment
+  path('realestate_investment/', views.EstateActiveInvestment, name='estate'),
+  path('investment_processing/', views.EstateSubmitInvestment, name='submitinvestment'),
+
+  path('certificate_of_deposit_investment/', views.CertificateActiveInvestment, name='certificate'),
+  path('certificate_processing/', views.CertificateSubmitInvestment, name='certificatesubmitinvestment'),
+
+  path('mutual_funds_investment/', views.MutualActiveInvestment, name='mutual'),
+  path('mutual_processing/', views.MutualSubmitInvestment, name='mutualsubmitinvestment'),
+
+  path('dividend_investment/', views.DividendInvestment, name='dividend'),
+  path('dividend_processing/', views.DividendSubmitInvestment, name='dividendsubmitinvestment'),
+
+
+
+
   path('transfer_funds/', views.InitiateTransfer, name='initiatetransfer'),
   path('transfer/', views.transfer, name='transfer'),
   path('Profile-dashboard/', views.Dashboard, name='dashboard'),

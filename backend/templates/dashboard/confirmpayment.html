@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block body %}
+<script src="https://cdn.tailwindcss.com"></script>
 
 <div class="form-bg">
     <div class="form px-4">
@@ -17,21 +18,32 @@
             <div>
                 <center><h3>Pay {{currency}}</h3></center>
             </div>
-            <div style="margin-left: auto; margin-right: auto; display: block;">
-                <img src="{{type.image.url}}" style="margin-left: auto; margin-right: auto; display: block; height: 20vh; width: 20vh;" alt="error loading Qrcode">
-            </div>
-            <div class="input-group mb-3"  style="padding-top: 20px;">
-                <input type="text" class="form-control" id="address" value="{{type.wallet_id}}">
-                <span class="input-group-text" id="wallet">copy</span>
+
+            <figure class="max-w-lg">
+                <img class="h-auto max-w-full rounded-lg" src="{{type.image.url}}" alt="image description">
+                <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">scan Qrcode</figcaption>
+            </figure>
+
+
+            <div>
+                <label for="hs-trailing-button-add-on" class="sr-only">Wallet Address</label>
+                <div class="flex rounded-lg shadow-sm">
+                    <input type="text" id="hs-trailing-button-add-on amount" name="hs-trailing-button-add-on" value="{{type.wallet_id}}" class="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-s-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    <button type="button" id="wallet" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-e-md border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                        Copy
+                    </button>
+                </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary w-100" id="confirm">Confirm Payment</button>
+            <button type="submit" class="btns w-full" id="confirm">Confirm Payment</button>
         </div>
         <br>
         <span style="color: red;"><i class="fa-solid fa-circle-info"></i> Be aware this order will be cancelled. if any other {{currency}} amount</span><br>
         <span style="color: green;"><i class="fa-solid fa-circle-info"></i> Account will be credited on payment confirmation</span>       
     </div>    
 </div>
+
+<script src="https://kit.fontawesome.com/82d49a62e0.js" crossorigin="anonymous"></script>
 
 <script>
     const btn = document.getElementById('wallet');

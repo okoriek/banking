@@ -1,4 +1,4 @@
-from .models import User, History, Notification,SystemEaring, Investment, NotificationVisibility
+from .models import User, History, Notification,SystemEaring, Investment
 
 
 def TotalDeposit(request):
@@ -50,41 +50,41 @@ def ActiveEarnings(request):
         return {'earning': None}
     
 def Notify(request):
-    data = NotificationVisibility.objects.filter(user= request.user.pk).count()
     val = Notification.objects.filter(ended=False).count() 
-    if data:
-        total = int(val-data)
-        return {'num': total}
-    else:
-        return {'num': val}
+    return {'num': val}
+    
     
     
     
 def Message(request):
-    data = NotificationVisibility.objects.filter(user= request.user.pk)
-    val = Notification.objects.filter(ended = False)
-    notify_id = []
-    message_id = []
     item = []
-    if data:
-        for i in val:
-            message_id.append(i.pk)
-        for d in data:
-            notify_id.append(d.notification_id)
-        update_data = list(set(message_id) - set(notify_id))
-        for y in update_data:
-            dats = Notification.objects.filter(pk = y)
-            for j in dats:
-                items = {
-                    'pk': j.pk,
-                    'subject': j.subject,
-                    'message': j.message,
-                    'date_created': j.date_created
+    items = []
+    try:
+        data = Notification.objects.filter(ended=False, user=None)
+        msg = Notification.objects.filter(ended=False, user=request.user)
+        if msg:
+            for i in msg:
+                val = {
+                    'subject': i.subject,
+                    'message': i.message,
+                    'date_created': i.date_created
                 }
-            item.append(items)
-        return {'item':item}
-    else:
-        return {'item': val}
+                item.append(val)
+        if data:
+            for i in data:
+                val = {
+                    'subject': i.subject,
+                    'message': i.message,
+                    'date_created': i.date_created
+                }
+                items.append(val)
+    except:
+        pass
+
+    return{'item':item, 'items': items}
+    
+    
+
 
 
 

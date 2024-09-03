@@ -31,7 +31,7 @@ def UpdateWithdrawHistorySave(sender, instance, created, **kwargs):
 def InvestHistorySave(sender, instance, created, **kwargs):
     if created:
         ids = instance.user
-        History.objects.create(user=ids, invest=instance,  action='Investment', currency= instance.plan, amount=instance.amount, status = instance.is_active, date_created = instance.date_created)
+        History.objects.create(user=ids, invest=instance,  action='Investment', currency='USD', amount=instance.amount, status = instance.is_active, date_created = instance.date_created)
         
 
 
@@ -52,7 +52,7 @@ def TransferHistoryUpdate(sender, instance, created, **kwargs):
 def UpdateSystemEarning(sender, instance, created, **kwargs):
     if created:
         ids = instance.user
-        SystemEaring.objects.create(user = ids, invest=instance, plan = instance.plan, is_active= instance.is_active, num=0, date_created = instance.date_created, date_expiration= instance.date_expiration)
+        SystemEaring.objects.create(user = ids, invest=instance, is_active= instance.is_active, num=0, date_created = instance.date_created, date_expiration= instance.date_expiration)
 
 
 

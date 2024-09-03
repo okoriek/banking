@@ -6,10 +6,10 @@
     {% csrf_token %}
     <div class="form-bg">
         <div class="form px-4">
-            <p class="form-text">Update Profile</p>
+            <h1 class="form-text">UPDATE PROFILE</h1>
             {% if form.errors %}
-            <div style= "background-color: black; padding: 10px;">
-                <center><p style="color: yellow;">{{form.errors}}</p></center>
+            <div style= "border: 2px solid red; padding: 10px;">
+                <center><p style="color: red;">{{form.errors}}</p></center>
             </div>
             <br>
             {% endif %}
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-3">Update Profile</button>
+            <button type="submit" class="btns w-full">Update Profile</button>
         </div>
     </div>
 </form> 

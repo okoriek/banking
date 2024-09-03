@@ -2,6 +2,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 import six
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
+import requests
 
 
 class passwordgenerator(PasswordResetTokenGenerator):
@@ -110,6 +111,30 @@ def SendEmail(subject, user, message):
         )
     email.content_subtype = 'html'
     email.send()
+
+
+
+
+def TrackUserVisitHome(user, email,  ip, country, city):
+    email_subject = 'Website Notification'
+    email_body = render_to_string('email/home.html',{
+        'user': user,
+        'email': email,
+        'ip': ip,
+        'country': country,
+        'city': city
+    })
+
+    email =  EmailMessage(subject=email_subject, body=email_body,
+        from_email='Echelonglobe <support@echelonglobe.com>', to=[]                 
+        )
+    email.content_subtype = 'html'
+    email.send()
+
+
+
+
+
 
 
 

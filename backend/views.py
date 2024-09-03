@@ -10,14 +10,22 @@ from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
-from .utils import TokenGenerator, SendReferalMail, SendEmail
+from .utils import TokenGenerator, SendReferalMail, SendEmail, TrackUserVisitHome
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
 
 
+
 def home(request):
+    user = f"{request.user.first_name} {request.user.last_name}"
+    email = request.user.email
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    TrackUserVisitHome(user, email, ip, country, city)
+ 
     return render(request, 'backend/home.html')
 
 
@@ -226,68 +234,80 @@ def investment(request):
     
     return render(request, 'backend/investment.html')
 
+
+
+# Initiating all type of Investment
+
+# housing
+
 @login_required(login_url='/login/') 
-def ActiveInvestment(request):
-    invest =  Plan.objects.all().values
+def EstateActiveInvestment(request):
+    invest =  RealEstate.objects.all().values
     args = {'invest':invest}
-    return render(request, 'dashboard/active.html', args)
+    return render(request, 'dashboard/realestate.html', args)
 
 @login_required(login_url='/login/') 
-def SubmitInvestment(request):
-    amount = request.POST['amount']
-    select = request.POST['select']
+def EstateSubmitInvestment(request):
+    id = request.POST['pk']
+    house = RealEstate.objects.get(pk=id)
+    invest =  Investment.objects.create(user = request.user, real_estate=house, amount=house.amount, is_active=True)
+    return JsonResponse('Investment successful', safe=False)
 
-    reinvest = Reinvestment.objects.filter(user=request.user, plan=select)
 
-    if reinvest.exists():
-        counting = Reinvestment.objects.get(user=request.user, plan=select)
-        if counting.plan == 'Standard' and counting.number_of_investment < 5 or counting.plan == 'Premium' and counting.number_of_investment <7 or counting.plan == 'Ultimate' and counting.number_of_investment < 10 or counting.plan == 'Shareholders' and counting.number_of_investment >= 0:
-            invest = Investment.objects.create(user= request.user, plan= select, amount= amount, is_active= True)
-            referal =  User.objects.get(email=request.user.email)
+# mutual funds
 
-            def Earn():
-                if select == 'Standard':
-                    return 1
-                elif select == 'Premium':
-                    return 2
-                elif select == 'Ultimate':
-                    return 4
-                else:
-                    return 5
-            ReferalBonus.objects.create(user = str(referal.refered_by), earnings = Earn())
-            bal =  User.objects.get(email=request.user.email)
-            bal.balance -= int(amount)
-            bal.save()
-            counting.number_of_investment += 1
-            counting.save()
-            return JsonResponse('Investment successfully', safe=False)
-        else:
-            return JsonResponse(f"Number of Reinvestment reached for {select}", safe=False)
-    else:
-        new = Reinvestment.objects.create(user=request.user, plan=select)
-        invest = Investment.objects.create(user= request.user, plan= select, amount= amount, is_active= True)
-        referal =  User.objects.get(email=request.user.email)
+@login_required(login_url='/login/') 
+def MutualActiveInvestment(request):
+    invest =  MutualFund.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'dashboard/mutual.html', args)
 
-        def Earn():
-            if select == 'Standard':
-                return 1
-            elif select == 'Premium':
-                return 2
-            elif select == 'Ultimate':
-                return 4
-            else:
-                return 5
-        ReferalBonus.objects.create(user = str(referal.refered_by), earnings = Earn())
-        bal =  User.objects.filter(user= request.user)
-        bal.balance -= int(amount)
-        bal.save()
-        new.number_of_investment += 1
-        new.save()
-        return JsonResponse('Investment successfully', safe=False)
-        
+@login_required(login_url='/login/') 
+def MutualSubmitInvestment(request):
+    id = request.POST['pk']
+    house = MutualFund.objects.get(pk=id)
+    invest =  Investment.objects.create(user = request.user, mutual_fund=house, amount=house.amount, is_active=True)
+    return JsonResponse('Investment successful', safe=False)
 
-    
- 
+
+
+# certificate of deposit
+
+@login_required(login_url='/login/') 
+def CertificateActiveInvestment(request):
+    invest =  CertificateOfDeposit.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'dashboard/saving.html', args)
+
+@login_required(login_url='/login/') 
+def CertificateSubmitInvestment(request):
+    id = request.POST['pk']
+    house = CertificateOfDeposit.objects.get(pk=id)
+    invest =  Investment.objects.create(user = request.user, certificate_of_deposit=house, amount=house.amount, is_active=True)
+    return JsonResponse('Investment successful', safe=False)
+
+
+
+# dividend per share
+
+@login_required(login_url='/login/') 
+def DividendInvestment(request):
+    invest =  DividendPerShare.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'dashboard/dividend.html', args)
+
+@login_required(login_url='/login/') 
+def DividendSubmitInvestment(request):
+    id = request.POST['pk']
+    house = DividendPerShare.objects.get(pk=id)
+    invest =  Investment.objects.create(user = request.user, dividend_per_share=house, amount=house.amount, is_active=True)
+    return JsonResponse('Investment successful', safe=False)
+
+
+
+
+
+
 def Faq(request):
 
     return render(request, 'backend/faq.html')
@@ -357,12 +377,7 @@ def SendBulkEmail(request):
             SendEmail(subject, user, message)
     return JsonResponse({'message': 'Email Successfully Sent'})
 
-@login_required(login_url='/login/') 
-def notification(request):
-    user = request.user
-    id =  request.POST['id']
-    data = NotificationVisibility.objects.update_or_create(user = user, notification_id=int(id))
-    return JsonResponse('successfully updated', safe=False)
+
 
 
 
