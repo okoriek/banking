@@ -9,13 +9,13 @@
         <div class="form px-4">
             <p class="form-text">Sign in</p>
             {% if form.errors %}
-            <div class="errors" style= "background-color: black; padding: 10px;">
-                <center><p style="color: yellow;">Username or password incorrect try again.</p></center>
+            <div class="errors" style= "border: 2px solid red; padding: 10px;">
+                <center><p style="color: red;">Username or password incorrect try again.</p></center>
             </div>
             <br>
             {% endif %}
             {% for message in messages %}
-            <div  style="color: yellow; background-color: black; padding: 10px; " >
+            <div  style="color: greenyellow; border: 2px solid greenyellow; padding: 10px; " >
                 {{message}}
             </div>
             {% endfor %}
