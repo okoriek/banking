@@ -3,80 +3,100 @@
 {% block title %}Echelonglobe - Investment Plan{% endblock %}
 {% block body %}
 
-<div class="container pt-5">
-    <div class="row">
-        <div class="col-lg-12">
-            <p class="offer pt-5">Investment Packages</p>
-            <div class="divider"></div>
+<section class="saas-faq-area bg-white">
+    <div class="container pt-5">
+        <div class="saas-section-title text-center mb-60 wow fadeInUp pt-5" data-wow-delay="0.2s">
+            <h4 class="pt-5">Overview of Investment Options</h4>
+            <p>Understanding the various investment options available is crucial to making informed decisions</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionExample">
+                    <div class="faq_item wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="faq-header" id="headingOne">
+                            <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                REAL ESTATE & HOUSING<i class="icon_plus"></i><i
+                                    class="icon_minus-06"></i>
+                            </h6>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="faq-body">
+                                <p> 
+                                    Real estate and housing investments involve purchasing property to generate income or appreciate in value. This category of investment includes residential properties, commercial real estate, land, and real estate investment trusts (REITs).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq_item wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="faq-header" id="headingTwo">
+                            <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                aria-expanded="true" aria-controls="collapseTwo">
+                                CERTIFICATE OF DEPOSIT <i
+                                    class="icon_plus"></i><i class="icon_minus-06"></i>
+                            </h6>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="faq-body">
+                                <p> 
+                                    Certificates of Deposit (CDs) are time deposits offered by banks and credit unions that pay a fixed interest rate for a specified period. CDs are considered one of the safest investment options available because they are typically insured by government agencies like the FDIC in the U.S.
+                                    <br>
+                                    <strong>How CDs Work:</strong>
+                                    <br>
+                                    When you invest in a CD, you agree to leave your money with the bank for a fixed term, which can range from a few months to several years. In return, the bank pays you interest, usually at a higher rate than that offered by regular savings accounts. At the end of the term, or maturity, you receive your initial deposit plus the accrued interest.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionExample2">
+                    <div class="faq_item wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="faq-header" id="headingFour">
+                            <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                aria-expanded="true" aria-controls="collapseFour">
+                                DIVIDEND PER SHARE<i
+                                    class="icon_plus"></i><i class="icon_minus-06"></i>
+                            </h6>
+                        </div>
+                        <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample2">
+                            <div class="faq-body">
+                                <p>
+                                    Dividends per share (DPS) represent the portion of a company's earnings distributed to shareholders, typically in the form of cash or additional shares. DPS is a key metric for investors, especially those focused on generating income from their investments.
+                                    <br>
+                                    <strong>Understanding DPS:</strong>
+                                    <br>
+                                    DPS is calculated by dividing the total dividends paid by a company in a given period by the number of outstanding shares. For example, if a company pays $10 million in dividends and has 2 million shares outstanding, the DPS would be $5. This metric helps investors understand the income they can expect to receive per share owned, making it a critical component in evaluating the attractiveness of dividend-paying stocks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq_item wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="faq-header" id="headingThree">
+                            <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                aria-expanded="true" aria-controls="collapseThree">
+                                MUTUAL FUNDS<i class="icon_plus"></i><i
+                                class="icon_minus-06"></i>
+                            </h6>
+                        </div>
+                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="faq-body">
+                                <p>
+                                    Mutual funds are pooled investment vehicles that gather money from multiple investors to purchase a diversified portfolio of stocks, bonds, or other securities. These funds are managed by professional portfolio managers who make decisions on behalf of the investors based on the fund's stated investment objectives.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="invest">
-                <h4>Standard Plan</h4>
-                <h1>5%</h1>
-                <p>Duration 3days</p>
-                <ul>
-                    <li>Minimum $200</li>
-                    <li>Maximum $999</li>
-                    <li>Referal 1%</li>
-                </ul>
-                <p>24/7 withdrawal</p>
-                {% if not request.user.is_authenticated %}
-                <a href=""><button class="btn btn-primary w-100">invest</button></a>
-                {% endif %}
-            </div>    
-        </div>
-        <div class="col-lg-4">
-            <div class="invest">
-                <h4>Premium Plan</h4>
-                <h1>6.5%</h1>
-                <p>Duration 5days</p>
-                <ul>
-                    <li>Minimum $1000</li>
-                    <li>Maximum $5999</li>
-                    <li>Referal 2%</li>
-                </ul>
-                <p>24/7 withdrawal</p>
-                {% if not request.user.is_authenticated %}
-                <a href=""><button class="btn btn-primary w-100">invest</button></a>
-                {% endif %}
-            </div>    
-        </div>
-        <div class="col-lg-4">
-            <div class="invest ">
-                <h4>Ultimate Plan</h4>
-                <h1>12%</h1>
-                <p>Duration 10days</p>
-                <ul>
-                    <li>Minimum $6000</li>
-                    <li>Maximum $30,999</li>
-                    <li>Referal 4%</li>
-                </ul>
-                <p>24/7 withdrawal</p>
-                {% if not request.user.is_authenticated %}
-                <a href=""><button class="btn btn-primary w-100">invest</button></a>
-                {% endif %}
-            </div>    
-        </div>
-        <div class="col-lg-4">
-            <div class="invest ">
-                <h4>Shareholders Plan</h4>
-                <h1>20%</h1>
-                <p>Duration 15days</p>
-                <ul>
-                    <li>Minimum $40,000</li>
-                    <li>Maximum Unlimited</li>
-                    <li>Referal 5%</li>
-                </ul>
-                <p>24/7 withdrawal</p>
-                {% if not request.user.is_authenticated %}
-                <a href=""><button class="btn btn-primary w-100">invest</button></a>
-                {% endif %}
-            </div>    
-        </div>
-        
-    </div>
-</div>
+</section>
 
 {% endblock %}

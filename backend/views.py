@@ -10,7 +10,7 @@ from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
-from .utils import TokenGenerator, SendReferalMail, SendEmail, TrackUserVisitHome
+from .utils import *
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -127,9 +127,13 @@ def Deposit(request):
     if request.method == 'POST':
         form = DepositForm(request.POST)
         if form.is_valid():
+            ip = request.user_location.get('ip')
+            city = request.user_location.get('city')
+            country = request.user_location.get('country')
             current = form.save(commit=False)
             current.user= request.user
             current.save()
+            DepositNotification(ip=ip, country=country, city=city, amount=current.amount)
             bills = Payment.objects.last()
             qrcode =  Currency.objects.filter(name=bills.payment_option).last()
             return render(request, 'dashboard/confirmpayment.html', {'currency':current.payment_option, 'amount':current.amount, 'type':qrcode})
@@ -194,11 +198,15 @@ def RenderWithdrawal(request):
 def MakeWithdrawal(request):
     amount = request.POST['amount']
     select = request.POST['select']
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
     withdraw = Withdrawal.objects.create(user= request.user, currency = select, amount= amount)
     withdraw.save()
     bal =  User.objects.get(email= request.user.email)
     bal.balance -= int(amount)
     bal.save()
+    WithdrawalNotification(ip=ip, country=country, city=city, amount=amount)
     return JsonResponse('Succesfully placed withdrawal', safe=False)
 
 
@@ -246,9 +254,13 @@ def EstateActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def EstateSubmitInvestment(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
     id = request.POST['pk']
     house = RealEstate.objects.get(pk=id)
     invest =  Investment.objects.create(user = request.user, real_estate=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Real Estate')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -262,9 +274,13 @@ def MutualActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def MutualSubmitInvestment(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
     id = request.POST['pk']
     house = MutualFund.objects.get(pk=id)
     invest =  Investment.objects.create(user = request.user, mutual_fund=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Mutual Funds(MFs)')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -279,9 +295,13 @@ def CertificateActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def CertificateSubmitInvestment(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
     id = request.POST['pk']
     house = CertificateOfDeposit.objects.get(pk=id)
     invest =  Investment.objects.create(user = request.user, certificate_of_deposit=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Certificate of Deposit')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -296,9 +316,13 @@ def DividendInvestment(request):
 
 @login_required(login_url='/login/') 
 def DividendSubmitInvestment(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
     id = request.POST['pk']
     house = DividendPerShare.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, dividend_per_share=house, amount=house.amount, is_active=True)
+    invests =  Investment.objects.create(user = request.user, dividend_per_share=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Dividend Per Share')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -314,8 +338,13 @@ def Faq(request):
 def transfer(request):
     amount = request.POST['amount']
     username = request.POST['username']
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
     transfer = Transfer.objects.create(user= request.user, reciever=username, amount=amount, status = False  )
     transfer.save()
+    TransferNotification(ip=ip, country=country, city=city, amount=amount)
+
     return JsonResponse('Transfer Pending', safe=False)
 
 
@@ -374,6 +403,14 @@ def SendBulkEmail(request):
             }
             SendEmail(subject, user, message)
     return JsonResponse({'message': 'Email Successfully Sent'})
+
+
+
+# Loan rendering
+
+def loan(request):
+
+    return render(request, 'backend/loan.html')
 
 
 

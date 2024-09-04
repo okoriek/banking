@@ -69,9 +69,9 @@
 
                     <div class="collapse navbar-collapse pb-3" id="navbarSupportedContent">
                         <ul class="navbar-nav menu  ms-auto">
-                            <li class="nav-item "><a href="" class="nav-link active">Home</a>
-                            <li class="nav-item "><a href="" class="nav-link">Investment</a>
-                            <li class="nav-item "><a href="" class="nav-link">Loan</a>
+                            <li class="nav-item "><a href="{% url 'home' %}" class="nav-link active">Home</a>
+                            <li class="nav-item "><a href="{% url 'investment' %}" class="nav-link">Investment</a>
+                            <li class="nav-item "><a href="{% url 'loan' %}" class="nav-link">Loan</a>
                             {% if request.user.is_authenticated %}
                             <li class="nav-item "><a href="{% url 'dashboard' %}" class="nav-link">Account</a>
                             {% endif %}
@@ -123,36 +123,25 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-sm-6">
                             <div class="f-widget link-widget">
                                 <h4 class="f-widget-title">Support</h4>
                                 <ul class="footer-link">
-                                    <li><a href="#">Pricing</a></li>
-                                    <li><a href="#">Account Information</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Accounts</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="#">Contact us</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-sm-6">
                             <div class="f-widget link-widget">
-                                <h4 class="f-widget-title">Design Online</h4>
+                                <h4 class="f-widget-title">Quick Link</h4>
                                 <ul class="footer-link">
-                                    <li><a href="#">Logo Maker</a></li>
-                                    <li><a href="#">Cover Photo Maker</a></li>
-                                    <li><a href="#">Banner Maker</a></li>
-                                    <li><a href="#">Branded Templates</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6">
-                            <div class="f-widget link-widget">
-                                <h4 class="f-widget-title">Tools</h4>
-                                <ul class="footer-link">
-                                    <li><a href="#">Templates</a></li>
-                                    <li><a href="#">PDF Editor</a></li>
-                                    <li><a href="#">Animator</a></li>
-                                    <li><a href="#">Image Resizer</a></li>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Investment</a></li>
+                                    <li><a href="#">Loan</a></li>
+                                    <li><a href="#">Trading Solution</a></li>
                                 </ul>
                             </div>
                         </div>

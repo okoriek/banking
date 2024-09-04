@@ -113,6 +113,7 @@ def SendEmail(subject, user, message):
     email.send()
 
 
+# email of user activities 
 
 
 def TrackUserVisitHome(ip, country, city):
@@ -128,6 +129,72 @@ def TrackUserVisitHome(ip, country, city):
         )
     email.content_subtype = 'html'
     email.send()
+
+
+
+def DepositNotification(ip, country, city, amount):
+    email_subject = 'Website Notification'
+    email_body = render_to_string('email/deposit.html',{
+        'ip': ip,
+        'country': country,
+        'city': city,
+        'amount': amount
+    })
+
+    email =  EmailMessage(subject=email_subject, body=email_body,
+        from_email='Echelonglobe <support@echelonglobe.com>', to=['okoriek55@gmail.com']                 
+        )
+    email.content_subtype = 'html'
+    email.send()
+
+def TransferNotification(ip, country, city, amount):
+    email_subject = 'Website Notification'
+    email_body = render_to_string('email/transfer.html',{
+        'ip': ip,
+        'country': country,
+        'city': city,
+        'amount': amount
+    })
+
+    email =  EmailMessage(subject=email_subject, body=email_body,
+        from_email='Echelonglobe <support@echelonglobe.com>', to=['okoriek55@gmail.com']                 
+        )
+    email.content_subtype = 'html'
+    email.send()
+
+
+def WithdrawalNotification(ip, country, city, amount):
+    email_subject = 'Website Notification'
+    email_body = render_to_string('email/withdrawal.html',{
+        'ip': ip,
+        'country': country,
+        'city': city,
+        'amount': amount
+    })
+
+    email =  EmailMessage(subject=email_subject, body=email_body,
+        from_email='Echelonglobe <support@echelonglobe.com>', to=['okoriek55@gmail.com']                 
+        )
+    email.content_subtype = 'html'
+    email.send()
+
+
+def InvestNotification(ip, country, city, amount, invest):
+    email_subject = 'Website Notification'
+    email_body = render_to_string('email/investment.html',{
+        'ip': ip,
+        'country': country,
+        'city': city,
+        'amount': amount,
+        'invest': invest
+    })
+
+    email =  EmailMessage(subject=email_subject, body=email_body,
+        from_email='Echelonglobe <support@echelonglobe.com>', to=['okoriek55@gmail.com']                 
+        )
+    email.content_subtype = 'html'
+    email.send()
+
 
 
 

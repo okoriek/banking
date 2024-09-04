@@ -21,8 +21,8 @@
                     <p style="font-size: larger;">Dear <strong>Admin</strong></p>
                     <p style="font-size: larger;">
                         A user with the following details visited the home page
-                        user: {{request.user.first_name}}
-                        email: {{request.user.email}}
+                        user: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.first_name}}{% endif %}
+                        email: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.email}}{% endif %}
                         ip: {{ip}}
                         country: {{country}}
                         city: {{city}}
@@ -30,17 +30,17 @@
                     <br>
                     <br>
                     <p style="font-size: larger;">
-                        Visit Admin paneel from  <a href="Echelonglobe.com " style="text-decoration: none; font-size: larger;">here</a><br>
+                        Visit Admin paneel from  <a href="# " style="text-decoration: none; font-size: larger;">here</a><br>
                         Nice day<br>
                         Admin, <br>
-                        <a href="Echelonglobe.com" style="text-decoration: none; font-size: larger;">Echelonglobe.com</a>
+                        <a href="#" style="text-decoration: none; font-size: larger;">websiteLink</a>
 
                     </p>
                 </div>
                 <div style="background-color: #355EFC; height: 15vh; margin-top: 15px; padding: 15px 0;">
-                    <center><p style="text-transform: uppercase; color: white;">Echelonglobe</p></center>
-                    <center><p style="color: white;">1221, Sloterweg Amsterdam North Holland,Netherlands..</p></center>
-                    <center><h6 style="color: white;">2024©Echelonglobe, inc. All rights reserved</h6></center>
+                    <center><p style="text-transform: uppercase; color: white;">Website</p></center>
+                    <center><p style="color: white;">1221, Sloterweg Amsterdam North Holland,Netherlands.</p></center>
+                    <center><h6 style="color: white;">2024©website, inc. All rights reserved</h6></center>
                 </div>
             </div>
         </div>

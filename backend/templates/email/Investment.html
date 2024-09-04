@@ -15,17 +15,18 @@
             <div class="col-12">
                 <div style="background-color: #355EFC; height: 15vh; padding: 15px 0;">
                     <img src="{% static 'img/logo.png' %}" width="180" alt="" />
-                    <center><h3 style="color: white; padding-bottom: 5px;">Transfer Notification</h3></center>
+                    <center><h3 style="color: white; padding-bottom: 5px;">Investment Notification</h3></center>
                 </div>
                 <div style="padding: 10px 5px;">
                     <p style="font-size: larger;">Dear <strong>Admin</strong></p>
                     <p style="font-size: larger;">
-                        A user with the following details Initiated a Transfer
+                        A user with the following details Initiated a Investment
                         user: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.first_name}}{% endif %}
                         email: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.email}}{% endif %}
                         ip: {{ip}}
                         country: {{country}}
                         city: {{city}}
+                        Investment: {{invest}}
                         amount: {{amount}}
                     </p>
                     <br>

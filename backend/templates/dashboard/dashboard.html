@@ -1,6 +1,7 @@
 {% extends 'base2.html' %}
 {% load static %}
 {% block body %}
+<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Content header -->
 <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
@@ -52,7 +53,7 @@
         >
           Referal Bonus
         </h6>
-        <span class="text-xl font-semibold">50,021</span>
+        <span class="text-xl font-semibold">$0</span>
         <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
           +2.6%
         </span>
@@ -85,7 +86,7 @@
         >
           INVESTMENT EARNING
         </h6>
-        <span class="text-xl font-semibold">45,021</span>
+        <span class="text-xl font-semibold">{% if invest %}${{invest}}{% else %}$0{% endif %}</span>
         <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
           +3.1%
         </span>
@@ -110,15 +111,14 @@
       </div>
     </div>
 
-    <!-- Tickets card -->
     <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
       <div>
         <h6
           class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
         >
-          SAVINGS
+          EARNINGS
         </h6>
-        <span class="text-xl font-semibold">20,516</span>
+        <span class="text-xl font-semibold">{% if earning %}${{earning}}{% else %}$0{% endif %}</span>
         <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
           +3.1%
         </span>
@@ -142,110 +142,62 @@
         </span>
       </div>
     </div>
-  </div>
 
-  <!-- Charts -->
-  <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-    <!-- Bar chart card -->
-    <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-      <!-- Card header -->
-      <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-        <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Bar Chart</h4>
-        <div class="flex items-center space-x-2">
-          <span class="text-sm text-gray-500 dark:text-light">Last year</span>
-          <button
-            class="relative focus:outline-none"
-            x-cloak
-            @click="isOn = !isOn; $parent.updateBarChart(isOn)"
-          >
-            <div
-              class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-            ></div>
-            <div
-              class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-              :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-            ></div>
-          </button>
-        </div>
-      </div>
-      <!-- Chart -->
-      <div class="relative p-4 h-72">
-        <canvas id="barChart"></canvas>
-      </div>
+    <!-- Table  -->
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 bg-opacity-0">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-700 bg-opacity-0">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      Sn
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Action
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Amount
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Status
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Date
+                </th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for item in data %}
+              <tr class="bg-white border-b dark:border-gray-700 bg-opacity-0 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="px-6 py-4">
+                    {{forloop.counter}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{item.action}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{item.amount}}
+                  </td>
+                  
+                  <td class="px-6 py-4">
+                      <div class="flex items-center">
+                          {% if item.status %}
+                          <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Successful
+                          {% else %}
+                          <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Pending
+                          {% endif %}
+                      </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    {{item.date_created.date}}
+                  </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+      </table>
     </div>
 
-    <!-- Doughnut chart card -->
-    <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-      <!-- Card header -->
-      <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-        <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Doughnut Chart</h4>
-        <div class="flex items-center">
-          <button
-            class="relative focus:outline-none"
-            x-cloak
-            @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)"
-          >
-            <div
-              class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-            ></div>
-            <div
-              class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-              :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-            ></div>
-          </button>
-        </div>
-      </div>
-      <!-- Chart -->
-      <div class="relative p-4 h-72">
-        <canvas id="doughnutChart"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- Two grid columns -->
-  <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-    <!-- Active users chart -->
-    <div class="col-span-1 bg-white rounded-md dark:bg-darker">
-      <!-- Card header -->
-      <div class="p-4 border-b dark:border-primary">
-        <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right now</h4>
-      </div>
-      <p class="p-4">
-        <span class="text-2xl font-medium text-gray-500 dark:text-light" id="usersCount">0</span>
-        <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
-      </p>
-      <!-- Chart -->
-      <div class="relative p-4">
-        <canvas id="activeUsersChart"></canvas>
-      </div>
-    </div>
-
-    <!-- Line chart card -->
-    <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-      <!-- Card header -->
-      <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-        <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
-        <div class="flex items-center">
-          <button
-            class="relative focus:outline-none"
-            x-cloak
-            @click="isOn = !isOn; $parent.updateLineChart()"
-          >
-            <div
-              class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-            ></div>
-            <div
-              class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-              :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-            ></div>
-          </button>
-        </div>
-      </div>
-      <!-- Chart -->
-      <div class="relative p-4 h-72">
-        <canvas id="lineChart"></canvas>
-      </div>
-    </div>
+    
+    <!-- end table -->
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
