@@ -158,12 +158,12 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST='mail.finovaedge.com'
+EMAIL_HOST='mail.saxobanking.com'
 EMAIL_PORT =587
-EMAIL_HOST_USER='support@finovaedge.com'
+EMAIL_HOST_USER='support@saxobanking.com'
 EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS =True
-DEFAULT_FROM_EMAIL ='support@finovaedge.com'
+DEFAULT_FROM_EMAIL ='support@saxobanking.com'
 
 LOGIN_REDIRECT_URL = ('/Profile-dashboard')
 LOGOUT_REDIRECT_URL = ('/')

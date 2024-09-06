@@ -1,6 +1,6 @@
 # your_app/middleware.py
 import requests
-from django.http import HttpResponseForbidden
+from django.shortcuts import render
 
 class UserLocationMiddleware:
     def __init__(self, get_response):
@@ -15,7 +15,7 @@ class UserLocationMiddleware:
         
         # Block users from Nigeria
         if country == 'NG':  # 'NG' is the ISO country code for Nigeria
-            return HttpResponseForbidden('Site not available in your region' )
+            return render(request, 'backend/restrict.html' )
         
         # Store the location in the request
         request.user_location = {

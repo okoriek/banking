@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
-from . models import Payment
+from . models import Payment, Loan
 from django import forms
 
 class RegistrationForm(UserCreationForm):
@@ -25,3 +25,8 @@ class DepositForm(forms.ModelForm):
     class Meta:
         model=Payment
         fields= ('user','payment_option', 'amount', 'memo')
+
+class LoanForm(forms.ModelForm):
+    class Meta:
+        model=Loan
+        fields =  ('amount', 'duration')

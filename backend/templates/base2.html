@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>K-WD Dashboard</title>
+    <title>Saxo Dashboard</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
       rel="stylesheet"
@@ -104,6 +104,14 @@
                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
                   >
                   Transfer
+                  </a>
+
+                  <a
+                    href="{% url 'loan' %}"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Loan
                   </a>
                   {% if request.user.is_staff %}
                   <a
@@ -284,12 +292,12 @@
               </button>
 
               <!-- Brand -->
-              <a
+              <!-- <a
                 href="index.html"
                 class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light"
               >
-                LOGO
-              </a>
+                <img src="{% static 'img/logo/logo1.png' %}" style="height: 50px; width: 100px;" alt="logo">
+              </a> -->
 
               <!-- Mobile sub menu button -->
               <button
@@ -676,6 +684,14 @@
                     >
                       Transfer
                     </a>
+
+                    <a
+                      href="{% url 'loan' %}"
+                      role="menuitem"
+                      class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                    >
+                      Loan
+                    </a>
                     {% if request.user.is_staff %}
                     <a
                       href="{% url 'email' %}"
@@ -842,9 +858,9 @@
           <footer
             class="flex items-center justify-between p-4 bg-white border-t dark:bg-darker dark:border-primary-darker"
           >
-            <div>company &copy; 2024</div>
+            <div>2024&copy;Saxobanking</div>
             <div>
-              company ltd
+              Saxobanking ltd
             </div>
           </footer>
         </div>
@@ -1233,61 +1249,6 @@
                 class="w-full py-2 pl-10 pr-4 border rounded-full dark:bg-dark dark:border-transparent dark:text-light focus:outline-none focus:ring"
                 placeholder="Search..."
               />
-            </div>
-
-            <!-- Panel content (Search result) -->
-            <div class="flex-1 px-4 pb-4 space-y-4 overflow-y-hidden h hover:overflow-y-auto">
-              <h3 class="py-2 text-sm font-semibold text-gray-600 dark:text-light">History</h3>
-              <a href="#" class="flex space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-10 h-10 rounded-lg" src="{% static 'dashboard/images/cover.jpg' %}" alt="Post cover" />
-                </div>
-                <div class="flex-1 max-w-xs overflow-hidden">
-                  <h4 class="text-sm font-semibold text-gray-600 dark:text-light">Header</h4>
-                  <p class="text-sm font-normal text-gray-400 truncate dark:text-primary-lighter">
-                    Lorem ipsum dolor, sit amet consectetur.
-                  </p>
-                  <span class="text-sm font-normal text-gray-400 dark:text-primary-light"> Post </span>
-                </div>
-              </a>
-              <a href="#" class="flex space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-10 h-10 rounded-lg" src="{% static 'dashboard/images/avatar.jpg' %}" alt="Ahmed Kamel" />
-                </div>
-                <div class="flex-1 max-w-xs overflow-hidden">
-                  <h4 class="text-sm font-semibold text-gray-600 dark:text-light">Ahmed Kamel</h4>
-                  <p class="text-sm font-normal text-gray-400 truncate dark:text-primary-lighter">
-                    Last activity 3h ago.
-                  </p>
-                  <span class="text-sm font-normal text-gray-400 dark:text-primary-light"> Offline </span>
-                </div>
-              </a>
-              <a href="#" class="flex space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-10 h-10 rounded-lg" src="{% static 'dashboard/images/cover-2.jpg' %}" alt="K-WD Dashboard" />
-                </div>
-                <div class="flex-1 max-w-xs overflow-hidden">
-                  <h4 class="text-sm font-semibold text-gray-600 dark:text-light">K-WD Dashboard</h4>
-                  <p class="text-sm font-normal text-gray-400 truncate dark:text-primary-lighter">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
-                  <span class="text-sm font-normal text-gray-400 dark:text-primary-light"> Updated 3h ago. </span>
-                </div>
-              </a>
-              <template x-for="i in 10" x-key="i">
-                <a href="#" class="flex space-x-4">
-                  <div class="flex-shrink-0">
-                    <img class="w-10 h-10 rounded-lg" src="{% static 'dashboard/images/cover-3.jpg' %}" alt="K-WD Dashboard" />
-                  </div>
-                  <div class="flex-1 max-w-xs overflow-hidden">
-                    <h4 class="text-sm font-semibold text-gray-600 dark:text-light">K-WD Dashboard</h4>
-                    <p class="text-sm font-normal text-gray-400 truncate dark:text-primary-lighter">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    </p>
-                    <span class="text-sm font-normal text-gray-400 dark:text-primary-light"> Updated 3h ago. </span>
-                  </div>
-                </a>
-              </template>
             </div>
           </div>
         </section>

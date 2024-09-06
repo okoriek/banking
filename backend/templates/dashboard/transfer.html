@@ -9,14 +9,21 @@
         <div class="form px-4">
             <h1 class="form-text">TRANSFER FUNDS</h1>
             <div class="mb-3">
-                <label for="name" class="form-label">Email: </label>
-                <input type="text" class="form-control" id="username" name="username" style="border: 2px solid #bee4fd; box-shadow: none;">
-                <span>enter email of user</span>
+                <label for="email" class="form-label">Email/Account number: </label>
+                <input type="text" class="form-control" placeholder="enter email for internal transfer" id="email" style="border: 2px solid #bee4fd; box-shadow: none;">
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="switch">
+                <label class="form-check-label" for="switch" >External Transfer</label>
             </div>
             <div class="mb-3">
-            <label for="email" class="form-label">Amount: </label>
-            <input type="number" class="form-control" id="amount" name="amount" style="border: 2px solid #bee4fd; box-shadow: none;">
-            <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
+                <label for="subject" class="form-label">Bank Name: </label>
+                <input type="text" class="form-control" id="subject"  placeholder="Bank Name" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount: </label>
+                <input type="number" class="form-control" id="amount" name="amount" style="border: 2px solid #bee4fd; box-shadow: none;">
+                <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
             </div>
             <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
             <button type="submit" id="reg_submit" class="btns w-full" style="box-shadow: none; border: none;">Transfer funds</button>
@@ -31,10 +38,27 @@
     const bal =  document.getElementById('bal');
     const amount =  document.getElementById('amount');
     const error =  document.getElementById('error');
+    const bank = document.getElementById('subject')
+    const tog =  document.getElementById('switch')
     var token =  '{{csrf_token}}'
+
+    var value = false
+
+    tog.addEventListener('click', (e)=>{
+        if (value === false){
+            bank.value = ''
+            bank.disabled = false
+            value = true
+        }
+        else{
+            bank.disabled = true
+            value = false
+        }
+    })
+
     btn.addEventListener('click', (e)=>{
         e.preventDefault()
-        if(parseInt(amount.value) >= parseInt(bal.innerText)){
+        if(parseInt(amount.value) >= parseInt(bal.innerText) || amount.value == ''){
             error.style.display = 'block'
         }
         else{
@@ -45,7 +69,8 @@
                 headers: { "X-CSRFToken": token },
                 data:{
                     amount:$('#amount').val(),
-                    username:$('#username').val(),
+                    username:$('#email').val(),
+                    bank: $('#subject').val(),
                 },
                 success:function(response){
                     Swal.fire({

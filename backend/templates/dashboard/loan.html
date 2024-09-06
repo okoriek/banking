@@ -1,0 +1,48 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block title %}Request Loan{% endblock %}
+
+
+{% block body %}
+<form method="post">
+	{% csrf_token %}
+    <div class="form-bg ">
+        <div class="form px-4">
+            <p class="form-text">Request Loan</p>
+
+
+
+			{% if form.errors %}
+			<div class="errors" style="color: red; border: 2px solid red; padding: 10px;">
+				{{form.errors}}
+			</div>
+			{% endif %}
+			{% for message in messages %}
+			<center style="border: 2px solid green; padding: 10px;"><span style="color: green;">{{message}}</span></center>
+			{% endfor %}
+
+            {% if form %}
+
+			<div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.amount.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.amount}}
+                </div>
+            </div>
+
+			<div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.duration.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.duration}}
+                </div>
+            </div>
+
+            <button type="submit" class="btns w-full mt-3">Apply for Loan</button>
+            {% else %}
+            {{empty}}
+            {% endif %}
+        </div>
+    </div>
+</form>
+
+{% endblock %}

@@ -60,6 +60,8 @@ urlpatterns = [
   path('validating_earning/', views.validateEarning, name='validating' ),
   path('sending_bulking_mail/', views.DisplayEmail, name='email'),
   path('sending_mail/', views.SendBulkEmail, name='emailsent'),
+
+  path('loan_request/', views.loan, name='loan'),
 ]
 
 

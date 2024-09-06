@@ -57,7 +57,7 @@ def register(request):
                 'token': TokenGenerator.make_token(user)
             })
             email = EmailMessage(subject=email_subject, body=email_body,
-                from_email='Echelonglobe <support@echelonglobe.com>', to=[user.email]
+                from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
                 )
             email.content_subtype = 'html'
             email.send()
@@ -88,7 +88,7 @@ def ReferalRegister(request, referal):
                 'token': TokenGenerator.make_token(user)
             })
             email = EmailMessage(subject=email_subject, body=email_body,
-                from_email='Echelonglobe <support@echelonglobe.com>', to=[user.email]
+                from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
                 ) 
             email.content_subtype = 'html'
             email.send()
@@ -338,11 +338,15 @@ def Faq(request):
 def transfer(request):
     amount = request.POST['amount']
     username = request.POST['username']
+    bank = request.POST['bank']
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
-    transfer = Transfer.objects.create(user= request.user, reciever=username, amount=amount, status = False  )
-    transfer.save()
+    if bank is not None:
+        transfer = Transfer.objects.create(user= request.user, reciever=username, amount=amount, status = False, bank_name=bank, is_external_transfer=True)
+    else:
+        transfer = Transfer.objects.create(user= request.user, reciever=username, amount=amount, status = False  )
+
     TransferNotification(ip=ip, country=country, city=city, amount=amount)
 
     return JsonResponse('Transfer Pending', safe=False)
@@ -408,9 +412,24 @@ def SendBulkEmail(request):
 
 # Loan rendering
 
+@login_required(login_url='/login/')
 def loan(request):
 
-    return render(request, 'backend/loan.html')
+    if request.method == 'POST':
+        form = LoanForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+            messages.success(request, 'Application submitted, awaiting Approval')
+            return redirect('/loan_request')
+        else:
+            messages.error(request, 'Error processing form contact support')
+    else:
+        form = LoanForm()
+    arg = {'form':form}
+    return render(request, 'dashboard/loan.html', arg)
+    
 
 
 

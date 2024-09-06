@@ -1,6 +1,6 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_delete
-from . models import History, Payment, Withdrawal, Investment, Transfer, SystemEaring
+from . models import History, Payment, Withdrawal, Investment, Transfer, SystemEaring, Loan
 
 @receiver(post_save, sender=Payment)
 def HistorySave(sender, instance, created, **kwargs):
@@ -55,7 +55,16 @@ def UpdateSystemEarning(sender, instance, created, **kwargs):
         SystemEaring.objects.create(user = ids, invest=instance, is_active= instance.is_active, num=0, date_created = instance.date_created, date_expiration= instance.date_expiration)
 
 
+@receiver(post_save, sender=Loan)
+def LoanHistorySave(sender, instance, created, **kwargs):
+    if created:
+        ids = instance.user
+        History.objects.create(user=ids, loan=instance, action='Loan', amount=instance.amount, status = instance.status, date_created = instance.date_generated, expires = instance.expiration)
 
+@receiver(post_save, sender=Loan)
+def UpdateLoanHistorySave(sender, instance, created, **kwargs):
+    if created == False:
+        history  = History.objects.filter(loan=instance).update(action='Loan', amount=instance.amount, status = instance.status, date_created = instance.date_generated, expires = instance.expiration)
 
 
 
