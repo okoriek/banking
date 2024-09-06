@@ -16,8 +16,8 @@ class AccountAdmin(UserAdmin):
 admin.site.register( User, AccountAdmin)
 
 
-admin.site.site_header = 'Echelonglobe Admin'
-admin.site.site_title = 'Echelonglobe Administrator'
+admin.site.site_header = 'Saxobanking Admin'
+admin.site.site_title = 'Saxobanking Administrator'
 
 
 
