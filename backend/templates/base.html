@@ -116,10 +116,9 @@
                             <div class="f-widget about-widget">
                                 <h4 class="f-widget-title">Contact us</h4>
                                 <ul class="list-unstyled">
-                                    <li>214 Cleo Street Suite 832 <br>Botswana</li>
+                                    <li>Philip Heymans Allé 15<br>Denmark</li>
                                     <li><a href="tel:235684154">+23 572-904-6013</a></li>
                                     <li><a href="#">support@saxobanking.com</a></li>
-                                    <li><a href="#">Contact us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -128,9 +127,9 @@
                                 <h4 class="f-widget-title">Support</h4>
                                 <ul class="footer-link">
                                     <li><a href="#">News</a></li>
-                                    <li><a href="#">Accounts</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Contact us</a></li>
+                                    <li><a href="{% url 'login' %}">Accounts</a></li>
+                                    <li><a href="{% url 'contact ' %}">Contact us</a></li>
+                                    <li><a href="{% url 'terms' %}">Term & Conditions</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -138,10 +137,9 @@
                             <div class="f-widget link-widget">
                                 <h4 class="f-widget-title">Quick Link</h4>
                                 <ul class="footer-link">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Investment</a></li>
-                                    <li><a href="#">Loan</a></li>
-                                    <li><a href="#">Trading Solution</a></li>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="{% url 'investment' %}">Investment</a></li>
+                                    <li><a href="{% url 'loanview' %}">Loan</a></li>
                                 </ul>
                             </div>
                         </div>

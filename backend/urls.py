@@ -54,7 +54,7 @@ urlpatterns = [
   path('faq/', views.Faq, name='faq'),
   path('terms_and_conditions/', views.terms, name='terms'),
   path('update_notification/', views.notification, name='update_notification'),
-  path('loan/', views.loan, name='loan'),
+  path('loan/', views.loan, name='loanview'),
 
   #api url
   path('validating_earning/', views.validateEarning, name='validating' ),
