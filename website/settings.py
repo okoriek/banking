@@ -15,7 +15,7 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-(iqbq_5^=axvh6+)6+lov0!t8&z%#h7s4ebd7-qn#aau0-#!2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django_countries',
     'rest_framework',
     'storages',
+    "phonenumber_field",
 ]
 
 AUTH_USER_MODEL = 'backend.User'
@@ -92,14 +93,12 @@ DATABASES = {
 
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',  # or another database backend like 'django.db.backends.postgresql'
-#        'NAME': BASE_DIR / "db.sqlite3",  # for SQLite
-#        # or for PostgreSQL
-#        # 'NAME': 'your_database_name',
-#        # 'USER': 'your_database_user',
-#        # 'PASSWORD': 'your_database_password',
-#        # 'HOST': 'localhost',
-#        # 'PORT': '5432',
+#        'ENGINE': 'mysql.connector.django',
+#        'NAME': 'finovaed_database1',
+#        'USER': 'finovaed_admin1',
+#        'PASSWORD': '%Thankgod24%',
+#        'HOST': '127.0.0.1',
+#        'PORT': '3306'
 #    }
 #}
 
@@ -150,20 +149,20 @@ STATIC_FILES = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AWS_STORAGE_BUCKET_NAME = 'kwexbanking'
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#AWS_STORAGE_BUCKET_NAME = 'kwexbanking'
+#AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST='mail.saxobanking.com'
-EMAIL_PORT =587
-EMAIL_HOST_USER='support@saxobanking.com'
-EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS =True
-DEFAULT_FROM_EMAIL ='support@saxobanking.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 465 # SSL port
+EMAIL_USE_SSL = True  # Use SSL for this port
+EMAIL_HOST_USER = 'info.saxotrading@zohomail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'info.saxotrading@zohomail.com'
 
 LOGIN_REDIRECT_URL = ('/Profile-dashboard')
 LOGOUT_REDIRECT_URL = ('/')
