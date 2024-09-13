@@ -22,8 +22,12 @@ def home(request):
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
-    TrackUserVisitHome(ip, country, city)
- 
+    print(country)
+    if Ipaddress.objects.filter(ip=ip).exists():
+        pass
+    else:
+        Ipaddress.objects.create(ip=ip)
+        TrackUserVisitHome(ip, country, city)
     return render(request, 'backend/home.html')
 
 
@@ -43,10 +47,16 @@ def EmailVerification(request, uidb64, token):
 
 def register(request):
     if request.method=='POST':
+        code = request.POST.get('country_phone_code')
+        mobile = request.POST.get('phone_number')
+        country = request.POST.get('country')
+
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active =False
+            user.country = country
+            user.mobile_number = f"{code}{mobile}"
             user.save()
             website = get_current_site(request).domain
             email_subject = 'Email Verification'
@@ -57,7 +67,7 @@ def register(request):
                 'token': TokenGenerator.make_token(user)
             })
             email = EmailMessage(subject=email_subject, body=email_body,
-                from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
+                from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user.email]
                 )
             email.content_subtype = 'html'
             email.send()
@@ -71,13 +81,18 @@ def register(request):
 
 def ReferalRegister(request, referal):
     if request.method=='POST':
+        code = request.POST.get('country_phone_code')
+        mobile = request.POST.get('phone_number')
+        country = request.POST.get('country')
         referer =  User.objects.get(referal=referal)
+
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active =False
+            user.country = country
+            user.mobile_number = f"{code}{mobile}"
             user.save()
-
 
             website = get_current_site(request).domain
             email_subject = 'Email Verification'
@@ -88,7 +103,7 @@ def ReferalRegister(request, referal):
                 'token': TokenGenerator.make_token(user)
             })
             email = EmailMessage(subject=email_subject, body=email_body,
-                from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
+                from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user.email]
                 ) 
             email.content_subtype = 'html'
             email.send()
@@ -250,7 +265,7 @@ def investment(request):
 def EstateActiveInvestment(request):
     invest =  RealEstate.objects.all().values
     args = {'invest':invest}
-    return render(request, 'dashboard/realestate.html', args)
+    return render(request, 'investment/realestate.html', args)
 
 @login_required(login_url='/login/') 
 def EstateSubmitInvestment(request):
@@ -267,20 +282,20 @@ def EstateSubmitInvestment(request):
 # mutual funds
 
 @login_required(login_url='/login/') 
-def MutualActiveInvestment(request):
-    invest =  MutualFund.objects.all().values
+def AnnutiesActiveInvestment(request):
+    invest =  Annuties.objects.all().values
     args = {'invest':invest}
-    return render(request, 'dashboard/mutual.html', args)
+    return render(request, 'investment/annuties.html', args)
 
 @login_required(login_url='/login/') 
-def MutualSubmitInvestment(request):
+def AnnutiesSubmitInvestment(request):
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
-    house = MutualFund.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, mutual_fund=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Mutual Funds(MFs)')
+    house = Annuties.objects.get(pk=id)
+    invest =  Investment.objects.create(user = request.user, annuties=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Annuties Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -288,20 +303,20 @@ def MutualSubmitInvestment(request):
 # certificate of deposit
 
 @login_required(login_url='/login/') 
-def CertificateActiveInvestment(request):
-    invest =  CertificateOfDeposit.objects.all().values
+def ArbitrageActiveInvestment(request):
+    invest =  Arbitrage.objects.all().values
     args = {'invest':invest}
-    return render(request, 'dashboard/saving.html', args)
+    return render(request, 'investment/arbitrage.html', args)
 
 @login_required(login_url='/login/') 
-def CertificateSubmitInvestment(request):
+def ArbitrageSubmitInvestment(request):
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
-    house = CertificateOfDeposit.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, certificate_of_deposit=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Certificate of Deposit')
+    house = Arbitrage.objects.get(pk=id)
+    invest =  Investment.objects.create(user = request.user, arbitrage=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Arbitrage Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -309,21 +324,105 @@ def CertificateSubmitInvestment(request):
 # dividend per share
 
 @login_required(login_url='/login/') 
-def DividendInvestment(request):
-    invest =  DividendPerShare.objects.all().values
+def HalalActiveInvestment(request):
+    invest =  HalalInvestment.objects.all().values
     args = {'invest':invest}
-    return render(request, 'dashboard/dividend.html', args)
+    return render(request, 'investment/halainvest.html', args)
 
 @login_required(login_url='/login/') 
-def DividendSubmitInvestment(request):
+def HalalSubmitInvestment(request):
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
-    house = DividendPerShare.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, dividend_per_share=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Dividend Per Share')
+    house = HalalInvestment.objects.get(pk=id)
+    invests =  Investment.objects.create(user = request.user, halal_investment=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Halal Investment')
     return JsonResponse('Investment successful', safe=False)
+
+
+#  Trading investments
+
+@login_required(login_url='/login/') 
+def StockTrading(request):
+    invest =  Stocks.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'investment/stock.html', args)
+
+@login_required(login_url='/login/') 
+def StockSubmitTrading(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    id = request.POST['pk']
+    house = Stocks.objects.get(pk=id)
+    invests =  Investment.objects.create(user = request.user, stocks=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Stock Trading')
+    return JsonResponse('Investment successful', safe=False)
+
+@login_required(login_url='/login/') 
+def ForexTrading(request):
+    invest =  Forex.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'investment/forex.html', args)
+
+@login_required(login_url='/login/') 
+def ForexSubmitTrading(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    id = request.POST['pk']
+    house = Forex.objects.get(pk=id)
+    invests =  Investment.objects.create(user = request.user, forex=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Forex Trading')
+
+@login_required(login_url='/login/') 
+def ShareTrading(request):
+    invest =  Shares.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'investment/share.html', args)
+
+@login_required(login_url='/login/') 
+def ShareSubmitTrading(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    id = request.POST['pk']
+    house = Shares.objects.get(pk=id)
+    invests =  Investment.objects.create(user = request.user, shares=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Shares Trading')
+
+@login_required(login_url='/login/') 
+def NfpTrading(request):
+    invest =  Nfp.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'investment/nfp.html', args)
+
+@login_required(login_url='/login/') 
+def NfpSubmitTrading(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    id = request.POST['pk']
+    house = Nfp.objects.get(pk=id)
+    invests =  Investment.objects.create(user = request.user, nfp=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='NFP Trading')
+
+@login_required(login_url='/login/') 
+def EnergyTrading(request):
+    invest =  Energy.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'investment/energy.html', args)
+
+@login_required(login_url='/login/') 
+def EnergySubmitTrading(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    id = request.POST['pk']
+    house = Energy.objects.get(pk=id)
+    invests =  Investment.objects.create(user = request.user, energy=house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Energy Trading')
 
 
 

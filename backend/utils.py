@@ -21,7 +21,7 @@ def SendReferalMail(user,referer):
 
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[referer.email]
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[referer.email]
         )
     email.content_subtype = 'html'
     email.send()
@@ -35,7 +35,7 @@ def DepositMail(user,amount,currency):
         'currency': currency
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user.email]
         )
     email.content_subtype = 'html'
     email.send()
@@ -48,14 +48,14 @@ def WithdrawalMail(user, amount):
         'amount': amount,
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user.email]
         )
     email.content_subtype = 'html'
     email.send()
 
 
 def CommisionMail(user,referer, bonus):
-    email_subject = 'Saxobanking Referral Commission'
+    email_subject = 'Referral Commission'
     email_body =  render_to_string('email/commision.html',{
         'user':referer.first_name,
         'bonus': bonus,
@@ -63,7 +63,7 @@ def CommisionMail(user,referer, bonus):
 
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[referer.email]
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[referer.email]
         )
     email.content_subtype = 'html'
     email.send()
@@ -78,7 +78,7 @@ def TransferMail(user,referer, amount):
 
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user.email]
         )
     email.content_subtype = 'html'
     email.send()
@@ -92,7 +92,7 @@ def TransferRecieverMail(referer, amount, user):
 
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[user.email]
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user.email]
         )
     email.content_subtype = 'html'
     email.send()
@@ -107,7 +107,7 @@ def SendEmail(subject, user, message):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=[user['email']]                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=[user['email']]                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -125,7 +125,7 @@ def TrackUserVisitHome(ip, country, city):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -142,7 +142,7 @@ def DepositNotification(ip, country, city, amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -157,7 +157,7 @@ def TransferNotification(ip, country, city, amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -173,7 +173,7 @@ def WithdrawalNotification(ip, country, city, amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -190,7 +190,7 @@ def InvestNotification(ip, country, city, amount, invest):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxobanking <support@saxobanking.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()

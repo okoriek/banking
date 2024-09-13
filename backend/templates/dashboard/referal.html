@@ -1,53 +1,124 @@
-{% extends 'base2.html' %}
-{% block body %}
+{% extends 'base2.html' %} {% block body %}
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="bg-gray-100 bg-opacity-50 py-12">
+    <div
+    class="max-w-2xl mx-auto  bg-opacity-0  rounded-lg p-6"
+    >
+    <!-- Header Section -->
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">
+        Refer a Friend
+    </h2>
+    <p class="text-center text-gray-600 mb-4">
+        Earn rewards by referring friends to our platform. Share your unique
+        referral code and get rewards when they sign up!
+    </p>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <p class="offer">Referals</p>
-            <div class="divider"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="progress mt-5 mb-3" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="80">
-                <div class="progress-bar" id="progress" >25%</div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-           <div class="d-flex justify-content-center fw-semibold">Referals</div>
-           <div class="d-flex justify-content-center">{{total}}</div>
-        </div>
-        <div class="col-6">
-            <div class="d-flex justify-content-center fw-semibold">Earnings</div>
-            <div class="d-flex justify-content-center">{% if earning %}${{earning}}{% else %}$0{% endif %}</div>   
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control bg-light" id="wallet" disabled>
-                <div class="input-group-append">
-                <span class="input-group-text bg-primary text-light" id="copy">Copy</span>
-                </div>
-            </div>
+    <!-- Referral Code Section -->
+    <div
+        class="flex items-center justify-between bg-gray-200 bg-opacity-50 p-4 rounded-lg mb-6"
+    >
+        <span class="text-lg font-semibold text-gray-800"
+        >Link:</span
+        >
+        <div class="flex items-center space-x-2">
+        <span
+            class="text-lg font-mono font-semibold text-blue-600 bg-gray-100 bg-opacity-40 px-4 py-2 rounded-md"
+            id="wallet"
+            ></span
+        >
+        <button
+            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+            id="copy"
+        >
+            Copy
+        </button>
         </div>
     </div>
 
+    <!-- Rewards Section -->
+    <div>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">How It Works:</h3>
+        <ul class="space-y-4">
+        <li class="flex items-center space-x-3">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span class="text-gray-600"
+            >Share your referral code with friends.</span
+          >
+        </li>
+        <li class="flex items-center space-x-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span class="text-gray-600">They sign up using your code.</span>
+        </li>
+        <li class="flex items-center space-x-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+            />
+            </svg>
+            <span class="text-gray-600"
+                >Earn rewards when they complete their first order.</span
+            >
+        </li>
+        </ul>
+    </div>
+    </div>
 </div>
 
 <script>
-    const value = '{{total}}'
-    const btn = document.getElementById('copy');
-    const progress = document.getElementById('progress');
-    progress.style.width = `${value}0%`
+
+    const shortText = (text, maxLength)=> {
+        if (text.length > maxLength) {
+            return text.slice(0, maxLength) + '...';
+        }
+        return text;
+    }
+
     const wallet = document.getElementById('wallet');
-    wallet.value = `${window.location.origin}/register/{{refer}}`
+    wallet.innerText = shortText(`${window.location.origin}/register/{{refer}}`, 10)
+    
+
+
+    const btn = document.getElementById('copy');
+    
     btn.addEventListener('click', ()=>{
         btn.innerText = 'copied'
         navigator.clipboard.writeText(`${wallet.value}`)
     })
 </script>
+
 {% endblock %}

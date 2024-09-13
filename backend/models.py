@@ -9,7 +9,7 @@ from django.core.files import File
 from PIL import Image, ImageDraw
 from io import BytesIO
 from .utils import WithdrawalMail, CommisionMail, DepositMail, TransferMail, TransferRecieverMail
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 class MyUserManager(BaseUserManager):
     def create_user(self,email, first_name, last_name, password=None):
@@ -62,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     btc_wallet_address = models.CharField(max_length=300, blank=True, null=True)
     eth_wallet_address = models.CharField(max_length=300, blank=True, null=True)
     usdt_trc20_wallet_address = models.CharField(max_length=300, blank=True, null=True)
-    mobile_number = models.CharField(max_length=20, blank=True, null=True)
+    mobile_number = models.CharField(max_length=25, blank=True, null=True)
 
     
     
@@ -164,10 +164,12 @@ class Payment(models.Model):
 
 class RealEstate(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -178,12 +180,14 @@ class RealEstate(models.Model):
         super().save(*args, **kwargs)
 
 
-class DividendPerShare(models.Model):
+class HalalInvestment(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -194,12 +198,14 @@ class DividendPerShare(models.Model):
         super().save(*args, **kwargs)
 
 
-class CertificateOfDeposit(models.Model):
+class Arbitrage(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -209,12 +215,14 @@ class CertificateOfDeposit(models.Model):
         self.returns =  ((self.interest * self.amount)/100) + self.amount
         super().save(*args, **kwargs)
 
-class MutualFund(models.Model):
+class Annuties(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -223,13 +231,118 @@ class MutualFund(models.Model):
     def save(self, *args, **kwargs):
         self.returns =  ((self.interest * self.amount)/100) + self.amount
         super().save(*args, **kwargs)
+
+class Stocks(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+
+class Forex(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+class Shares(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+
+class Nfp(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+class Energy(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'Energies'
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
+
+
+
+
 
 class Investment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     real_estate = models.ForeignKey(RealEstate, on_delete=models.CASCADE, blank=True, null=True)
-    dividend_per_share = models.ForeignKey(DividendPerShare, on_delete=models.CASCADE, blank=True, null=True)
-    mutual_fund = models.ForeignKey(MutualFund, on_delete=models.CASCADE, blank=True, null=True)
-    certificate_of_deposit = models.ForeignKey(CertificateOfDeposit, on_delete=models.CASCADE, blank=True, null=True)
+    halal_investment = models.ForeignKey(HalalInvestment, on_delete=models.CASCADE, blank=True, null=True)
+    annuties = models.ForeignKey(Annuties, on_delete=models.CASCADE, blank=True, null=True)
+    arbitrage = models.ForeignKey(Arbitrage, on_delete=models.CASCADE, blank=True, null=True)
+    stocks = models.ForeignKey(Stocks, on_delete=models.CASCADE, blank=True, null=True)
+    forex = models.ForeignKey(Forex, on_delete=models.CASCADE, blank=True, null=True)
+    shares = models.ForeignKey(Shares, on_delete=models.CASCADE, blank=True, null=True)
+    nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, blank=True, null=True)
+    energy = models.ForeignKey(Energy, on_delete=models.CASCADE, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
@@ -244,12 +357,22 @@ class Investment(models.Model):
         def duration():
             if self.real_estate:
                 return self.real_estate.duration
-            elif self.dividend_per_share:
-                return self.dividend_per_share.duration
-            elif self.mutual_fund:
-                return self.mutual_fund.duration
+            elif self.halal_investment:
+                return self.halal_investment.duration
+            elif self.annuties:
+                return self.annuties.duration
+            elif self.arbitrage:
+                return self.arbitrage.duration
+            elif self.stocks:
+                return self.stocks.duration
+            elif self.shares:
+                return self.shares.duration
+            elif self.forex:
+                return self.forex.duration
+            elif self.nfp:
+                return self.nfp.duration
             else:
-                return self.certificate_of_deposit.duration
+                return self.energy.duration
         
         self.date_expiration =  self.date_created + timezone.timedelta(days=duration())
         if timezone.now() > self.date_expiration and self.is_active == True and self.is_completed == False:
@@ -419,8 +542,8 @@ class ReferalBonus(models.Model):
 
 class Reinvestment(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE, blank=True, null=True)
-    plan = models.CharField(max_length=100, blank=True, null=True)
-    number_of_investment =  models.IntegerField(default=0)
+    investment = models.ForeignKey(Investment, on_delete=models.CASCADE, blank=True, null=True)
+
 
     def __str__(self):
         return f"{self.user}-------{self.number_of_investment}"
@@ -503,6 +626,13 @@ class History(models.Model):
 
     def __str__(self):
         return f"{self.user}----------{self.amount}-------{self.action}------------{self.date_created}-------{self.status}"
+    
+
+class Ipaddress(models.Model):
+    ip =  models.GenericIPAddressField(blank=True, null=True, max_length=50)
+
+    def __str__(self):
+        return self.ip
     
 
 

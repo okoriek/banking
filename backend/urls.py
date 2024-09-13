@@ -28,14 +28,29 @@ urlpatterns = [
   path('realestate_investment/', views.EstateActiveInvestment, name='estate'),
   path('investment_processing/', views.EstateSubmitInvestment, name='submitinvestment'),
 
-  path('certificate_of_deposit_investment/', views.CertificateActiveInvestment, name='certificate'),
-  path('certificate_processing/', views.CertificateSubmitInvestment, name='certificatesubmitinvestment'),
+  path('halal_investment/', views.HalalActiveInvestment, name='hala'),
+  path('halal_processing/', views.HalalSubmitInvestment, name='halasubmitinvestment'),
 
-  path('mutual_funds_investment/', views.MutualActiveInvestment, name='mutual'),
-  path('mutual_processing/', views.MutualSubmitInvestment, name='mutualsubmitinvestment'),
+  path('arbitrage_investment/', views.ArbitrageActiveInvestment, name='artitrage'),
+  path('arbitrage_processing/', views.ArbitrageSubmitInvestment, name='artitragesubmitinvestment'),
 
-  path('dividend_investment/', views.DividendInvestment, name='dividend'),
-  path('dividend_processing/', views.DividendSubmitInvestment, name='dividendsubmitinvestment'),
+  path('energy_investment/', views.EnergyTrading, name='energy'),
+  path('energy_processing/', views.EnergySubmitTrading, name='energysubmitinvestment'),
+
+  path('annuties_investment/', views.AnnutiesActiveInvestment, name='annuties'),
+  path('annuties_processing/', views.AnnutiesSubmitInvestment, name='annutiessubmitinvestment'),
+
+  path('stock_investment/', views.StockTrading, name='stock'),
+  path('stock_processing/', views.StockSubmitTrading, name='stocksubmitinvestment'),
+
+  path('shares_investment/', views.ShareTrading, name='shares'),
+  path('shares_processing/', views.ShareSubmitTrading, name='sharesubmitinvestment'),
+
+  path('forex_investment/', views.ForexTrading, name='forex'),
+  path('forex_processing/', views.ForexSubmitTrading, name='forexsubmitinvestment'),
+
+  path('nfp_investment/', views.NfpTrading, name='nfp'),
+  path('nfp_processing/', views.NfpSubmitTrading, name='nfpsubmitinvestment'),
 
 
 

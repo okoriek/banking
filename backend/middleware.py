@@ -40,7 +40,7 @@ class UserLocationMiddleware:
     def get_geo_from_ip(self, ip):
         try:
             # Using ipinfo.io API to get location
-            response = requests.get(f"https://ipinfo.io/{ip}/geo", timeout=5)
+            response = requests.get(f"https://ipinfo.io/{ip}/geo")
             data = response.json()
             
             country = data.get('country', '')  # Get the country

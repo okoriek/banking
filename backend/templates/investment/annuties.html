@@ -4,7 +4,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <section class="flex items-center justify-center mt-10 pb-10">
     <div class="p-4 sm:px-10 flex flex-col justify-center items-center text-base h-100vh mx-auto" id="pricing">
-        <h4 class="text-2xl font-semibold text-center flex gap-2 justify-center mb-10">Mutual Funds(MFs)</h4>
+        <h4 class="text-2xl font-semibold text-center flex gap-2 justify-center mb-10">Annuties</h4>
         <div class="isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {% if invest %}
             {% for data in invest %}
@@ -13,7 +13,7 @@
                     <h3 id="tier-standard" class="text-gray-500 text-2xl font-semibold leading-8">{{data.name}}</h3>
                     <p class="rounded-full bg-blue-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-blue-600">Most popular</p>
                 </div>
-                <p class="mt-4 text-base leading-6 text-gray-500">Earn passive income from assets</p>
+                <p class="mt-4 text-base leading-6 text-gray-500 limited-text">{{data.description}}</p>
                 <p class="mt-6 flex items-baseline gap-x-1">
                     <span class="text-5xl font-bold tracking-tight text-gray-500">${{data.amount}}</span>
                 </p>
@@ -44,6 +44,13 @@
                                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>{{data.duration}} days
                     </li>
+                    <li class="flex gap-x-3 text-base"></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true" class="h-6 w-5 flex-none text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>{% if data.slot %}{{data.slot}}slots{% else %}0 slot{% endif %}
+                    </li>
                 </ul>
             </div>
             {% endfor %}\
@@ -71,7 +78,7 @@
                 }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/mutual_processing/',
+                        url: '/annuties_processing/',
                         type: 'post',
                         headers: { "X-CSRFToken": token },
                         data: {
