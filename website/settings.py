@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-(iqbq_5^=axvh6+)6+lov0!t8&z%#h7s4ebd7-qn#aau0-#!2a
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOST = ['saxobanking.com', 'www.saxobanking.com', 'cron-job.org']
+ALLOWED_HOST = ['saxobanking.com', 'www.saxobanking.com', 'cron-job.org', '*']
 # Application definition
 
 INSTALLED_APPS = [
