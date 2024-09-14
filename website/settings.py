@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': dj_database_url.parse(os.getenv('banking'))
-}
+#DATABASES = {
+#    'default': dj_database_url.parse(os.getenv('banking'))
+#}
 
 
 
@@ -165,6 +165,6 @@ LOGIN_REDIRECT_URL = ('/Profile-dashboard')
 LOGOUT_REDIRECT_URL = ('/')
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-#SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
-#CSRF_COOKIE_SECURE = True   # Prevent CSRF attacks over HTTP
-#SESSION_COOKIE_SECURE = True  # Secure session cookies
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
+CSRF_COOKIE_SECURE = True   # Prevent CSRF attacks over HTTP
+SESSION_COOKIE_SECURE = True  # Secure session cookies
