@@ -1,7 +1,7 @@
 {% extends 'base2.html' %}
 {% load static %}
 {% block body %}
-<div class="w-full">
+<div class="w-full px-8">
     <iframe
     referrerpolicy="origin"
     width="100%"
@@ -20,11 +20,13 @@
             <div class="ring-1 ring-gray-200 rounded-3xl p-8 xl:p-10">
                 <div class="flex items-center justify-between gap-x-4">
                     <h3 id="tier-standard" class="text-gray-500 text-2xl font-semibold leading-8">{{data.name}}</h3>
-                    <p class="rounded-full bg-blue-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-blue-600">Most popular</p>
+                    <p class="rounded-full bg-blue-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-blue-600">Recommended</p>
                 </div>
-                <p class="mt-4 text-base leading-6 text-gray-500 limited-text">{{data.description}}</p>
+                {% if data.description %}
+                <p class="mt-4 text-base leading-6 text-gray-500 limited-text">{{data.description}}{% else %}{{empty}}</p>
+                {% endif %}
                 <p class="mt-6 flex items-baseline gap-x-1">
-                    <span class="text-5xl font-bold tracking-tight text-gray-500">${{data.amount}}</span>
+                    <span class="text-5xl font-bold tracking-tight text-gray-500 amt">{{data.amount}}</span>
                 </p>
                 <button
                     id="{{data.id}}"
@@ -53,12 +55,12 @@
                                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>{{data.duration}} days
                     </li>
-                    <li class="flex gap-x-3 text-base"></li>
+                    <li class="flex gap-x-3 text-base">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" aria-hidden="true" class="h-6 w-5 flex-none text-blue-600">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>{% if data.slot %}{{data.slot}}slots{% else %}0 slot{% endif %}
+                        </svg>{% if data.slot %}{{data.slot}} slots{% else %}0 slot{% endif %}
                     </li>
                 </ul>
             </div>
@@ -112,5 +114,23 @@
             });
         })   
     })
+</script>
+
+<script>
+    // Function to format number as currency with commas
+    function formatCurrency(number) {
+        return number.toLocaleString();
+    }
+
+    // Select the element
+    const priceElement = document.querySelectorAll('.amt');
+    
+    // Get the current text, convert to number, format, and set new text
+
+    priceElement.forEach((e)=>{
+        const formattedText = formatCurrency(Number(e.innerText));
+        e.innerText = `$${formattedText}`;
+    })
+    
 </script>
 {% endblock %}

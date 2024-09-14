@@ -6,8 +6,8 @@
 
 <form action="" method="post">
     <div class="form-bg">
-        <div class="form px-4">
-            <h1 class="form-text">WITHDRAWAL</h1>
+        <div class="form">
+            <p class="form-text">Withdrawal</p>
             <div class="mb-3">
                 <label for="name" class="form-label">Payment type: </label>
                 <select name="" id="select">
@@ -18,14 +18,17 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Amount: </label>
-                <input type="number" class="form-control" id="amount" name="amount" style="border: 2px solid #bee4fd; box-shadow: none;">
+                <input type="number" class="form-control" id="amount" name="amount">
                 <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
             </div>
             <div style="color: red; display: none;" id="min">Minimum Withdrawal: $<span>{% if min %}{{min.amount}}{% else %}10{% endif %}</span></div>
             <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
-            <button type="submit" id="reg_submit" class="btns w-full" style="box-shadow: none; border: none;">Request Withdrawal</button>
+            <button type="submit" id="reg_submit" class="btn btn-primary w-100" style="box-shadow: none; border: none;">Request Withdrawal</button>
         </div>
     </div>
+</form>
+
+
 </form>
 
 

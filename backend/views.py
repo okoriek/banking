@@ -22,7 +22,6 @@ def home(request):
     ip = request.user_location.get('ip')
     city = request.user_location.get('city')
     country = request.user_location.get('country')
-    print(country)
     if Ipaddress.objects.filter(ip=ip).exists():
         pass
     else:
@@ -121,7 +120,7 @@ def ReferalRegister(request, referal):
 @login_required(login_url='/login/')  
 def Dashboard(request):
     user = request.user
-    data = History.objects.filter(user = user)[:10]
+    data = History.objects.filter(user = user)[:8]
     detail = User.objects.get(email= request.user.email)
 
     #referer
@@ -131,7 +130,7 @@ def Dashboard(request):
     total = 0
     for i in bonus:
         total += i.earnings
-    arg = {'detail':detail, 'data':data, 'total':refer.count(), 'refer': detail.referal, 'earnings':total}
+    arg = {'detail':detail, 'data':data, 'total':refer.count(), 'refer': refer.count(), 'earnings':total}
     return render(request, 'dashboard/dashboard.html', arg)
 
 

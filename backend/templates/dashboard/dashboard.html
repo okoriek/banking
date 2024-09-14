@@ -1,202 +1,191 @@
 {% extends 'base2.html' %}
 {% load static %}
 {% block body %}
-<script src="https://cdn.tailwindcss.com"></script>
+<div class="container-xxl flex-grow-1 container-p-y">
+  <!-- first row -->
+  <div class="row">
 
-<!-- Content header -->
-<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
-  <h1 class="text-2xl font-semibold">Welcome {{request.user.first_name}}!</h1>
-</div>
+    <div class="col-lg-12 col-md-6 order-1">
+      <div class="row">
 
-<!-- Content -->
-<div class="mt-2">
-  <!-- State cards -->
-  <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4">
-    <!-- Value card -->
-    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
-      <div>
-        <h6
-          class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
-        >
-          Main Balance
-        </h6>
-        <span class="text-xl font-semibold">{% if balance %}${{balance}}{% else %}$0{% endif %}</span>
-        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-          +4.4%
-        </span>
-      </div>
-      <div>
-        <span>
-          <svg
-            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </span>
+        <div class="col-6  mb-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                <div class="avatar flex-shrink-0">
+                  <img
+                    src="{% static 'assets/img/icons/unicons/wallet-info.png' %}"
+                    alt="chart success"
+                    class="rounded" />
+                </div>
+              </div>
+              <p class="mb-1">Main Balance</p>
+              <h4 class="card-title mb-3">{% if balance %}${{balance}}{% else %}$0{% endif %}</h4>
+              <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6  mb-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                <div class="avatar flex-shrink-0">
+                  <img
+                    src="{% static 'assets/img/icons/unicons/wallet-info.png' %}"
+                    alt="wallet info"
+                    class="rounded" />
+                </div>
+              </div>
+              <p class="mb-1">Investment</p>
+              <h4 class="card-title mb-3">{% if invest %}${{invest}}{% else %}$0{% endif %}</h4>
+              <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- confuse -->
+
+        <div class="col-6  mb-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                <div class="avatar flex-shrink-0">
+                  <img
+                    src="{% static 'assets/img/icons/unicons/wallet-info.png' %}"
+                    alt="wallet info"
+                    class="rounded" />
+                </div>
+              </div>
+              <p class="mb-1">Earnings</p>
+              <h4 class="card-title mb-3">{% if earning %}${{earning}}{% else %}$0{% endif %}</h4>
+              <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+            </div>
+          </div>
+        </div>
+        
+
+
+        <div class="col-6  mb-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                <div class="avatar flex-shrink-0">
+                  <img
+                    src="{% static 'assets/img/icons/unicons/chart-success.png' %}"
+                    alt="wallet info"
+                    class="rounded" />
+                </div>
+              </div>
+              <p class="mb-1">Referals</p>
+              <h4 class="card-title mb-3">${{earnings}}</h4>
+              <small class="fw-medium">referals: {{refer}}</small>
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
+    <!-- Income Progress -->
+    <div class="col-12 col-lg-6 order-2 order-md-3 order-xxl-2 mb-6">
+      <div class="card">
+        <div class="row row-bordered g-0">
+          <div class="col-lg-12">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <div class="card-title mb-0">
+                <h5 class="m-0 me-2">Income Progress</h5>
+              </div>
+              
+            </div>
+            <div id="incomeChart" class="px-3"></div>
+          </div>
+          <div class="col-lg-12 d-flex align-items-center">
+            <div class="card-body px-xl-9">
+              
+              <div id="growthChart"></div>
+              <div class="text-center fw-medium my-6">62% Investment Growth</div>
 
-    <!-- Users card -->
-    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
-      <div>
-        <h6
-          class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
-        >
-          Referal Bonus
-        </h6>
-        <span class="text-xl font-semibold">$0</span>
-        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-          +2.6%
-        </span>
-      </div>
-      <div>
-        <span>
-          <svg
-            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-            />
-          </svg>
-        </span>
+              <div class="d-flex gap-3 justify-content-between">
+                <div class="d-flex">
+                  <div class="avatar me-2">
+                    <span class="avatar-initial rounded-2 bg-label-primary"
+                      ><i class="bx bx-dollar bx-lg text-primary"></i
+                    ></span>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0 pt-2">$32.5k</h6>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="avatar me-2">
+                    <span class="avatar-initial rounded-2 bg-label-info"
+                      ><i class="bx bx-wallet bx-lg text-info"></i
+                    ></span>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0 pt-2">$41.2k</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Orders card -->
-    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
-      <div>
-        <h6
-          class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
-        >
-          INVESTMENT EARNING
-        </h6>
-        <span class="text-xl font-semibold">{% if invest %}${{invest}}{% else %}$0{% endif %}</span>
-        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-          +3.1%
-        </span>
-      </div>
-      <div>
-        <span>
-          <svg
-            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-            />
-          </svg>
-        </span>
-      </div>
-    </div>
-
-    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
-      <div>
-        <h6
-          class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
-        >
-          EARNINGS
-        </h6>
-        <span class="text-xl font-semibold">{% if earning %}${{earning}}{% else %}$0{% endif %}</span>
-        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-          +3.1%
-        </span>
-      </div>
-      <div>
-        <span>
-          <svg
-            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-            />
-          </svg>
-        </span>
-      </div>
-    </div>
-  </div>
-  <!-- Table  -->
+    <!--/ Income Progress ends -->
   
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-4">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 bg-opacity-0">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-700 bg-opacity-0">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Sn
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Amount
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Date
-              </th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for item in data %}
-            <tr class="bg-white border-b dark:border-gray-700 bg-opacity-0 ">
-                <td class="px-6 py-4">
-                  {{forloop.counter}}
-                </td>
-                <td class="px-6 py-4">
-                  {{item.action}}
-                </td>
-                <td class="px-6 py-4">
-                  {{item.amount}}
-                </td>
-                
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        {% if item.status %}
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Successful
-                        {% else %}
-                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Pending
-                        {% endif %}
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                  {{item.date_created.date}}
-                </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-    </table>
+
+    <!-- Transactions -->
+    <div class="col-md-6 col-lg-6 order-2 mb-6">
+      <div class="card h-100">
+        <div class="card-header d-flex align-items-center justify-content-between">
+          <h5 class="card-title m-0 me-2">Transactions</h5>
+          <div class="dropdown">
+            <button
+              class="btn text-muted p-0"
+              type="button"
+              id="transactionID"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+              <i class="bx bx-dots-vertical-rounded bx-lg"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+              <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+              <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+              <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body pt-4">
+          <ul class="p-0 m-0">
+            {% for i in data %}
+            <li class="d-flex align-items-center mb-6">
+              <div class="avatar flex-shrink-0 me-3">
+                <img src="{% static 'assets/img/icons/unicons/wallet.png' %}" alt="User" class="rounded" />
+              </div>
+              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                <div class="me-2">
+                  <small class="d-block">{{i.action}}</small>
+                  <h6 class="fw-normal mb-0">{% if i.status %}<span class="text-success">successful</span>{% else %}<span class="text-danger">pending</span>{% endif %}</h6>
+                </div>
+                <div class="user-Newgress d-flex align-items-center gap-2">
+                  <h6 class="fw-normal mb-0">{% if i.action == 'Deposit' %}+{{i.amount}}{% else %}-{{i.amount}}{% endif %}</h6>
+                  <span class="text-muted">USD</span>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/ Transactions -->
   </div>
-  <!-- end table -->
 </div>
-<script src="{% static 'dashboard/js/script.js' %}"></script>
+<!-- / Content -->
 {% endblock %}

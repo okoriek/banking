@@ -7,7 +7,7 @@
 <form method="post">
 	{% csrf_token %}
     <div class="form-bg ">
-        <div class="form px-4">
+        <div class="form">
             <p class="form-text">Request Loan</p>
 
 
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btns w-full mt-3">Apply for Loan</button>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Apply for Loan</button>
             {% else %}
             {{empty}}
             {% endif %}

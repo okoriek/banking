@@ -6,7 +6,7 @@
 
 <form action="" method="post">
     <div class="form-bg">
-        <div class="form px-4">
+        <div class="form">
             <h1 class="form-text">TRANSFER FUNDS</h1>
             <div class="mb-3">
                 <label for="email" class="form-label">Email/Account number: </label>
@@ -22,11 +22,11 @@
             </div>
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount: </label>
-                <input type="number" class="form-control" id="amount" name="amount" style="border: 2px solid #bee4fd; box-shadow: none;">
+                <input type="number" class="form-control" id="amount" name="amount" >
                 <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
             </div>
             <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
-            <button type="submit" id="reg_submit" class="btns w-full" style="box-shadow: none; border: none;">Transfer funds</button>
+            <button type="submit" id="reg_submit" class="btn btn-primary w-100 mt-3">Transfer funds</button>
 
         </div>
     </div>

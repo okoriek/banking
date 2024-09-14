@@ -15,11 +15,8 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-(iqbq_5^=axvh6+)6+lov0!t8&z%#h7s4ebd7-qn#aau0-#!2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
-
+DEBUG = Fals
+ALLOWED_HOST = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,16 +88,16 @@ DATABASES = {
 
 
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'mysql.connector.django',
-#        'NAME': 'finovaed_database1',
-#        'USER': 'finovaed_admin1',
-#        'PASSWORD': '%Thankgod24%',
-#        'HOST': '127.0.0.1',
-#        'PORT': '3306'
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'finovaed_database3',
+        'USER': 'finovaed_admin3',
+        'PASSWORD': '%Thankgod24%',
+        'HOST': 'server4.lytehosting.com',
+        'PORT': '3306'
+    }
+}
 
 
 # Password validation
