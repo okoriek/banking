@@ -1,16 +1,37 @@
-{% extends 'base2.html' %}
-{% load static %}
-{% block body %}
-<div class="w-full px-8">
-    <iframe
-    referrerpolicy="origin"
-    width="100%"
-    height="638.2"
-    style="background: #FFFFFF; padding: 10px; border: none; border-radius: 5px; box-shadow: 0 2px 4px 0 rgba(0,0,0,.2)"
-    src="https://jika.io/embed/fundamentals-chart?symbols=AAPL,AMZN,META&keys=Market Cap,Net Income&reportingPeriod=quarter&from=2019&to=2024&boxShadow=true&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Nunito"
-    ></iframe>
-</div>
+{% extends 'base2.html' %} {% load static %} {% block body %}
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- TradingView Widget BEGIN -->
+<!-- TradingView Widget BEGIN -->
+<div class="container" style="height: 70vh">
+    <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <div id="tradingview-widget" style="width:100%"></div>
+        <div class="tradingview-widget-copyright">
+        </div>
+        <script type="text/javascript">
+            window.addEventListener('load', function() {
+                new TradingView.widget({
+                "autosize": true,
+                "symbol": "NASDAQ:TSLA",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "save_image": false,
+                "calendar": false,
+                "container_id": "tradingview-widget",
+                "support_host": "https://www.tradingview.com"
+                });
+            });
+        </script>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"></script>
+    </div>
+    <!-- TradingView Widget END -->
+</div>
+
+
 <section class="flex items-center justify-center mt-10 pb-10">
     <div class="p-4 sm:px-10 flex flex-col justify-center items-center text-base h-100vh mx-auto" id="pricing">
         <h4 class="text-2xl font-semibold text-center flex gap-2 justify-center mb-10"> Stock Trading</h4>
@@ -64,13 +85,15 @@
                     </li>
                 </ul>
             </div>
-            {% endfor %}\
+            {% endfor %}
             {% else %}
             <p class="text-center">No record found!</p>
             {% endif %}
         </div>
     </div>
 </section>
+
+
 
 <script>
     const btn = document.querySelectorAll('.submit')
@@ -134,3 +157,4 @@
     
 </script>
 {% endblock %}
+
