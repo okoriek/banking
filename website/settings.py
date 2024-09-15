@@ -91,8 +91,8 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
-        'NAME': 'finovaed_database3',
-        'USER': 'finovaed_admin3',
+        'NAME': 'finovaed_database1',
+        'USER': 'finovaed_admin1',
         'PASSWORD': '%Thankgod24%',
         'HOST': 'server4.lytehosting.com',
         'PORT': '3306'
