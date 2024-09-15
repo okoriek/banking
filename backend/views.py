@@ -120,7 +120,7 @@ def ReferalRegister(request, referal):
 @login_required(login_url='/login/')  
 def Dashboard(request):
     user = request.user
-    data = History.objects.filter(user = user)[:8]
+    data = UserHistory.objects.filter(user = user)[:8]
     detail = User.objects.get(email= request.user.email)
 
     #referer
@@ -182,7 +182,7 @@ def Referal(request):
 @login_required(login_url='/login/')  
 def history(request):
     user = request.user
-    data = History.objects.filter(user = user)
+    data = UserHistory.objects.filter(user = user)
     args = {'data':data}
     return render(request, 'dashboard/history.html', args)
 
@@ -337,6 +337,26 @@ def HalalSubmitInvestment(request):
     house = HalalInvestment.objects.get(pk=id)
     invests =  Investment.objects.create(user = request.user, halal_investment=house, amount=house.amount, is_active=True)
     InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Halal Investment')
+    return JsonResponse('Investment successful', safe=False)
+
+
+
+
+@login_required(login_url='/login/') 
+def CryptoInvestment(request):
+    invest =  Cryptocurrency.objects.all().values
+    args = {'invest':invest}
+    return render(request, 'investment/crypto.html', args)
+
+@login_required(login_url='/login/') 
+def CryptoSubmitInvestment(request):
+    ip = request.user_location.get('ip')
+    city = request.user_location.get('city')
+    country = request.user_location.get('country')
+    id = request.POST['pk']
+    house = Cryptocurrency.objects.get(pk=id)
+    invests =  Cryptocurrency.objects.create(user = request.user, cryptocurrency =house, amount=house.amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Crypto Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -508,25 +528,53 @@ def SendBulkEmail(request):
 
 
 
-# Loan rendering
-
+# user document
 @login_required(login_url='/login/')
-def loan(request):
 
+def document(request):
     if request.method == 'POST':
-        form = LoanForm(request.POST)
+        form =  DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.save(commit=False)
             data.user = request.user
             data.save()
-            messages.success(request, 'Application submitted, awaiting Approval')
+            messages.success(request, 'Document Submitted Awaiting Verification')
             return redirect('/loan_request')
         else:
-            messages.error(request, 'Error processing form contact support')
+            return ('/Profile-dashboard')
     else:
-        form = LoanForm()
-    arg = {'form':form}
-    return render(request, 'dashboard/loan.html', arg)
+        form = DocumentForm()
+    arg = {'form': form}
+    return render(request, 'dashboard/document.html', arg)
+
+
+
+
+
+# Loan rendering
+
+@login_required(login_url='/login/')
+def loan(request):
+    loan_eligibily = UserDocument.objects.filter(user = request.user)
+    if loan_eligibily.exists():
+        if request.method == 'POST':
+            form = LoanForm(request.POST)
+            if form.is_valid():
+                data = form.save(commit=False)
+                data.user = request.user
+                data.save()
+                messages.success(request, 'Application submitted, awaiting Approval')
+                return redirect('/loan_request')
+            else:
+                messages.error(request, 'Error processing form contact support')
+        else:
+            form = LoanForm()
+        arg = {'form':form}
+        return render(request, 'dashboard/loan.html', arg)
+    else:
+        return redirect('/upload_document')
+
+    
     
 
 

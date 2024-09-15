@@ -22,8 +22,10 @@ admin.site.site_title = 'Saxobanking Administrator'
 
 
 admin.site.register(Payment)
+admin.site.register(UserDocument)
+admin.site.register(Cryptocurrency)
 admin.site.register(Currency)
-admin.site.register(History)
+admin.site.register(UserHistory)
 admin.site.register(Withdrawal)
 admin.site.register(Investment)
 admin.site.register(Transfer)

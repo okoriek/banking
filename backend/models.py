@@ -63,6 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     eth_wallet_address = models.CharField(max_length=300, blank=True, null=True)
     usdt_trc20_wallet_address = models.CharField(max_length=300, blank=True, null=True)
     mobile_number = models.CharField(max_length=25, blank=True, null=True)
+    document_verified =  models.BooleanField(default=False)
 
     
     
@@ -326,6 +327,27 @@ class Energy(models.Model):
         self.returns =  ((self.interest * self.amount)/100) + self.amount
         super().save(*args, **kwargs)
 
+class Cryptocurrency(models.Model):
+    name =  models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    amount =  models.IntegerField(default=0)
+    interest = models.IntegerField(default=0)
+    returns = models.IntegerField(default=0)
+    duration =  models.IntegerField(default=0)
+    slot =  models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'Cryptocurrencies'
+
+    def __str__(self):
+        return f"{self.name} {self.amount}"
+
+
+    def save(self, *args, **kwargs):
+        self.returns =  ((self.interest * self.amount)/100) + self.amount
+        super().save(*args, **kwargs)
+
+
 
 
 
@@ -340,6 +362,7 @@ class Investment(models.Model):
     arbitrage = models.ForeignKey(Arbitrage, on_delete=models.CASCADE, blank=True, null=True)
     stocks = models.ForeignKey(Stocks, on_delete=models.CASCADE, blank=True, null=True)
     forex = models.ForeignKey(Forex, on_delete=models.CASCADE, blank=True, null=True)
+    cryptocurrency = models.ForeignKey(Cryptocurrency, on_delete=models.CASCADE, blank=True, null=True)
     shares = models.ForeignKey(Shares, on_delete=models.CASCADE, blank=True, null=True)
     nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, blank=True, null=True)
     energy = models.ForeignKey(Energy, on_delete=models.CASCADE, blank=True, null=True)
@@ -556,6 +579,25 @@ class MinimumWithdraw(models.Model):
         return f"Mininum withdrawal: {self.amount}"
     
 
+class UserDocument(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    governmental_document = models.FileField(upload_to='government/')
+    proof_address =  models.FileField(upload_to='address/')
+    bank_statement =  models.FileField(upload_to='bank_document/')
+    
+
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name} email: {self.user.email}"  
+
+    def save(self, *arg, **kwargs):
+        if self.governmental_document and self.proof_address and self.bank_statement:
+            self.user.is_verified = True
+
+        super().save(*arg, **kwargs)
+
+    
+
 
 
 class Loan(models.Model):
@@ -565,8 +607,10 @@ class Loan(models.Model):
         ('one_year', '1 year'),
     )
     user  = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    purpose =  models.TextField(max_length=5000, blank=True, null=True)
     amount = models.IntegerField(default='', blank=True, null=True)
     interest = models.IntegerField(default='', blank=True, null=True)
+
     status = models.BooleanField(default=False)
     duration = models.CharField(max_length=20, choices=choice)
     date_generated = models.DateTimeField(default=timezone.now)
@@ -600,7 +644,7 @@ class Loan(models.Model):
 
 
 
-class History(models.Model):
+class UserHistory(models.Model):
     choice  =  (
         ('Withdrawal', 'Withdrawal'),
         ('Deposit', 'Deposit'),

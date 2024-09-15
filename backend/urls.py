@@ -52,6 +52,9 @@ urlpatterns = [
   path('nfp_investment/', views.NfpTrading, name='nfp'),
   path('nfp_processing/', views.NfpSubmitTrading, name='nfpsubmitinvestment'),
 
+  path('crypto_investment/', views.CryptoInvestment, name='crypto'),
+  path('crypto_processing/', views.CryptoSubmitInvestment, name='cryptosubmitinvestment'),
+
 
 
 
@@ -70,6 +73,7 @@ urlpatterns = [
   path('terms_and_conditions/', views.terms, name='terms'),
   path('update_notification/', views.notification, name='update_notification'),
   path('loan/', views.loan, name='loanview'),
+  path('upload_document/', views.document, name='document'),
 
   #api url
   path('validating_earning/', views.validateEarning, name='validating' ),

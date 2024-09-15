@@ -37,6 +37,13 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.purpose.label_tag}}</label>
+                <div class="input-group mb-3">
+                    {{form.purpose}}
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary w-100 mt-3">Apply for Loan</button>
             {% else %}
             {{empty}}

@@ -1,4 +1,4 @@
-from .models import User, History, Notification,SystemEaring, Investment
+from .models import User, UserHistory, Notification,SystemEaring, Investment
 
 
 def TotalDeposit(request):
@@ -11,7 +11,7 @@ def TotalDeposit(request):
     
 def PendingWithdrawal(request):
     try:
-        bal = History.objects.filter(user=request.user, status=False, action= 'Withdrawal')
+        bal = UserHistory.objects.filter(user=request.user, status=False, action= 'Withdrawal')
         total = 0
         for i in  bal:
             total  += int(i.amount)
@@ -20,7 +20,7 @@ def PendingWithdrawal(request):
         return {'withdraw': None}
 def TotalWithdrawal(request):
     try:
-        bal = History.objects.filter(user=request.user, status=True, action= 'Withdrawal')
+        bal = UserHistory.objects.filter(user=request.user, status=True, action= 'Withdrawal')
         total = 0
         for i in  bal:
             total  += int(i.amount)
