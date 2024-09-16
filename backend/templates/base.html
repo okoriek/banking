@@ -126,10 +126,30 @@
                         <div class="f-widget link-widget">
                             <h4 class="f-widget-title">Documents </h4>
                             <ul class="footer-link">
-                                <li><a href="{% url 'home' %}">Whitepaper</a></li>
-                                <li><a href="{% url 'investment' %}">Complaint Handling</a></li>
-                                <li><a href="{% url 'loanview' %}">Conflict of Interest</a></li>
-                                <li><a href="{% url 'loanview' %}">Private Policy</a></li>
+                                {% if certificate.white_paper %}
+                                <li><a href="{{certificate.white_paper.url}}" >Whitepaper</a></li>
+                                {% else %}
+                                <li><a href="#" >Whitepaper</a></li>
+                                {% endif %}
+
+                                {% if certificate.complaint_handling %}
+                                <li><a href="{{certificate.complaint_handling.url}}" >Complaint handling</a></li>
+                                {% else %}
+                                <li><a href="#" >Complaint handling</a></li>
+                                {% endif %}
+
+                                {% if certificate.conflict_interest %}
+                                <li><a href="{{certificate.conflict_interest.url}}" >Conflict interest</a></li>
+                                {% else %}
+                                <li><a href="#" >Conflict interest</a></li>
+                                {% endif %}
+
+                                {% if certificate.private_policy %}
+                                <li><a href="{{certificate.private_policy.url}}" >Private policy</a></li>
+                                {% else %}
+                                <li><a href="#" >Private policy</a></li>
+                                {% endif %}
+                                
                             </ul>
                         </div>
                     </div>
@@ -137,9 +157,23 @@
                         <div class="f-widget link-widget">
                             <h4 class="f-widget-title">Reports</h4>
                             <ul class="footer-link">
-                                <li><a href="{% url 'home' %}">Financial Report 2023</a></li>
-                                <li><a href="{% url 'investment' %}">Financial Report 2022</a></li>
-                                <li><a href="{% url 'loanview' %}">Financial Report 2021</a></li>
+                                {% if certificate.report1 %}
+                                <li><a href="{{certificate.report1.url}}" download>Financial Report 2023</a></li>
+                                {% else %}
+                                <li><a href="#" download>Financial Report 2023</a></li>
+                                {% endif %}
+
+                                {% if certificate.report2 %}
+                                <li><a href="{{certificate.report2.url}}" download>Financial Report 2022</a></li>
+                                {% else %}
+                                <li><a href="#" download>Financial Report 2022</a></li>
+                                {% endif %}
+
+                                {% if certificate.report3 %}
+                                <li><a href="{{certificate.report3.url}}" download>Financial Report 2021</a></li>
+                                {% else %}
+                                <li><a href="#" download>Financial Report 2021</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

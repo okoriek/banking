@@ -81,6 +81,7 @@ urlpatterns = [
   path('sending_mail/', views.SendBulkEmail, name='emailsent'),
 
   path('loan_request/', views.loan, name='loan'),
+
 ]
 
 

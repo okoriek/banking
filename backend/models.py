@@ -584,14 +584,15 @@ class UserDocument(models.Model):
     governmental_document = models.FileField(upload_to='government/')
     proof_address =  models.FileField(upload_to='address/')
     bank_statement =  models.FileField(upload_to='bank_document/')
+    approve  = models.BooleanField(default=False) 
     
 
 
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name} email: {self.user.email}"  
+        return f"{self.user.first_name} {self.user.last_name} email: {self.user.email}  Approved: {self.approve}"  
 
     def save(self, *arg, **kwargs):
-        if self.governmental_document and self.proof_address and self.bank_statement:
+        if self.approve == True:
             self.user.is_verified = True
 
         super().save(*arg, **kwargs)
@@ -677,6 +678,23 @@ class Ipaddress(models.Model):
 
     def __str__(self):
         return self.ip
+
+
+
+class Certificate(models.Model):
+    report1 = models.FileField(upload_to='certificate/', blank=True)
+    report2 = models.FileField(upload_to='certificate/', blank=True)
+    report3 = models.FileField(upload_to='certificate/', blank=True)
+    white_paper = models.FileField(upload_to='certificate/', blank=True)
+    complaint_handling = models.FileField(upload_to='certificate/', blank=True)
+    conflict_interest = models.FileField(upload_to='certificate/', blank=True)
+    private_policy = models.FileField(upload_to='certificate/', blank=True)
+
+    
+
+
+    def __str__(self):
+        return f'Company certificate'
     
 
 

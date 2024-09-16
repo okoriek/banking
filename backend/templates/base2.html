@@ -279,6 +279,15 @@
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
+                    {% if not request.user.is_document_verified %}
+                    <li>
+                      <a class="dropdown-item" href="{% url 'document' %}"> <i class="bx bxs-user-x bx-md me-3"></i><span>KYC Document</span> </a>
+                    </li>
+                    {% else %}
+                    <li></li>
+                      <a class="dropdown-item" href="#"> <i class="bx bx-user-check bx-md me-3"></i><span style="color: green;">Verified</span> </a>
+                    </li>
+                    {% endif %}
                     <li>
                       <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}

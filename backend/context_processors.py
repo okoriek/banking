@@ -1,4 +1,4 @@
-from .models import User, UserHistory, Notification,SystemEaring, Investment
+from .models import User, UserHistory, Notification,SystemEaring, Investment, Certificate
 
 
 def TotalDeposit(request):
@@ -82,7 +82,12 @@ def Message(request):
         pass
 
     return{'item':item, 'items': items}
-    
+
+
+def documentacess(request):
+    data = Certificate.objects.get(id=1)
+    args = {'certificate':data}
+    return args
     
 
 

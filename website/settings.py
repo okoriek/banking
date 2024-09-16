@@ -68,6 +68,7 @@ TEMPLATES = [
                 'backend.context_processors.Notify',
                 'backend.context_processors.Message',
                 'backend.context_processors.ActiveEarnings',
+                'backend.context_processors.documentacess',
             ],
         },
     },

@@ -8,7 +8,7 @@
 	{% csrf_token %}
     <div class="form-bg ">
         <div class="form">
-            <p class="form-text">Upload Governmental Document</p>
+            <p class="form-text">KYC Document</p>
 
 
 			{% if form.errors %}
@@ -24,6 +24,7 @@
                 <label for="exampleFormControlInput1" class="form-label">{{form.governmental_document.label_tag}}</label>
                 <div class="input-group mb-3">
                     {{form.governmental_document}}
+                    <p class="text-danger pb-0 mb-0">Government document (international passport, national identification, drivers license)</p>
                 </div>
             </div>
 

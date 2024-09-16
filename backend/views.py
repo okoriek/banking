@@ -574,6 +574,8 @@ def loan(request):
     else:
         return redirect('/upload_document')
 
+
+
     
     
 
