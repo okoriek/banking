@@ -114,8 +114,15 @@
                     <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">New</div>
                   </a>
                 </li>
+                <li class="menu-item">
+                  <a
+                    href="{% url 'referal' %}"
+                    class="menu-link">
+                    <div class="text-truncate" data-i18n="Logistics">Referal</div>
+                  </a>
+                </li>
                 {% if request.user.is_staff %}
-                <li class="menu-item"></li>
+                <li class="menu-item">
                   <a href="{% url 'email' %}"  class="menu-link">
                     <div class="text-truncate" data-i18n="Datatables">Send Email</div>
                   </a>
@@ -238,6 +245,9 @@
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               
               <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+                <!-- Notification  -->
+                 
                 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">

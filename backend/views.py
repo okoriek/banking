@@ -56,6 +56,7 @@ def register(request):
             user.is_active =False
             user.country = country
             user.mobile_number = f"{code}{mobile}"
+            user.balance = 50
             user.save()
             website = get_current_site(request).domain
             email_subject = 'Email Verification'
@@ -91,6 +92,7 @@ def ReferalRegister(request, referal):
             user.is_active =False
             user.country = country
             user.mobile_number = f"{code}{mobile}"
+            user.balance = 100
             user.save()
 
             website = get_current_site(request).domain
