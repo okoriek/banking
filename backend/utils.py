@@ -125,7 +125,7 @@ def TrackUserVisitHome(ip, country, city):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -142,7 +142,7 @@ def DepositNotification(ip, country, city, amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -157,7 +157,7 @@ def TransferNotification(ip, country, city, amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -173,7 +173,7 @@ def WithdrawalNotification(ip, country, city, amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -190,7 +190,7 @@ def InvestNotification(ip, country, city, amount, invest):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['okoriek55@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
