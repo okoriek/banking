@@ -17,9 +17,13 @@
                 {% if data.description %}
                 <p class="mt-4 text-base leading-6 text-gray-500 limited-text">{{data.description}}{% else %}{{empty}}</p>
                 {% endif %}
-                <p class="mt-6 flex items-baseline gap-x-1">
-                    <span class="text-5xl font-bold tracking-tight text-gray-500 amt">{{data.amount}}</span>
-                </p>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount: </label>
+                    <input type="number" class="form-control" id="amount" name="amount" >
+                    <div class="fs-6">
+                        <span>min: <span class="amt px-3">{{amount}}</span></span><span>max: <span class="amt px-3">{{amount}}</span></span>
+                    </div>
+                </div>
                 <button
                     id="{{data.id}}"
                     aria-describedby="tier-extended"
@@ -38,13 +42,6 @@
                             stroke="currentColor" aria-hidden="true" class="h-6 w-5 flex-none text-blue-600">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>${{data.returns}} returns
-                    </li>
-                    <li class="flex gap-x-3 text-base">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" aria-hidden="true" class="h-6 w-5 flex-none text-blue-600">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>{{data.duration}} days
                     </li>
                     <li class="flex gap-x-3 text-base">
@@ -56,7 +53,7 @@
                     </li>
                 </ul>
             </div>
-            {% endfor %}\
+            {% endfor %}
             {% else %}
             <p class="text-center">No record found!</p>
             {% endif %}
@@ -66,6 +63,7 @@
 
 <script>
     const btn = document.querySelectorAll('.submit')
+    const amount =  document.getElementById('amount')
     var token =  '{{csrf_token}}'
     btn.forEach((e)=>{
         e.addEventListener('click', ()=>{
@@ -86,6 +84,7 @@
                         headers: { "X-CSRFToken": token },
                         data: {
                             pk : id,
+                            amount: amount.value,
                         },
                         success: (response)=>{
                             Swal.fire({

@@ -8,9 +8,7 @@
 	{% csrf_token %}
     <div class="form-bg ">
         <div class="form">
-            <p class="form-text">Request Loan</p>
-
-
+            <p class="form-text pt-3">Request Loan</p>
 
 			{% if form.errors %}
 			<div class="errors" style="color: red; border: 2px solid red; padding: 10px;">
@@ -20,6 +18,8 @@
 			{% for message in messages %}
 			<center style="border: 2px solid green; padding: 10px;"><span style="color: green;">{{message}}</span></center>
 			{% endfor %}
+
+            <p class="text-center">Requirements for securing a loan from Saxobank, before proceeding, please note that you need to meet one of the following criteria below.</p>
 
             {% if form %}
 
@@ -48,6 +48,10 @@
             {% else %}
             {{empty}}
             {% endif %}
+
+            <p class="pt-3"><strong>Trading Requiremnts:</strong> You must have conducted trades with Saxobank totaling 
+            $2,000 or more. </p>
+            <p><strong>Proof of Funds:</strong> Alternatively, you should have at least 15% of the requested loan amount available in your account as proof of fundss.</p>
         </div>
     </div>
 </form>

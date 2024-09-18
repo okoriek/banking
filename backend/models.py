@@ -167,6 +167,8 @@ class RealEstate(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -185,6 +187,8 @@ class HalalInvestment(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -203,6 +207,8 @@ class Arbitrage(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -220,6 +226,8 @@ class Annuties(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -237,6 +245,8 @@ class Stocks(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -256,6 +266,8 @@ class Forex(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -274,6 +286,8 @@ class Shares(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -293,6 +307,8 @@ class Nfp(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -311,6 +327,8 @@ class Energy(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -331,6 +349,8 @@ class Cryptocurrency(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
     amount =  models.IntegerField(default=0)
+    min = models.IntegerField(default=0)
+    max = models.IntegerField(default=0)
     interest = models.IntegerField(default=0)
     returns = models.IntegerField(default=0)
     duration =  models.IntegerField(default=0)
@@ -484,8 +504,7 @@ class Notification(models.Model):
 class SystemEaring(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     invest = models.ForeignKey(Investment, on_delete=models.CASCADE, blank=True, null=True)
-    num =  models.IntegerField(default=0)
-    plan = models.CharField(max_length=50, blank=True, null=True)   
+    num =  models.IntegerField(default=0)   
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     date_expiration =  models.DateTimeField(default=timezone.now)
     date_created =  models.DateTimeField(default=timezone.now)
@@ -496,14 +515,26 @@ class SystemEaring(models.Model):
         # Function that returns investment interests
 
         def investment():
-            if self.invest.certificate_of_deposit:
-                return self.invest.certificate_of_deposit.interest
-            elif self.invest.mutual_fund:
-                return self.invest.mutual_fund.interest
-            elif self.invest.real_estate:
+            if self.invest.real_estate:
                 return self.invest.real_estate.interest
+            elif self.invest.annuties:
+                return self.invest.annuties.interest
+            elif self.invest.arbitrage:
+                return self.invest.arbitrage.interest
+            elif self.invest.cryptocurrency:
+                return self.invest.cryptocurrency.interest
+            elif self.invest.halal_investment:
+                return self.invest.halal_investment.interest
+            elif self.invest.nfp:
+                return self.invest.nfp.interest
+            elif self.invest.stocks:
+                return self.invest.stocks.interest
+            elif self.invest.shares:
+                return self.invest.shares.interest
+            elif self.invest.forex:
+                return self.invest.forex.interest
             else:
-                return self.invest.dividend_per_share.interest
+                return self.invest.energy.interest
             
 
         total =  User.objects.filter(email=self.user)

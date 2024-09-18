@@ -14,6 +14,8 @@ from .utils import *
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 
 
 
@@ -274,9 +276,10 @@ def EstateSubmitInvestment(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = RealEstate.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, real_estate=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Real Estate')
+    invest =  Investment.objects.create(user = request.user, real_estate=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Real Estate')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -294,9 +297,10 @@ def AnnutiesSubmitInvestment(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Annuties.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, annuties=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Annuties Investment')
+    invest =  Investment.objects.create(user = request.user, annuties=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Annuties Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -315,9 +319,10 @@ def ArbitrageSubmitInvestment(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Arbitrage.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, arbitrage=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Arbitrage Investment')
+    invest =  Investment.objects.create(user = request.user, arbitrage=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Arbitrage Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -336,9 +341,10 @@ def HalalSubmitInvestment(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = HalalInvestment.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, halal_investment=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Halal Investment')
+    invests =  Investment.objects.create(user = request.user, halal_investment=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Halal Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -356,9 +362,10 @@ def CryptoSubmitInvestment(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Cryptocurrency.objects.get(pk=id)
-    invests =  Cryptocurrency.objects.create(user = request.user, cryptocurrency =house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Crypto Investment')
+    invests =  Cryptocurrency.objects.create(user = request.user, cryptocurrency =house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
     return JsonResponse('Investment successful', safe=False)
 
 
@@ -376,9 +383,10 @@ def StockSubmitTrading(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Stocks.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, stocks=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Stock Trading')
+    invests =  Investment.objects.create(user = request.user, stocks=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Stock Trading')
     return JsonResponse('Investment successful', safe=False)
 
 @login_required(login_url='/login/') 
@@ -393,9 +401,10 @@ def ForexSubmitTrading(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Forex.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, forex=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Forex Trading')
+    invests =  Investment.objects.create(user = request.user, forex=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Forex Trading')
 
 @login_required(login_url='/login/') 
 def ShareTrading(request):
@@ -409,9 +418,10 @@ def ShareSubmitTrading(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Shares.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, shares=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Shares Trading')
+    invests =  Investment.objects.create(user = request.user, shares=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Shares Trading')
 
 @login_required(login_url='/login/') 
 def NfpTrading(request):
@@ -425,9 +435,10 @@ def NfpSubmitTrading(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Nfp.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, nfp=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='NFP Trading')
+    invests =  Investment.objects.create(user = request.user, nfp=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='NFP Trading')
 
 @login_required(login_url='/login/') 
 def EnergyTrading(request):
@@ -441,9 +452,10 @@ def EnergySubmitTrading(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
+    amount = request.POST['amount']
     house = Energy.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, energy=house, amount=house.amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=house.amount, invest='Energy Trading')
+    invests =  Investment.objects.create(user = request.user, energy=house, amount=amount, is_active=True)
+    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Energy Trading')
 
 
 
@@ -575,6 +587,23 @@ def loan(request):
         return render(request, 'dashboard/loan.html', arg)
     else:
         return redirect('/upload_document')
+    
+
+
+
+# analytic 
+@csrf_exempt
+def analyticdata(request):
+    value = 0
+    count = 0
+    gear =  UserHistory.objects.filter(user=request.user)
+    if gear.exists():
+        for i in gear:
+            if i.date_created.month == timezone.now().month:
+                count += 1
+    else:
+        pass
+    return JsonResponse({'percent': value*count})
 
 
 
