@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permission, PermissionsMixin
 from django.utils import timezone
 import random
+from decimal import Decimal
 from django.utils.crypto import get_random_string
 from django_countries.fields import CountryField
 import qrcode
@@ -166,11 +167,10 @@ class Payment(models.Model):
 class RealEstate(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -186,11 +186,10 @@ class RealEstate(models.Model):
 class HalalInvestment(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -206,11 +205,10 @@ class HalalInvestment(models.Model):
 class Arbitrage(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -225,11 +223,10 @@ class Arbitrage(models.Model):
 class Annuties(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -248,11 +245,10 @@ class Annuties(models.Model):
 class Stocks(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -272,11 +268,10 @@ class Stocks(models.Model):
 class Forex(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -295,11 +290,10 @@ class Forex(models.Model):
 class Shares(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -319,11 +313,10 @@ class Shares(models.Model):
 class Nfp(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -339,11 +332,10 @@ class Nfp(models.Model):
 class Energy(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -361,11 +353,10 @@ class Energy(models.Model):
 class Cryptocurrency(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 

@@ -20,16 +20,16 @@ def TotalDeposit(request):
 #        return {'withdraw': None}
 
 def Percentage(request):
-    invest = Investment.objects.filter(user=request.user, is_active=False)
-    earning =  SystemEaring.objects.filter(user=request.user, is_active=False)
-    invest_total = 0
-    earning_total = 0 
-    for i in invest:
-        invest_total += i.amount
-    for e in earning:
-        earning_total += e.balance
     try:
-        Percent =  (earning_total * 100)/invest_total
+        invest = Investment.objects.filter(user=request.user, is_active=False)
+        earning =  SystemEaring.objects.filter(user=request.user, is_active=False)
+        invest_total = 0
+        earning_total = 0 
+        for i in invest:
+            invest_total += i.amount
+        for e in earning:
+            earning_total += e.balance
+            Percent =  (earning_total * 100)/invest_total
         return {'percent': Percent}
     except:
         return {'percent': None}
