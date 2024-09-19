@@ -135,7 +135,7 @@ class Currency(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     payment_option= models.ForeignKey(Currency, on_delete=models.DO_NOTHING, blank=True, null=True)
-    amount = models.FloatField()
+    amount = models.DecimalField(max_digits=2, blank=True, decimal_places=2 )
     memo = models.CharField(max_length=200, blank=True, null=True)
     status = models.BooleanField(default=False) 
     date_created = models.DateTimeField(default=timezone.now)
