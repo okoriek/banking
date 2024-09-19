@@ -178,9 +178,7 @@ class RealEstate(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 
 class HalalInvestment(models.Model):
@@ -197,9 +195,7 @@ class HalalInvestment(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 
 class Arbitrage(models.Model):
@@ -216,9 +212,7 @@ class Arbitrage(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 class Annuties(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
@@ -238,9 +232,7 @@ class Annuties(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 class Stocks(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
@@ -259,9 +251,7 @@ class Stocks(models.Model):
         verbose_name_plural = 'Stocks'
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 
 
@@ -282,9 +272,7 @@ class Forex(models.Model):
         verbose_name_plural = 'Forex'
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+    
 
 
 class Shares(models.Model):
@@ -304,9 +292,7 @@ class Shares(models.Model):
         verbose_name_plural = 'Shares'
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 
 
@@ -324,9 +310,7 @@ class Nfp(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+ 
 
 
 class Energy(models.Model):
@@ -346,9 +330,7 @@ class Energy(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 class Cryptocurrency(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
@@ -367,9 +349,7 @@ class Cryptocurrency(models.Model):
         return f"{self.name} {self.amount}"
 
 
-    def save(self, *args, **kwargs):
-        self.returns =  ((self.interest * self.amount)/100) + self.amount
-        super().save(*args, **kwargs)
+   
 
 
 
