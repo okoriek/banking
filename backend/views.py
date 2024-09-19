@@ -278,9 +278,19 @@ def EstateSubmitInvestment(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = RealEstate.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, real_estate=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Real Estate')
-    return JsonResponse('Investment successful', safe=False)
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, real_estate=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 
 # mutual funds
@@ -299,9 +309,19 @@ def AnnutiesSubmitInvestment(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Annuties.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, annuties=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Annuties Investment')
-    return JsonResponse('Investment successful', safe=False)
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, annuties=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 
 
@@ -321,9 +341,19 @@ def ArbitrageSubmitInvestment(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Arbitrage.objects.get(pk=id)
-    invest =  Investment.objects.create(user = request.user, arbitrage=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Arbitrage Investment')
-    return JsonResponse('Investment successful', safe=False)
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, arbitrage=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 
 
@@ -343,9 +373,19 @@ def HalalSubmitInvestment(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = HalalInvestment.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, halal_investment=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Halal Investment')
-    return JsonResponse('Investment successful', safe=False)
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, hala_investment=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 
 
@@ -365,8 +405,14 @@ def CryptoSubmitInvestment(request):
     amount = int(request.POST['amount'])
     house = Cryptocurrency.objects.get(pk=id)
     if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
         invests =  Investment.objects.create(user = request.user, cryptocurrency=house, amount=amount, is_active=True)
-        InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
         return JsonResponse('Your Investment as be Intiated successful', safe=False)
     else:
         pass
@@ -389,9 +435,19 @@ def StockSubmitTrading(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Stocks.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, stocks=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Stock Trading')
-    return JsonResponse('Investment successful', safe=False)
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, stocks=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 @login_required(login_url='/login/') 
 def ForexTrading(request):
@@ -407,8 +463,19 @@ def ForexSubmitTrading(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Forex.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, forex=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Forex Trading')
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, forex=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 @login_required(login_url='/login/') 
 def ShareTrading(request):
@@ -424,8 +491,19 @@ def ShareSubmitTrading(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Shares.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, shares=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Shares Trading')
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, shares=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 @login_required(login_url='/login/') 
 def NfpTrading(request):
@@ -441,8 +519,19 @@ def NfpSubmitTrading(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Nfp.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, nfp=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='NFP Trading')
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, nfp=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 @login_required(login_url='/login/') 
 def EnergyTrading(request):
@@ -458,8 +547,19 @@ def EnergySubmitTrading(request):
     id = request.POST['pk']
     amount = request.POST['amount']
     house = Energy.objects.get(pk=id)
-    invests =  Investment.objects.create(user = request.user, energy=house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Energy Trading')
+    if amount >= house.min and amount <= house.max:
+        user = User.objects.get(email = request.user.email)
+        user.balance -= amount
+        user.save()
+        invests =  Investment.objects.create(user = request.user, energy=house, amount=amount, is_active=True)
+        try:
+            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        except:
+            pass
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 
 
