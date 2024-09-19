@@ -57,7 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email         = models.EmailField(max_length=100, unique=True)
     referal = models.CharField(max_length=20, unique=True, blank=True, null=True)
     refered_by = models.CharField(max_length=50, blank=True, null=True)
-    balance = models.IntegerField(default=0)
+    balance = models.DecimalField(default=0, blank=True, null=True,decimal_places=2, max_digits=20)
     country = CountryField(blank_label="(select country)")
     btc_wallet_address = models.CharField(max_length=300, blank=True, null=True)
     eth_wallet_address = models.CharField(max_length=300, blank=True, null=True)
@@ -166,13 +166,13 @@ class Payment(models.Model):
 class RealEstate(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -186,13 +186,13 @@ class RealEstate(models.Model):
 class HalalInvestment(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -206,13 +206,13 @@ class HalalInvestment(models.Model):
 class Arbitrage(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -225,13 +225,13 @@ class Arbitrage(models.Model):
 class Annuties(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -244,13 +244,13 @@ class Annuties(models.Model):
 class Stocks(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -265,13 +265,13 @@ class Stocks(models.Model):
 class Forex(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -285,13 +285,13 @@ class Forex(models.Model):
 class Shares(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -306,13 +306,13 @@ class Shares(models.Model):
 class Nfp(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"{self.name} {self.amount}"
@@ -326,13 +326,13 @@ class Nfp(models.Model):
 class Energy(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     class Meta:
         verbose_name_plural = 'Energies'
@@ -348,13 +348,13 @@ class Energy(models.Model):
 class Cryptocurrency(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    amount =  models.IntegerField(default=0)
-    min = models.IntegerField(default=0)
-    max = models.IntegerField(default=0)
-    interest = models.IntegerField(default=0)
-    returns = models.IntegerField(default=0)
-    duration =  models.IntegerField(default=0)
-    slot =  models.IntegerField(default=0)
+    amount =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    returns = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    duration =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
+    slot =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     class Meta:
         verbose_name_plural = 'Cryptocurrencies'
@@ -386,7 +386,7 @@ class Investment(models.Model):
     shares = models.ForeignKey(Shares, on_delete=models.CASCADE, blank=True, null=True)
     nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, blank=True, null=True)
     energy = models.ForeignKey(Energy, on_delete=models.CASCADE, blank=True, null=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(decimal_places=2, max_digits=20)
     is_active = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
     date_expiration = models.DateTimeField(default=timezone.now) 
@@ -431,14 +431,20 @@ class Investment(models.Model):
 class Withdrawal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     currency = models.CharField(max_length=20, blank=True, null=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.BooleanField(default=False) 
+    amount = models.DecimalField(decimal_places=2, max_digits=20)
+    status = models.BooleanField(default=False)
+    btc_wallet_address = models.CharField(max_length=300, blank=True, null=True)
+    eth_wallet_address = models.CharField(max_length=300, blank=True, null=True)
+    usdt_trc20_wallet_address = models.CharField(max_length=300, blank=True, null=True)
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.user}---------{self.currency}---------{self.amount}"
     
     def save(self, *args, **kwargs):
+        self.btc_wallet_address = self.user.btc_wallet_address
+        self.eth_wallet_address = self.user.eth_wallet_address
+        self.usdt_trc20_wallet_address = self.user.usdt_trc20_wallet_address
         user = self.user
         amount = self.amount
         if self.status == True:
@@ -451,7 +457,7 @@ class Withdrawal(models.Model):
 class Transfer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     reciever = models.CharField(max_length=20, blank=True, null=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(decimal_places=2, max_digits=20)
     bank_name = models.CharField(max_length=50, blank=True, null=True)
     is_external_transfer = models.BooleanField(default=False)
     status = models.BooleanField(default=False) 
@@ -504,8 +510,8 @@ class Notification(models.Model):
 class SystemEaring(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     invest = models.ForeignKey(Investment, on_delete=models.CASCADE, blank=True, null=True)
-    num =  models.IntegerField(default=0)   
-    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    num =  models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)   
+    balance = models.DecimalField(decimal_places=2, max_digits=20, default=0.00)
     date_expiration =  models.DateTimeField(default=timezone.now)
     date_created =  models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=False)
@@ -542,20 +548,18 @@ class SystemEaring(models.Model):
         diff = fig.days
         profit =  investment()
         profit_per_day = ((profit * int(self.invest.amount)))/100
-        
+
         if diff == 0:
             pass
         else:
             if timezone.now() <= self.date_expiration: 
-                if ((diff + 1) - self.num) == 1 and self.balance == diff * profit_per_day:
-                    self.balance += profit_per_day
+                if ((diff + 1) - self.num) == 1:
                     self.num += 1
                 else:
-                    self.num = diff + 1
-                    self.balance = diff * profit_per_day                           
+                    self.num = diff + 1                          
             else:
                 total =  User.objects.get(user=self.user)
-                total.balance += self.balance
+                total.balance += profit_per_day
                 total.save()
                 self.is_active = False
 
@@ -570,7 +574,7 @@ class SystemEaring(models.Model):
 
 class ReferalBonus(models.Model):
     user =  models.CharField(max_length=200, blank=True, null=True)
-    earnings = models.IntegerField(default=0)
+    earnings = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     class Meta:
         verbose_name_plural='Referal Bonuses'
@@ -604,7 +608,7 @@ class Reinvestment(models.Model):
 
 
 class MinimumWithdraw(models.Model):
-    amount = models.IntegerField(default=0)
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
 
     def __str__(self):
         return f"Mininum withdrawal: {self.amount}"
