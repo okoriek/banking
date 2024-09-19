@@ -21,7 +21,7 @@
                     <label for="amount" class="form-label">Amount: </label>
                     <input type="number" class="form-control" id="amount" name="amount" >
                     <div class="fs-6">
-                        <span>min: <span class="amt px-3">{{data.min}}</span></span><span>max: <span class="amt px-3">{{data.max}}</span></span>
+                        <span>min: <span class="amt px-3" id="min">{{data.min}}</span></span><span>max: <span class="amt px-3" id="max">{{data.max}}</span></span>
                     </div>
                 </div>
                 <button
@@ -64,9 +64,11 @@
 <script>
     const btn = document.querySelectorAll('.submit')
     const amount =  document.getElementById('amount')
+    
     var token =  '{{csrf_token}}'
     btn.forEach((e)=>{
         e.addEventListener('click', ()=>{
+            e.innerText = 'processing...'
             var id = e.id
             Swal.fire({
                 title: "Confirmation",
@@ -87,11 +89,22 @@
                             amount: amount.value,
                         },
                         success: (response)=>{
-                            Swal.fire({
-                                title: "Confirmed",
-                                text: "Your Investment as be Intiated successful",
-                                icon: "success"
-                            });
+                            if (response == "Your Investment as be Intiated successful"){
+                                Swal.fire({
+                                    title: "Confirmed",
+                                    text: `${response}`,
+                                    icon: "success"
+                                });
+                                e.innerText = 'Invest now'
+                            }
+                            else{
+                                Swal.fire({
+                                    title: "Range Exceeded",
+                                    text: `${response}`,
+                                    icon: "info"
+                                });
+                                e.innerText = 'Invest now'
+                            }
                         },
                         error: (error)=>{
                             Swal.fire({
@@ -99,14 +112,17 @@
                                 title: "Oops...",
                                 text: "Something went wrong!",
                             });
+                            e.innerText = 'Invest now'
                         }
                     })    
+                }
+                else{
+                    e.innerText = 'Invest now'
                 }
             });
         })   
     })
 </script>
-
 <script>
     // Function to format number as currency with commas
     function formatCurrency(number) {

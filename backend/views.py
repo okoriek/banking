@@ -362,11 +362,15 @@ def CryptoSubmitInvestment(request):
     city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
-    amount = request.POST['amount']
+    amount = int(request.POST['amount'])
     house = Cryptocurrency.objects.get(pk=id)
-    invests =  Cryptocurrency.objects.create(user = request.user, cryptocurrency =house, amount=amount, is_active=True)
-    InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-    return JsonResponse('Investment successful', safe=False)
+    if amount >= house.min and amount <= house.max:
+        invests =  Investment.objects.create(user = request.user, cryptocurrency=house, amount=amount, is_active=True)
+        InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
+        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+    else:
+        pass
+        return JsonResponse('Amount range exceeded', safe=False)
 
 
 #  Trading investments
