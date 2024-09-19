@@ -85,9 +85,13 @@ def Message(request):
 
 
 def documentacess(request):
-    data = Certificate.objects.get(id=1)
-    args = {'certificate':data}
-    return args
+    try:
+        data = Certificate.objects.get(id=1)
+        args = {'certificate':data}
+        return args
+    except:
+        return {'certificate': None}
+    
     
 
 
