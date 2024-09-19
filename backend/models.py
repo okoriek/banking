@@ -170,7 +170,7 @@ class RealEstate(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -187,7 +187,7 @@ class HalalInvestment(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -204,7 +204,7 @@ class Arbitrage(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -212,7 +212,6 @@ class Arbitrage(models.Model):
         return f"{self.name}"
 
 
-   
 
 class Annuties(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
@@ -220,7 +219,7 @@ class Annuties(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -232,7 +231,6 @@ class Annuties(models.Model):
         return f"{self.name}"
 
 
-   
 
 class Stocks(models.Model):
     name =  models.CharField(max_length=50, blank=True, null=True)
@@ -240,7 +238,7 @@ class Stocks(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -261,7 +259,7 @@ class Forex(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -302,7 +300,7 @@ class Nfp(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -319,7 +317,7 @@ class Energy(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
@@ -338,7 +336,7 @@ class Cryptocurrency(models.Model):
     min = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     max = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     interest = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
-    
+    amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=20)
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
