@@ -175,7 +175,7 @@ class RealEstate(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
    
@@ -192,7 +192,7 @@ class HalalInvestment(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
    
@@ -209,7 +209,7 @@ class Arbitrage(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
    
@@ -229,7 +229,7 @@ class Annuties(models.Model):
     
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
    
@@ -245,7 +245,7 @@ class Stocks(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
     
     class Meta:
         verbose_name_plural = 'Stocks'
@@ -266,7 +266,7 @@ class Forex(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
     
     class Meta:
         verbose_name_plural = 'Forex'
@@ -286,7 +286,7 @@ class Shares(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
     
     class Meta:
         verbose_name_plural = 'Shares'
@@ -307,7 +307,7 @@ class Nfp(models.Model):
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
  
@@ -327,7 +327,7 @@ class Energy(models.Model):
         verbose_name_plural = 'Energies'
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
    
@@ -346,7 +346,7 @@ class Cryptocurrency(models.Model):
         verbose_name_plural = 'Cryptocurrencies'
 
     def __str__(self):
-        return f"{self.name} {self.amount}"
+        return f"{self.name}"
 
 
    
