@@ -598,16 +598,19 @@ def loan(request):
 # analytic 
 @csrf_exempt
 def analyticdata(request):
-    value = 0
-    count = 0
-    gear =  UserHistory.objects.filter(user=request.user)
-    if gear.exists():
-        for i in gear:
-            if i.date_created.month == timezone.now().month:
-                count += 1
-    else:
-        pass
-    return JsonResponse({'percent': value*count})
+    invest = Investment.objects.filter(user=request.user, is_active=False)
+    earning =  SystemEaring.objects.filter(user=request.user, is_active=False)
+    invest_total = 0
+    earning_total = 0 
+    for i in invest:
+        invest_total += i.amount
+    for e in earning:
+        earning_total += e.balance
+    try:
+        Percent =  (earning_total * 100)/invest_total
+        return JsonResponse({'percent': Percent})
+    except:
+        return JsonResponse({'percent': 0})
 
 
 

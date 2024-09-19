@@ -9,15 +9,33 @@ def TotalDeposit(request):
     except:
         return {'balance':None}
     
-def PendingWithdrawal(request):
+#def PendingWithdrawal(request):
+#    try:
+#        bal = UserHistory.objects.filter(user=request.user, status=False, action= 'Withdrawal')
+#        total = 0
+#        for i in  bal:
+#            total  += int(i.amount)
+#        return {'withdraw': total}
+#    except:
+#        return {'withdraw': None}
+
+def Percentage(request):
+    invest = Investment.objects.filter(user=request.user, is_active=False)
+    earning =  SystemEaring.objects.filter(user=request.user, is_active=False)
+    invest_total = 0
+    earning_total = 0 
+    for i in invest:
+        invest_total += i.amount
+    for e in earning:
+        earning_total += e.balance
     try:
-        bal = UserHistory.objects.filter(user=request.user, status=False, action= 'Withdrawal')
-        total = 0
-        for i in  bal:
-            total  += int(i.amount)
-        return {'withdraw': total}
+        Percent =  (earning_total * 100)/invest_total
+        return {'percent': Percent}
     except:
-        return {'withdraw': None}
+        return {'percent': None}
+
+
+
 def TotalWithdrawal(request):
     try:
         bal = UserHistory.objects.filter(user=request.user, status=True, action= 'Withdrawal')
@@ -41,7 +59,7 @@ def ActiveDeposit(request):
     
 def ActiveEarnings(request):
     try:
-        bal = SystemEaring.objects.filter(user=request.user, is_active=True)
+        bal = SystemEaring.objects.filter(user=request.user, is_active=False)
         total = 0
         for i in  bal:
             total  += int(i.balance)

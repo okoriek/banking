@@ -135,7 +135,7 @@ class Currency(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     payment_option= models.ForeignKey(Currency, on_delete=models.DO_NOTHING, blank=True, null=True)
-    amount = models.DecimalField(max_digits=2, blank=True, decimal_places=2 )
+    amount = models.DecimalField(blank=True, decimal_places=2, max_digits=20)
     memo = models.CharField(max_length=200, blank=True, null=True)
     status = models.BooleanField(default=False) 
     date_created = models.DateTimeField(default=timezone.now)
@@ -233,6 +233,10 @@ class Annuties(models.Model):
     duration =  models.IntegerField(blank=True, null=True, default=0)
     slot =  models.IntegerField(blank=True, null=True, default=0)
 
+    class Meta:
+        verbose_name_plural = 'Annuties'
+    
+
     def __str__(self):
         return f"{self.name} {self.amount}"
 
@@ -254,6 +258,9 @@ class Stocks(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.amount}"
+    
+    class Meta:
+        verbose_name_plural = 'Stocks'
 
 
     def save(self, *args, **kwargs):
@@ -275,6 +282,9 @@ class Forex(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.amount}"
+    
+    class Meta:
+        verbose_name_plural = 'Forex'
 
 
     def save(self, *args, **kwargs):
@@ -295,6 +305,9 @@ class Shares(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.amount}"
+    
+    class Meta:
+        verbose_name_plural = 'Shares'
 
 
     def save(self, *args, **kwargs):
@@ -702,6 +715,7 @@ class UserHistory(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     expires = models.DateTimeField(default=timezone.now)
 
+
     class Meta:
         verbose_name_plural ='Histories'
         ordering = ('-date_created',)
@@ -715,6 +729,9 @@ class Ipaddress(models.Model):
 
     def __str__(self):
         return self.ip
+    
+    class Meta:
+        verbose_name_plural = 'Ipaddress'
 
 
 
