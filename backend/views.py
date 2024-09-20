@@ -127,14 +127,6 @@ def Dashboard(request):
     data = UserHistory.objects.filter(user = user)[:8]
     detail = User.objects.get(email= request.user.email)
 
-    #referer
-    earn =  SystemEaring.objects.filter(is_active=True)
-    invest =  Investment.objects.filter(is_active=True)
-    for x in earn: 
-        x.save()
-    for y in invest:
-        y.save()
-
     refer = User.objects.all().filter(refered_by = str(request.user))
     bonus = ReferalBonus.objects.all().filter(user=str(request.user))
     total = 0

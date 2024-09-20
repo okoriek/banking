@@ -13,10 +13,6 @@ class UserLocationMiddleware:
         # Get user's location (country, city, latitude, and longitude)
         country, city, latitude, longitude = self.get_geo_from_ip(ip)
         
-        # Block users from Nigeria
-        if country == 'NG':  # 'NG' is the ISO country code for Nigeria
-            return render(request, 'backend/restrict.html' )
-        
         # Store the location in the request
         request.user_location = {
             'ip': ip,
