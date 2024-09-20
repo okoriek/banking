@@ -287,7 +287,7 @@ def EstateSubmitInvestment(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -318,7 +318,7 @@ def AnnutiesSubmitInvestment(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -350,7 +350,7 @@ def ArbitrageSubmitInvestment(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -382,7 +382,7 @@ def HalalSubmitInvestment(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -413,7 +413,7 @@ def CryptoSubmitInvestment(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -444,7 +444,7 @@ def StockSubmitTrading(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -472,7 +472,7 @@ def ForexSubmitTrading(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -500,7 +500,7 @@ def ShareSubmitTrading(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -528,7 +528,7 @@ def NfpSubmitTrading(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
@@ -556,7 +556,7 @@ def EnergySubmitTrading(request):
             InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
         except:
             pass
-        return JsonResponse('Your Investment as be Intiated successful', safe=False)
+        return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
         return JsonResponse('Amount range exceeded', safe=False)
