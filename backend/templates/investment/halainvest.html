@@ -18,7 +18,7 @@
                 {% endif %}
                 <div class="mb-3">
                     <label for="amount" class="form-label">Amount: </label>
-                    <input type="number" class="form-control" id="amount" name="amount" >
+                    <input type="number" class="form-control" id="amount{{data.id}}" name="amount" >
                     <div class="fs-6">
                         <span>min: <span class="amt px-3" id="min">{{data.min}}</span></span><span>max: <span class="amt px-3" id="max">{{data.max}}</span></span>
                     </div>
@@ -62,11 +62,11 @@
 
 <script>
     const btn = document.querySelectorAll('.submit')
-    const amount =  document.getElementById('amount')
     
     var token =  '{{csrf_token}}'
     btn.forEach((e)=>{
         e.addEventListener('click', ()=>{
+            const amount =  document.getElementById(`amount${e.id}`)
             e.innerText = 'processing...'
             var id = e.id
             Swal.fire({
@@ -98,8 +98,8 @@
                             }
                             else{
                                 Swal.fire({
-                                    title: "Range Exceeded",
-                                    text: `${response}`,
+                                    title: `${response}`,
+                                    text: `Amount range exceeded or Insufficient balance`,
                                     icon: "info"
                                 });
                                 e.innerText = 'Invest now'

@@ -117,7 +117,7 @@
     
     btn.addEventListener('click', ()=>{
         btn.innerText = 'copied'
-        navigator.clipboard.writeText(`${wallet.value}`)
+        navigator.clipboard.writeText(`${window.location.origin}/register/{{refer}}`)
     })
 </script>
 

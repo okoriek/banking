@@ -109,6 +109,14 @@
                   </a>
                 </li>
                 <li class="menu-item">
+                  <a
+                    href="{% url 'transaction' %}"
+                    
+                    class="menu-link">
+                    <div class="text-truncate" data-i18n="Logistics">Transaction History</div>
+                  </a>
+                </li>
+                <li class="menu-item">
                   <a href="{% url 'loan' %}"  class="menu-link">
                     <div class="text-truncate" data-i18n="Academy">Loan</div>
                     <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">New</div>
@@ -289,13 +297,13 @@
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
-                    {% if not request.user.is_document_verified %}
+                    {% if not request.user.document_verified %}
                     <li>
                       <a class="dropdown-item" href="{% url 'document' %}"> <i class="bx bxs-user-x bx-md me-3"></i><span>KYC Document</span> </a>
                     </li>
                     {% else %}
                     <li></li>
-                      <a class="dropdown-item" href="#"> <i class="bx bx-user-check bx-md me-3"></i><span style="color: green;">Verified</span> </a>
+                      <a class="dropdown-item" href="#" style="color: green;"> <i class="bx bx-user-check bx-md me-3"></i><span>Verified</span> </a>
                     </li>
                     {% endif %}
                     <li>
@@ -351,6 +359,12 @@
     </div>
     
 
+    <!-- whatsapp chat -->
+
+    <a href="https://wa.me/+14699229510" class="whatsapp_float" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp Chat" class="whatsapp_icon">
+    </a>
+
     <script src="{% static 'assets/vendor/libs/jquery/jquery.js' %}"></script>
     <script src="{% static 'assets/vendor/libs/popper/popper.js' %}"></script>
     <script src="{% static 'assets/vendor/js/bootstrap.js' %}"></script>
@@ -372,5 +386,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siqa8c09b5582229468a683ad238f52cf5f37151a9faca042e4ab634e7fa08da090" defer></script>
   </body>
 </html>

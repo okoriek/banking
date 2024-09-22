@@ -369,13 +369,22 @@ class Investment(models.Model):
     nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, blank=True, null=True)
     energy = models.ForeignKey(Energy, on_delete=models.CASCADE, blank=True, null=True)
     amount = models.DecimalField(decimal_places=2, max_digits=20)
+    returns  = models.DecimalField(decimal_places=2, max_digits=20, blank=True, null=True)
     is_active = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
     date_expiration = models.DateTimeField(default=timezone.now) 
     date_created = models.DateTimeField(default=timezone.now)
 
+
+    
+        
+
     def __str__(self):
-        return f"{self.user}--------{self.amount}------------{self.date_created}"
+        def days_remaining():
+            total = self.date_expiration - self.date_created
+            remaining = self.date_expiration - timezone.now()
+            return f"{remaining.days}/{total.days}"
+        return f"user:{self.user}-----amount:{self.amount}-----date of investment:{self.date_created}------days remaining: {days_remaining()}-----Returns: {self.returns}"
     
     def save(self, *args, **kwargs):
 
@@ -603,6 +612,7 @@ class UserDocument(models.Model):
     governmental_document = models.FileField(upload_to='government/')
     proof_address =  models.FileField(upload_to='address/')
     bank_statement =  models.FileField(upload_to='bank_document/')
+    submitted = models.BooleanField(default=False)
     approve  = models.BooleanField(default=False) 
     
 
@@ -612,7 +622,8 @@ class UserDocument(models.Model):
 
     def save(self, *arg, **kwargs):
         if self.approve == True:
-            self.user.is_verified = True
+            self.user.document_verified = True
+            self.user.save()
 
         super().save(*arg, **kwargs)
 

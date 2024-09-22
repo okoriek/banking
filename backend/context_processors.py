@@ -4,7 +4,7 @@ from .models import User, UserHistory, Notification,SystemEaring, Investment, Ce
 def TotalDeposit(request):
     try:
         amount= User.objects.get(email=request.user.email)
-        bal = amount.balance
+        bal = int(amount.balance)
         return {'balance':bal}
     except:
         return {'balance':None}
