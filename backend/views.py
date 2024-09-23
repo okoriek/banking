@@ -263,7 +263,7 @@ def EstateSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = RealEstate.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user.balance -= amount
@@ -290,7 +290,7 @@ def AnnutiesSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Annuties.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
@@ -321,7 +321,7 @@ def ArbitrageSubmitInvestment(request):
     amount = int(request.POST['amount'])
     house = Arbitrage.objects.get(pk=id)
     user = User.objects.get(email = request.user.email)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
@@ -349,7 +349,7 @@ def HalalSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = HalalInvestment.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
@@ -377,7 +377,7 @@ def CryptoSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Cryptocurrency.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and user.balance >= amount:
         user.balance -= amount
@@ -404,7 +404,7 @@ def StockSubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Stocks.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
@@ -429,7 +429,7 @@ def ForexSubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Forex.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
@@ -456,7 +456,7 @@ def ShareSubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Shares.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
@@ -482,7 +482,7 @@ def NfpSubmitTrading(request):
     country = request.user_location.get('country')
     id = request.POST['pk']
     amount = int(request.POST['amount'])
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     house = Nfp.objects.get(pk=id)
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
@@ -508,7 +508,7 @@ def EnergySubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Energy.objects.get(pk=id)
-    interest = ((house.amount * house.interest)/100) * house.duration
+    interest = ((amount * house.interest)/100) * house.duration
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
