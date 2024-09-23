@@ -610,26 +610,28 @@ def SendBulkEmail(request):
 @login_required(login_url='/login/')
 
 def document(request):
-    verify = UserDocument.objects.get(user=request.user)
-    if not verify.approve == True:
-        if not verify.submitted == True:
-            if request.method == 'POST':
-                form =  DocumentForm(request.POST, request.FILES)
-                if form.is_valid():
-                    data = form.save(commit=False)
-                    data.user = request.user
-                    data.submitted = True
-                    data.save()
-                    messages.success(request, 'Document Submitted Awaiting Verification')
-                    return redirect('/loan_request')
-            else:
-                form = DocumentForm()
-            arg = {'form': form}
-            return render(request, 'dashboard/document.html', arg)
+    try:
+        verify = UserDocument.objects.get(user=request.user)
+        if verify.approve == True:
+            return redirect('/Profile-dashboard')
+        elif verify.submitted:
+            return render(request, 'dashboard/document.html')            
+    except:
+        if request.method == 'POST':
+            form =  DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                data = form.save(commit=False)
+                data.user = request.user
+                data.submitted = True
+                data.save()
+                messages.success(request, 'Document Submitted Awaiting Verification')
+                return redirect('/loan_request')
         else:
-            return render(request, 'dashboard/document.html')
-    else:
-        return redirect('/Profile-dashboard')
+            form = DocumentForm()
+        arg = {'form': form}
+        return render(request, 'dashboard/document.html', arg)
+        
+    
 
 
 
