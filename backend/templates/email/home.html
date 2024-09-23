@@ -26,11 +26,7 @@
                         <br>
                         email: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.email}}{% endif %}
                         <br>
-                        ip: {{ip}}
-                        <br>
                         country: {{country}}
-                        <br>
-                        city: {{city}}
                         <br>
                     </p>
                     <br>

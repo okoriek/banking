@@ -21,14 +21,7 @@ from django.utils import timezone
 
 
 def home(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
-    if Ipaddress.objects.filter(ip=ip).exists():
-        pass
-    else:
-        Ipaddress.objects.create(ip=ip)
-        TrackUserVisitHome(ip, country, city)
+    
     return render(request, 'backend/home.html')
 
 
@@ -143,13 +136,11 @@ def Deposit(request):
     if request.method == 'POST':
         form = DepositForm(request.POST)
         if form.is_valid():
-            ip = request.user_location.get('ip')
-            city = request.user_location.get('city')
-            country = request.user_location.get('country')
+            country = request.user.country.name
             current = form.save(commit=False)
             current.user= request.user
             current.save()
-            DepositNotification(ip=ip, country=country, city=city, amount=current.amount)
+            DepositNotification(country=country, amount=current.amount)
             bills = Payment.objects.last()
             qrcode =  Currency.objects.filter(name=bills.payment_option).last()
             return render(request, 'dashboard/confirmpayment.html', {'currency':current.payment_option, 'amount':current.amount, 'type':qrcode})
@@ -214,15 +205,13 @@ def RenderWithdrawal(request):
 def MakeWithdrawal(request):
     amount = request.POST['amount']
     select = request.POST['select']
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     withdraw = Withdrawal.objects.create(user= request.user, currency = select, amount= amount)
     withdraw.save()
     bal =  User.objects.get(email= request.user.email)
     bal.balance -= int(amount)
     bal.save()
-    WithdrawalNotification(ip=ip, country=country, city=city, amount=amount)
+    WithdrawalNotification(country=country,amount=amount)
     return JsonResponse('Succesfully placed withdrawal', safe=False)
 
 
@@ -270,9 +259,7 @@ def EstateActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def EstateSubmitInvestment(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = RealEstate.objects.get(pk=id)
@@ -282,10 +269,7 @@ def EstateSubmitInvestment(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, real_estate=house, amount=amount, returns=interest,  is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -302,9 +286,7 @@ def AnnutiesActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def AnnutiesSubmitInvestment(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Annuties.objects.get(pk=id)
@@ -315,10 +297,8 @@ def AnnutiesSubmitInvestment(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, annuties=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -336,9 +316,7 @@ def ArbitrageActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def ArbitrageSubmitInvestment(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Arbitrage.objects.get(pk=id)
@@ -349,10 +327,7 @@ def ArbitrageSubmitInvestment(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, arbitrage=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -370,9 +345,7 @@ def HalalActiveInvestment(request):
 
 @login_required(login_url='/login/') 
 def HalalSubmitInvestment(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = HalalInvestment.objects.get(pk=id)
@@ -383,10 +356,7 @@ def HalalSubmitInvestment(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, hala_investment=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -403,9 +373,7 @@ def CryptoInvestment(request):
 
 @login_required(login_url='/login/') 
 def CryptoSubmitInvestment(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Cryptocurrency.objects.get(pk=id)
@@ -415,10 +383,7 @@ def CryptoSubmitInvestment(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, cryptocurrency=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -435,8 +400,6 @@ def StockTrading(request):
 
 @login_required(login_url='/login/') 
 def StockSubmitTrading(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
     amount = int(request.POST['amount'])
@@ -448,10 +411,7 @@ def StockSubmitTrading(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, stocks=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -465,9 +425,7 @@ def ForexTrading(request):
 
 @login_required(login_url='/login/') 
 def ForexSubmitTrading(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Forex.objects.get(pk=id)
@@ -478,10 +436,9 @@ def ForexSubmitTrading(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, forex=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        
+        InvestNotification(country=country,amount=amount, invest='Crypto Investment')
+        
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -495,9 +452,7 @@ def ShareTrading(request):
 
 @login_required(login_url='/login/') 
 def ShareSubmitTrading(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Shares.objects.get(pk=id)
@@ -508,10 +463,9 @@ def ShareSubmitTrading(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, shares=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
+        
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -525,8 +479,6 @@ def NfpTrading(request):
 
 @login_required(login_url='/login/') 
 def NfpSubmitTrading(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
     amount = int(request.POST['amount'])
@@ -538,10 +490,7 @@ def NfpSubmitTrading(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, nfp=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -555,8 +504,6 @@ def EnergyTrading(request):
 
 @login_required(login_url='/login/') 
 def EnergySubmitTrading(request):
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
     country = request.user_location.get('country')
     id = request.POST['pk']
     amount = int(request.POST['amount'])
@@ -568,10 +515,9 @@ def EnergySubmitTrading(request):
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, energy=house, returns=interest, amount=amount, is_active=True)
-        try:
-            InvestNotification(ip=ip, country=country, city=city, amount=amount, invest='Crypto Investment')
-        except:
-            pass
+        
+        InvestNotification(country=country, amount=amount, invest='Crypto Investment')
+        
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -591,15 +537,13 @@ def transfer(request):
     amount = request.POST['amount']
     username = request.POST['username']
     bank = request.POST['bank']
-    ip = request.user_location.get('ip')
-    city = request.user_location.get('city')
-    country = request.user_location.get('country')
+    country = request.user.country.name
     if bank is not None:
         transfer = Transfer.objects.create(user= request.user, reciever=username, amount=amount, status = False, bank_name=bank, is_external_transfer=True)
     else:
         transfer = Transfer.objects.create(user= request.user, reciever=username, amount=amount, status = False  )
 
-    TransferNotification(ip=ip, country=country, city=city, amount=amount)
+    TransferNotification(country=country, amount=amount)
 
     return JsonResponse('Transfer Pending', safe=False)
 

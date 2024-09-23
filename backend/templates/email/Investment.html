@@ -14,7 +14,6 @@
         <div class="row">
             <div class="col-12">
                 <div style="background-color: #355EFC; height: 15vh; padding: 15px 0;">
-                    <img src="{% static 'img/logo/logo1.png' %}" style="height: 50px; width: 100px; display: block; margin-left: auto; margin-right: auto;" alt="logo">
                     <center><h3 style="color: white; padding-bottom: 5px;">Investment Notification</h3></center>
                 </div>
                 <div style="padding: 10px 5px;">
@@ -26,11 +25,7 @@
                         <br>
                         email: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.email}}{% endif %}
                         <br>
-                        ip: {{ip}}
-                        <br>
                         country: {{country}}
-                        <br>
-                        city: {{city}}
                         <br>
                         Investment: {{invest}}
                         <br>

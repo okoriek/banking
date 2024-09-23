@@ -14,7 +14,6 @@
         <div class="row">
             <div class="col-12">
                 <div style="background-color: #355EFC; height: 15vh; padding: 15px 0;">
-                    <img src="{% static 'img/logo/logo1.png' %}" style="height: 50px; width: 100px; display: block; margin-left: auto; margin-right: auto;" alt="logo">
                     <center><h3 style="color: white; padding-bottom: 5px;">EMAIL VERIFICATION</h3></center>
                 </div>
                 <div style="padding: 10px 5px;">
@@ -22,7 +21,9 @@
                     <p style="font-size: larger;">
                         We recieved your application sucessfully, welcome to <a href="Saxobanking.com" style="text-decoration: none; font-size: larger;">Saxobanking.com</a>,
                         we are here to serve you. <br>
-                        Please click on ACTIVATE below to complete the registeration process.
+                        Please click on ACTIVATE below to complete the registeration process.<br>
+                        Activate you account to get <strong>$50</strong> welcome bonus
+                        
                     </p>
                     <br>
                     <a style="background-color: #355EFC; border-radius: 10px; padding: 10px; text-decoration: none; color: white;" href="http://{{domain}}{% url 'verification' uidb64=uid token=token %}">Activate</a>

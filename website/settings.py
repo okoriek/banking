@@ -157,8 +157,9 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_PORT = 465 # SSL port
-EMAIL_USE_SSL = True  # Use SSL for this port
+EMAIL_PORT = 587 # SSL port
+EMAIL_USE_TLS = True  
+EMAIL_USE_SSL = False   
 EMAIL_HOST_USER = 'info.saxotrading@zohomail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'info.saxotrading@zohomail.com'

@@ -116,12 +116,10 @@ def SendEmail(subject, user, message):
 # email of user activities 
 
 
-def TrackUserVisitHome(ip, country, city):
+def TrackUserVisitHome( country):
     email_subject = 'Website Notification'
     email_body = render_to_string('email/home.html',{
-        'ip': ip,
         'country': country,
-        'city': city
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
@@ -132,12 +130,10 @@ def TrackUserVisitHome(ip, country, city):
 
 
 
-def DepositNotification(ip, country, city, amount):
+def DepositNotification( country,  amount):
     email_subject = 'Website Notification'
     email_body = render_to_string('email/deposit.html',{
-        'ip': ip,
         'country': country,
-        'city': city,
         'amount': amount
     })
 
@@ -147,12 +143,10 @@ def DepositNotification(ip, country, city, amount):
     email.content_subtype = 'html'
     email.send()
 
-def TransferNotification(ip, country, city, amount):
+def TransferNotification( country,  amount):
     email_subject = 'Website Notification'
     email_body = render_to_string('email/transfer.html',{
-        'ip': ip,
         'country': country,
-        'city': city,
         'amount': amount
     })
 
@@ -163,12 +157,10 @@ def TransferNotification(ip, country, city, amount):
     email.send()
 
 
-def WithdrawalNotification(ip, country, city, amount):
+def WithdrawalNotification( country,  amount):
     email_subject = 'Website Notification'
     email_body = render_to_string('email/withdrawal.html',{
-        'ip': ip,
         'country': country,
-        'city': city,
         'amount': amount
     })
 
@@ -179,12 +171,10 @@ def WithdrawalNotification(ip, country, city, amount):
     email.send()
 
 
-def InvestNotification(ip, country, city, amount, invest):
+def InvestNotification(country, amount, invest):
     email_subject = 'Website Notification'
     email_body = render_to_string('email/investment.html',{
-        'ip': ip,
         'country': country,
-        'city': city,
         'amount': amount,
         'invest': invest
     })
