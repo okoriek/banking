@@ -36,6 +36,7 @@ def EmailVerification(request, uidb64, token):
         user.save()
         messages.add_message(request, messages.SUCCESS, 'Email verification complete' )
         return redirect('/login')
+    return JsonResponse('User verified', safe=False)
 
 
 def register(request):
