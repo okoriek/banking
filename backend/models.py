@@ -551,9 +551,6 @@ class SystemEaring(models.Model):
                 else:
                     self.num = diff + 1                          
             else:
-                total =  User.objects.get(user=self.user)
-                total.balance += profit_per_day
-                total.save()
                 self.is_active = False
 
         super().save(*args, **kwargs)
