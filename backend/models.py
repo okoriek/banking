@@ -358,6 +358,7 @@ class Cryptocurrency(models.Model):
 
 class Investment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    choice = models.CharField(max_length=200, blank=True, null=True)
     real_estate = models.ForeignKey(RealEstate, on_delete=models.CASCADE, blank=True, null=True)
     halal_investment = models.ForeignKey(HalalInvestment, on_delete=models.CASCADE, blank=True, null=True)
     annuties = models.ForeignKey(Annuties, on_delete=models.CASCADE, blank=True, null=True)
@@ -376,15 +377,6 @@ class Investment(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
 
 
-    
-        
-
-    def __str__(self):
-        def days_remaining():
-            total = self.date_expiration - self.date_created
-            remaining = self.date_expiration - timezone.now()
-            return f"{remaining.days}/{total.days}"
-        return f"user:{self.user}-----amount:{self.amount}-----date of investment:{self.date_created}------days remaining: {days_remaining()}-----Returns: {self.returns}"
     
     def save(self, *args, **kwargs):
 
@@ -413,11 +405,20 @@ class Investment(models.Model):
         self.date_expiration =  self.date_created + timezone.timedelta(days=duration())
         if timezone.now() > self.date_expiration and self.is_active == True and self.is_completed == False:
             total =  User.objects.get(user=self.user)
-            total.balance += self.amount
+            total.balance += self.returns
             total.save()
             self.is_active = False
             self.is_completed =True
         super().save(*args, **kwargs)
+    
+    def __str__(self):
+        def days_remaining():
+            total = self.date_expiration - self.date_created
+            remaining = self.date_expiration - timezone.now()
+            if remaining == 0:
+                return f"expired"
+            return f"{remaining.days}/{total.days}"
+        return f"user:{self.user}-----amount:{self.amount}-----date of investment:{self.date_created}------days remaining: {days_remaining()}-----Returns: {self.returns}"
 
 
 

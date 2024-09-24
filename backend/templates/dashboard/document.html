@@ -18,6 +18,8 @@
 			</div>
 			{% endif %}
 			{% for message in messages %}
+
+            
 			<center style="border: 2px solid green; padding: 10px;"><span style="color: green;">{{message}}</span></center>
 			{% endfor %}
 
@@ -48,7 +50,10 @@
     </div>
 </form>
 {% else %}
-<center style="display: flex; height: 70vh; justify-content: center; align-items: center;"><p class="pt-5">Document Submitted Successfully <br> Awaiting Verification </p></center>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
+    <i class="fa-solid fa-circle-check fa-10x" style="color: green;"></i>  
+</div>
+<center><p >Document Submitted Successfully <br> Awaiting Verification </p></center>
 {% endif %}
 
 

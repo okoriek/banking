@@ -74,6 +74,7 @@ urlpatterns = [
   path('update_notification/', views.notification, name='update_notification'),
   path('loan/', views.loan, name='loanview'),
   path('upload_document/', views.document, name='document'),
+  path('investment_history/', views.investmenthistory, name="investhistory"),
 
   #api url
   path('validating_earning/', views.validateEarning, name='validating' ),

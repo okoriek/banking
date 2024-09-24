@@ -263,12 +263,12 @@ def EstateSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = RealEstate.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, real_estate=house, amount=amount, returns=interest,  is_active=True)
+        invests =  Investment.objects.create(user = request.user, real_estate=house, choice=house.name, amount=amount, returns=interest,  is_active=True)
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -290,13 +290,13 @@ def AnnutiesSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Annuties.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, annuties=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, annuties=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
@@ -321,12 +321,12 @@ def ArbitrageSubmitInvestment(request):
     amount = int(request.POST['amount'])
     house = Arbitrage.objects.get(pk=id)
     user = User.objects.get(email = request.user.email)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, arbitrage=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, arbitrage=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -349,13 +349,13 @@ def HalalSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = HalalInvestment.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, hala_investment=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, hala_investment=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -377,12 +377,12 @@ def CryptoSubmitInvestment(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Cryptocurrency.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and user.balance >= amount:
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, cryptocurrency=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, cryptocurrency=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -404,13 +404,13 @@ def StockSubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Stocks.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, stocks=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, stocks=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -429,13 +429,13 @@ def ForexSubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Forex.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, forex=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, forex=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         
         InvestNotification(country=country,amount=amount, invest='Crypto Investment')
         
@@ -456,13 +456,13 @@ def ShareSubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Shares.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, shares=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, shares=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         
@@ -482,14 +482,14 @@ def NfpSubmitTrading(request):
     country = request.user_location.get('country')
     id = request.POST['pk']
     amount = int(request.POST['amount'])
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     house = Nfp.objects.get(pk=id)
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, nfp=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, nfp=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -508,13 +508,13 @@ def EnergySubmitTrading(request):
     id = request.POST['pk']
     amount = int(request.POST['amount'])
     house = Energy.objects.get(pk=id)
-    interest = ((amount * house.interest)/100) * house.duration
+    interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
     if amount >= house.min and amount <= house.max and amount >= user.balance:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
-        invests =  Investment.objects.create(user = request.user, energy=house, returns=interest, amount=amount, is_active=True)
+        invests =  Investment.objects.create(user = request.user, energy=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         
         InvestNotification(country=country, amount=amount, invest='Crypto Investment')
         
@@ -625,7 +625,7 @@ def document(request):
                 data.submitted = True
                 data.save()
                 messages.success(request, 'Document Submitted Awaiting Verification')
-                return redirect('/loan_request')
+                return redirect('/upload_document')
         else:
             form = DocumentForm()
         arg = {'form': form}
@@ -680,7 +680,14 @@ def analyticdata(request):
         return JsonResponse({'percent': Percent})
     except:
         return JsonResponse({'percent': 0})
+    
 
+
+def investmenthistory(request):
+    
+    invest = Investment.objects.filter(user= request.user)
+    arg = {'data': invest}
+    return render(request, 'dashboard/investhistory.html', arg)
 
 
     

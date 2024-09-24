@@ -36,6 +36,7 @@
                     alt="wallet info"
                     class="rounded" />
                 </div>
+                <span style="float: right;"><a href="{% url 'investhistory' %}"><i class="fa-solid fa-clock-rotate-left pt-2" style="font-size: 25px;"></i></a></span>
               </div>
               <p class="mb-1">Active Investment</p>
               <h4 class="card-title mb-3">{% if invest %}${{invest}}{% else %}$0{% endif %}</h4>
