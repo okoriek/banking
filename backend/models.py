@@ -423,28 +423,37 @@ class Investment(models.Model):
 
 
 class Withdrawal(models.Model):
+    status = (
+        ('Approved', 'Approved'),
+        ('Declined', 'Declined'),
+        ('Pending', 'Pending'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    currency = models.CharField(max_length=20, blank=True, null=True)
+    currency = models.ForeignKey(Currency, on_delete=models.CASCADE, blank=True, null=True)
     amount = models.DecimalField(decimal_places=2, max_digits=20)
-    status = models.BooleanField(default=False)
-    btc_wallet_address = models.CharField(max_length=300, blank=True, null=True)
-    eth_wallet_address = models.CharField(max_length=300, blank=True, null=True)
-    usdt_trc20_wallet_address = models.CharField(max_length=300, blank=True, null=True)
+    approve = models.BooleanField(default=False)
+    declined = models.BooleanField(default=False)
+    wallet_address = models.CharField(max_length=1000, blank=True, null=True)
+    status =  models.CharField(max_length=100, choices=status, blank=True, null=True)
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.user}---------{self.currency}---------{self.amount}"
     
     def save(self, *args, **kwargs):
-        self.btc_wallet_address = self.user.btc_wallet_address
-        self.eth_wallet_address = self.user.eth_wallet_address
-        self.usdt_trc20_wallet_address = self.user.usdt_trc20_wallet_address
         user = self.user
         amount = self.amount
-        if self.status == True:
+        if self.approve == True:
             WithdrawalMail( user, amount)
+            self.status = 'Approved'
         else:
-            pass
+            self.user.balance -= self.amount
+            self.user.save()
+            self.status = 'Pending'
+        if self.declined:
+            self.user.balance += self.amount
+            self.user.save()
+            self.status = 'Pending'
         super().save(*args, **kwargs)
     
 

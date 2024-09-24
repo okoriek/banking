@@ -21,7 +21,6 @@ urlpatterns = [
   path('deposit/', views.Deposit, name='deposit'),
   path('transaction/', views.history,name='transaction'),
   path('withdrawal/', views.RenderWithdrawal, name='withdrawal'),
-  path('make_withdrawal/', views.MakeWithdrawal, name='makewithdrawal'),
   path('make_payment/', views.ConfirmPayment, name='payment'),
 
   # investment

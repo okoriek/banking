@@ -196,23 +196,28 @@ def editProfile(request):
 
 @login_required(login_url='/login/') 
 def RenderWithdrawal(request):
-    data =  Currency.objects.all()
-    amount = MinimumWithdraw.objects.filter().last()
-    args = {'data':data, 'min':amount}
+    user = User.objects.get(email = request.user.email)
+    min = MinimumWithdraw.objects.filter().last()
+    if request.method == 'POST':
+        form = WithdrawalForm(request.POST)
+        if form.is_valid():
+            form_data = form.save(commit=False)
+            if form_data.amount > user.balance:
+                messages.success(request, 'Insufficient Amount balance')
+                return redirect('/withdrawal')
+            elif form_data.amount < min.amount:
+                messages.success(request, f"minimum withdrawal is {min.amount}")
+                return redirect('/withdrawal')
+            else:
+                form_data.user = request.user
+                form_data.save()
+                messages.success(request, 'Request for Withdrawal Successful.')
+                return redirect('/withdrawal')
+    else:
+        form = WithdrawalForm()
+    args = {'form': form, 'min': min, 'bal':user}
     return render(request, 'dashboard/withdrawal.html', args)
 
-@login_required(login_url='/login/') 
-def MakeWithdrawal(request):
-    amount = request.POST['amount']
-    select = request.POST['select']
-    country = request.user.country.name
-    withdraw = Withdrawal.objects.create(user= request.user, currency = select, amount= amount)
-    withdraw.save()
-    bal =  User.objects.get(email= request.user.email)
-    bal.balance -= int(amount)
-    bal.save()
-    WithdrawalNotification(country=country,amount=amount)
-    return JsonResponse('Succesfully placed withdrawal', safe=False)
 
 
 def Contactinfo(request):
@@ -557,7 +562,6 @@ def InitiateTransfer(request):
 
 @login_required(login_url='/login/') 
 def notification(request):
-    
     return render(request, 'backend/tr.html')
 
 
@@ -624,7 +628,7 @@ def document(request):
                 data.user = request.user
                 data.submitted = True
                 data.save()
-                messages.success(request, 'Document Submitted Awaiting Verification')
+                messages.success(request, 'Document Submitted, Awaiting Verification...')
                 return redirect('/upload_document')
         else:
             form = DocumentForm()
