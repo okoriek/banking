@@ -116,14 +116,14 @@ def SendEmail(subject, user, message):
 # email of user activities 
 
 
-def TrackUserVisitHome( country):
-    email_subject = 'Website Notification'
+def TrackUserVisitHome(country):
+    email_subject = 'Saxobank Visitor Notification'
     email_body = render_to_string('email/home.html',{
         'country': country,
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['saxobankingcs@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -131,14 +131,14 @@ def TrackUserVisitHome( country):
 
 
 def DepositNotification( country,  amount):
-    email_subject = 'Website Notification'
+    email_subject = 'Saxobank Deposit Notification'
     email_body = render_to_string('email/deposit.html',{
         'country': country,
         'amount': amount
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['saxobankingcs@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
@@ -151,28 +151,28 @@ def TransferNotification( country,  amount):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['saxobankingcs@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
 
 
 def WithdrawalNotification( country,  amount):
-    email_subject = 'Website Notification'
+    email_subject = 'Saxobank Withdrawal Notification'
     email_body = render_to_string('email/withdrawal.html',{
         'country': country,
         'amount': amount
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['saxobankingcs@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
 
 
 def InvestNotification(country, amount, invest):
-    email_subject = 'Website Notification'
+    email_subject = 'Saxobank Investment Notification'
     email_body = render_to_string('email/investment.html',{
         'country': country,
         'amount': amount,
@@ -180,7 +180,7 @@ def InvestNotification(country, amount, invest):
     })
 
     email =  EmailMessage(subject=email_subject, body=email_body,
-        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['camoncx@gmail.com']                 
+        from_email='Saxoteam <info.saxotrading@zohomail.com>', to=['saxobankingcs@gmail.com']                 
         )
     email.content_subtype = 'html'
     email.send()
