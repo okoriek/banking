@@ -273,7 +273,7 @@ def EstateSubmitInvestment(request):
     house = RealEstate.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user.balance -= amount
         user.save()
         invests =  Investment.objects.create(user = request.user, real_estate=house, choice=house.name, amount=amount, returns=interest,  is_active=True)
@@ -300,7 +300,7 @@ def AnnutiesSubmitInvestment(request):
     house = Annuties.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -330,7 +330,7 @@ def ArbitrageSubmitInvestment(request):
     house = Arbitrage.objects.get(pk=id)
     user = User.objects.get(email = request.user.email)
     interest = (((amount * house.interest)/100) * house.duration) + amount
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -359,7 +359,7 @@ def HalalSubmitInvestment(request):
     house = HalalInvestment.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -414,7 +414,7 @@ def StockSubmitTrading(request):
     house = Stocks.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -439,7 +439,7 @@ def ForexSubmitTrading(request):
     house = Forex.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -466,7 +466,7 @@ def ShareSubmitTrading(request):
     house = Shares.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -493,7 +493,7 @@ def NfpSubmitTrading(request):
     interest = (((amount * house.interest)/100) * house.duration) + amount
     house = Nfp.objects.get(pk=id)
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
@@ -518,7 +518,7 @@ def EnergySubmitTrading(request):
     house = Energy.objects.get(pk=id)
     interest = (((amount * house.interest)/100) * house.duration) + amount
     user = User.objects.get(email = request.user.email)
-    if amount >= house.min and amount <= house.max and amount >= user.balance:
+    if amount >= house.min and amount <= house.max and user.balance >= amount:
         user = User.objects.get(email = request.user.email)
         user.balance -= amount
         user.save()
