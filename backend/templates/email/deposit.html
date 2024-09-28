@@ -21,9 +21,9 @@
                     <p style="font-size: larger;">
                         A user with the following details Initiated a Deposit
                         <br>
-                        user: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.first_name}}{% endif %}
+                        user: {% if request.user %}{{request.user.first_name}}{% else %}A visitor or not Logged in{% endif %}
                         <br>
-                        email: {% if not request.user %}A visitor or not Logged in{% else %}{{request.user.email}}{% endif %}
+                        email: {% if request.user %}{{request.user.email}}{% else %}A visitor or not Logged in{% endif %}
                         <br>
                         country: {{country}}
                         <br>

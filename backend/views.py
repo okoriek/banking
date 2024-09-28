@@ -211,6 +211,9 @@ def RenderWithdrawal(request):
             else:
                 form_data.user = request.user
                 form_data.save()
+                country = user.country.name
+                amount = form_data.amount
+                WithdrawalNotification(country, amount)
                 messages.success(request, 'Request for Withdrawal Successful.')
                 return redirect('/withdrawal')
     else:

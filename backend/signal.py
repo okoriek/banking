@@ -23,7 +23,7 @@ def WithdrawHistorySave(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Withdrawal)
 def UpdateWithdrawHistorySave(sender, instance, created, **kwargs):
     if created == False:
-        UserHistory.objects.filter(withdraw =instance).update(action='Withdrawal', currency = instance.currency, status = instance.approve, date_created = instance.date_created)
+        UserHistory.objects.filter(withdraw =instance).update(action='Withdrawal', currency = str(instance.currency), status = instance.approve, date_created = instance.date_created)
 
 
 
