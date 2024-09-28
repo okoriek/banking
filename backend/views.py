@@ -278,7 +278,10 @@ def EstateSubmitInvestment(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, real_estate=house, choice=house.name, amount=amount, returns=interest,  is_active=True)
         invest = 'Real Estate Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -307,7 +310,10 @@ def AnnutiesSubmitInvestment(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, annuties=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         invest = 'Annuties Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -337,7 +343,10 @@ def ArbitrageSubmitInvestment(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, arbitrage=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         invest = 'Arbitrage Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -395,7 +404,10 @@ def CryptoSubmitInvestment(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, cryptocurrency=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         invest = 'Cryptocurrency Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -424,7 +436,10 @@ def StockSubmitTrading(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, stocks=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         invest = 'Stocks Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -451,7 +466,10 @@ def ForexSubmitTrading(request):
         invests =  Investment.objects.create(user = request.user, forex=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         
         invest = 'Forex Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -479,7 +497,10 @@ def ShareSubmitTrading(request):
         invests =  Investment.objects.create(user = request.user, shares=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         
         invest = 'Shares Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
@@ -506,7 +527,10 @@ def NfpSubmitTrading(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, nfp=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         invest = 'Nfp Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
@@ -532,7 +556,10 @@ def EnergySubmitTrading(request):
         user.save()
         invests =  Investment.objects.create(user = request.user, energy=house, choice=house.name, returns=interest, amount=amount, is_active=True)
         invest = 'Energy Investment'
-        InvestNotification(country, amount, invest)
+        try:
+            InvestNotification(country, amount, invest)
+        except:
+            pass
         return JsonResponse('Your Investment has been Initiated successfully', safe=False)
     else:
         pass
