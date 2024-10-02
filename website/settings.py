@@ -70,6 +70,7 @@ TEMPLATES = [
                 'backend.context_processors.ActiveEarnings',
                 'backend.context_processors.documentacess',
                 'backend.context_processors.Percentage',
+                'backend.context_processors.whatsapp',
             ],
         },
     },

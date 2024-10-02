@@ -1,4 +1,4 @@
-from .models import User, UserHistory, Notification,SystemEaring, Investment, Certificate
+from .models import User, UserHistory, Notification,SystemEaring, Investment, Certificate, Whatsapp
 
 
 def TotalDeposit(request):
@@ -113,7 +113,13 @@ def documentacess(request):
     
 
 
-
+def whatsapp(request):
+    try:
+        number = Whatsapp.objects.get(id=1)
+        arg = {'whatsapp': number}
+        return arg
+    except:
+        return {'whatsapp': None}
 
     
 
