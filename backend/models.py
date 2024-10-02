@@ -415,7 +415,7 @@ class Investment(models.Model):
         def days_remaining():
             total = self.date_expiration - self.date_created
             remaining = self.date_expiration - timezone.now()
-            if int(remaining) == 0:
+            if remaining < 1:
                 return f"expired"
             return f"{remaining.days}/{total.days}"
         return f"user:{self.user}-----amount:{self.amount}-----date of investment:{self.date_created}------days remaining: {days_remaining()}-----Returns: {self.returns}"
